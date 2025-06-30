@@ -1,0 +1,387 @@
+{
+  "address": "0x47F34f1F074DCEdc2bD1441848bd5b0786F031bD",
+  "abi": [
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_btcUsdPriceFeed",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "constructor"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "owner",
+          "type": "address"
+        }
+      ],
+      "name": "OwnableInvalidOwner",
+      "type": "error"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "account",
+          "type": "address"
+        }
+      ],
+      "name": "OwnableUnauthorizedAccount",
+      "type": "error"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "previousOwner",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "newOwner",
+          "type": "address"
+        }
+      ],
+      "name": "OwnershipTransferred",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "address",
+          "name": "oldPriceFeed",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "address",
+          "name": "newPriceFeed",
+          "type": "address"
+        }
+      ],
+      "name": "PriceFeedChanged",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "price",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "timestamp",
+          "type": "uint256"
+        }
+      ],
+      "name": "PriceUpdated",
+      "type": "event"
+    },
+    {
+      "inputs": [],
+      "name": "btcUsdPriceFeed",
+      "outputs": [
+        {
+          "internalType": "contract AggregatorV3Interface",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_newPriceFeed",
+          "type": "address"
+        }
+      ],
+      "name": "changePriceFeed",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getLatestPrice",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getPriceDecimals",
+      "outputs": [
+        {
+          "internalType": "uint8",
+          "name": "",
+          "type": "uint8"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "lastUpdateTimestamp",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "latestBtcPrice",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "owner",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "renounceOwnership",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "newOwner",
+          "type": "address"
+        }
+      ],
+      "name": "transferOwnership",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "updatePrice",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ],
+  "transactionHash": "0xa3a19dbc9de6b1ef10e861156938a6b680fe030a0337ba941f5e2acacbab2725",
+  "receipt": {
+    "to": null,
+    "from": "0x08a23b78BC3D082134D0e716e9453519fAAe1C8E",
+    "contractAddress": "0x47F34f1F074DCEdc2bD1441848bd5b0786F031bD",
+    "transactionIndex": 0,
+    "gasUsed": "497255",
+    "logsBloom": "0x00000000000000000000000000000000000000000000000000800000000000000000000000001000000000000000000000000000000000000000000000000000000000000000000000000000000000000001000000000000000000000000000000000000020000000000000000000800000000000000002000000000000000400000000000000000000000000000000040000000000000020000000000000000000000000008000004000000000000000000000002000000000000001000000000000000000000000000000000000000000000000000000000004000000020000000000000000000000000000000000000000000000000000000000000000000",
+    "blockHash": "0xa6bf642ba2ef161167b5eebd24ebd16cc8b2053c40d7f4ad09604896c731a2f1",
+    "transactionHash": "0xa3a19dbc9de6b1ef10e861156938a6b680fe030a0337ba941f5e2acacbab2725",
+    "logs": [
+      {
+        "transactionIndex": 0,
+        "blockNumber": 41843149,
+        "transactionHash": "0xa3a19dbc9de6b1ef10e861156938a6b680fe030a0337ba941f5e2acacbab2725",
+        "address": "0x47F34f1F074DCEdc2bD1441848bd5b0786F031bD",
+        "topics": [
+          "0x8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e0",
+          "0x0000000000000000000000000000000000000000000000000000000000000000",
+          "0x00000000000000000000000008a23b78bc3d082134d0e716e9453519faae1c8e"
+        ],
+        "data": "0x",
+        "logIndex": 0,
+        "blockHash": "0xa6bf642ba2ef161167b5eebd24ebd16cc8b2053c40d7f4ad09604896c731a2f1"
+      },
+      {
+        "transactionIndex": 0,
+        "blockNumber": 41843149,
+        "transactionHash": "0xa3a19dbc9de6b1ef10e861156938a6b680fe030a0337ba941f5e2acacbab2725",
+        "address": "0x47F34f1F074DCEdc2bD1441848bd5b0786F031bD",
+        "topics": [
+          "0x945c1c4e99aa89f648fbfe3df471b916f719e16d960fcec0737d4d56bd696838"
+        ],
+        "data": "0x0000000000000000000000000000000000000000000000000000099860a3654000000000000000000000000000000000000000000000000000000000684e7072",
+        "logIndex": 1,
+        "blockHash": "0xa6bf642ba2ef161167b5eebd24ebd16cc8b2053c40d7f4ad09604896c731a2f1"
+      }
+    ],
+    "blockNumber": 41843149,
+    "cumulativeGasUsed": "497255",
+    "status": 1,
+    "byzantium": true
+  },
+  "args": [
+    "0x31CF013A08c6Ac228C94551d535d5BAfE19c602a"
+  ],
+  "numDeployments": 1,
+  "solcInputHash": "ba8c400a2b1aabcd785e89f90ece9ca0",
+  "metadata": "{\"compiler\":{\"version\":\"0.8.28+commit.7893614a\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_btcUsdPriceFeed\",\"type\":\"address\"}],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"}],\"name\":\"OwnableInvalidOwner\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"}],\"name\":\"OwnableUnauthorizedAccount\",\"type\":\"error\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"previousOwner\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"OwnershipTransferred\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"oldPriceFeed\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"newPriceFeed\",\"type\":\"address\"}],\"name\":\"PriceFeedChanged\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"price\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"timestamp\",\"type\":\"uint256\"}],\"name\":\"PriceUpdated\",\"type\":\"event\"},{\"inputs\":[],\"name\":\"btcUsdPriceFeed\",\"outputs\":[{\"internalType\":\"contract AggregatorV3Interface\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_newPriceFeed\",\"type\":\"address\"}],\"name\":\"changePriceFeed\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getLatestPrice\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getPriceDecimals\",\"outputs\":[{\"internalType\":\"uint8\",\"name\":\"\",\"type\":\"uint8\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"lastUpdateTimestamp\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"latestBtcPrice\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"owner\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"renounceOwnership\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"transferOwnership\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"updatePrice\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"details\":\"Contract to consume BTC/USD price data from Chainlink Price Feeds\",\"errors\":{\"OwnableInvalidOwner(address)\":[{\"details\":\"The owner is not a valid owner account. (eg. `address(0)`)\"}],\"OwnableUnauthorizedAccount(address)\":[{\"details\":\"The caller account is not authorized to perform an operation.\"}]},\"kind\":\"dev\",\"methods\":{\"changePriceFeed(address)\":{\"details\":\"Change the price feed address (owner only)\",\"params\":{\"_newPriceFeed\":\"New price feed address\"}},\"constructor\":{\"details\":\"Constructor sets the Chainlink Price Feed address\",\"params\":{\"_btcUsdPriceFeed\":\"Address of the BTC/USD price feed\"}},\"getLatestPrice()\":{\"details\":\"Gets the latest price without updating storage\",\"returns\":{\"_0\":\"The latest BTC/USD price\"}},\"getPriceDecimals()\":{\"details\":\"Get the number of decimals in the price feed\",\"returns\":{\"_0\":\"The number of decimals\"}},\"owner()\":{\"details\":\"Returns the address of the current owner.\"},\"renounceOwnership()\":{\"details\":\"Leaves the contract without owner. It will not be possible to call `onlyOwner` functions. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby disabling any functionality that is only available to the owner.\"},\"transferOwnership(address)\":{\"details\":\"Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.\"},\"updatePrice()\":{\"details\":\"Updates the latest price from the Chainlink Price Feed\",\"returns\":{\"_0\":\"The latest BTC/USD price\"}}},\"title\":\"BitPesaPriceConsumer\",\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"contracts/BitPesaPriceConsumer.sol\":\"BitPesaPriceConsumer\"},\"evmVersion\":\"paris\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\",\"useLiteralContent\":true},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"@chainlink/contracts/src/v0.8/shared/interfaces/AggregatorV3Interface.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\npragma solidity ^0.8.0;\\n\\n// solhint-disable-next-line interface-starts-with-i\\ninterface AggregatorV3Interface {\\n  function decimals() external view returns (uint8);\\n\\n  function description() external view returns (string memory);\\n\\n  function version() external view returns (uint256);\\n\\n  function getRoundData(\\n    uint80 _roundId\\n  ) external view returns (uint80 roundId, int256 answer, uint256 startedAt, uint256 updatedAt, uint80 answeredInRound);\\n\\n  function latestRoundData()\\n    external\\n    view\\n    returns (uint80 roundId, int256 answer, uint256 startedAt, uint256 updatedAt, uint80 answeredInRound);\\n}\\n\",\"keccak256\":\"0x257a8d28fa83d3d942547c8e129ef465e4b5f3f31171e7be4739a4c98da6b4f0\",\"license\":\"MIT\"},\"@chainlink/contracts/src/v0.8/shared/interfaces/LinkTokenInterface.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\npragma solidity ^0.8.0;\\n\\n// solhint-disable-next-line interface-starts-with-i\\ninterface LinkTokenInterface {\\n  function allowance(address owner, address spender) external view returns (uint256 remaining);\\n\\n  function approve(address spender, uint256 value) external returns (bool success);\\n\\n  function balanceOf(address owner) external view returns (uint256 balance);\\n\\n  function decimals() external view returns (uint8 decimalPlaces);\\n\\n  function decreaseApproval(address spender, uint256 addedValue) external returns (bool success);\\n\\n  function increaseApproval(address spender, uint256 subtractedValue) external;\\n\\n  function name() external view returns (string memory tokenName);\\n\\n  function symbol() external view returns (string memory tokenSymbol);\\n\\n  function totalSupply() external view returns (uint256 totalTokensIssued);\\n\\n  function transfer(address to, uint256 value) external returns (bool success);\\n\\n  function transferAndCall(address to, uint256 value, bytes calldata data) external returns (bool success);\\n\\n  function transferFrom(address from, address to, uint256 value) external returns (bool success);\\n}\\n\",\"keccak256\":\"0xd3643595b0a46f577fff806736cbe4e3f81707c93fb1693a8a7960466e5cd321\",\"license\":\"MIT\"},\"@openzeppelin/contracts/access/Ownable.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\n// OpenZeppelin Contracts (last updated v5.0.0) (access/Ownable.sol)\\n\\npragma solidity ^0.8.20;\\n\\nimport {Context} from \\\"../utils/Context.sol\\\";\\n\\n/**\\n * @dev Contract module which provides a basic access control mechanism, where\\n * there is an account (an owner) that can be granted exclusive access to\\n * specific functions.\\n *\\n * The initial owner is set to the address provided by the deployer. This can\\n * later be changed with {transferOwnership}.\\n *\\n * This module is used through inheritance. It will make available the modifier\\n * `onlyOwner`, which can be applied to your functions to restrict their use to\\n * the owner.\\n */\\nabstract contract Ownable is Context {\\n    address private _owner;\\n\\n    /**\\n     * @dev The caller account is not authorized to perform an operation.\\n     */\\n    error OwnableUnauthorizedAccount(address account);\\n\\n    /**\\n     * @dev The owner is not a valid owner account. (eg. `address(0)`)\\n     */\\n    error OwnableInvalidOwner(address owner);\\n\\n    event OwnershipTransferred(address indexed previousOwner, address indexed newOwner);\\n\\n    /**\\n     * @dev Initializes the contract setting the address provided by the deployer as the initial owner.\\n     */\\n    constructor(address initialOwner) {\\n        if (initialOwner == address(0)) {\\n            revert OwnableInvalidOwner(address(0));\\n        }\\n        _transferOwnership(initialOwner);\\n    }\\n\\n    /**\\n     * @dev Throws if called by any account other than the owner.\\n     */\\n    modifier onlyOwner() {\\n        _checkOwner();\\n        _;\\n    }\\n\\n    /**\\n     * @dev Returns the address of the current owner.\\n     */\\n    function owner() public view virtual returns (address) {\\n        return _owner;\\n    }\\n\\n    /**\\n     * @dev Throws if the sender is not the owner.\\n     */\\n    function _checkOwner() internal view virtual {\\n        if (owner() != _msgSender()) {\\n            revert OwnableUnauthorizedAccount(_msgSender());\\n        }\\n    }\\n\\n    /**\\n     * @dev Leaves the contract without owner. It will not be possible to call\\n     * `onlyOwner` functions. Can only be called by the current owner.\\n     *\\n     * NOTE: Renouncing ownership will leave the contract without an owner,\\n     * thereby disabling any functionality that is only available to the owner.\\n     */\\n    function renounceOwnership() public virtual onlyOwner {\\n        _transferOwnership(address(0));\\n    }\\n\\n    /**\\n     * @dev Transfers ownership of the contract to a new account (`newOwner`).\\n     * Can only be called by the current owner.\\n     */\\n    function transferOwnership(address newOwner) public virtual onlyOwner {\\n        if (newOwner == address(0)) {\\n            revert OwnableInvalidOwner(address(0));\\n        }\\n        _transferOwnership(newOwner);\\n    }\\n\\n    /**\\n     * @dev Transfers ownership of the contract to a new account (`newOwner`).\\n     * Internal function without access restriction.\\n     */\\n    function _transferOwnership(address newOwner) internal virtual {\\n        address oldOwner = _owner;\\n        _owner = newOwner;\\n        emit OwnershipTransferred(oldOwner, newOwner);\\n    }\\n}\\n\",\"keccak256\":\"0xff6d0bb2e285473e5311d9d3caacb525ae3538a80758c10649a4d61029b017bb\",\"license\":\"MIT\"},\"@openzeppelin/contracts/utils/Context.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\n// OpenZeppelin Contracts (last updated v5.0.1) (utils/Context.sol)\\n\\npragma solidity ^0.8.20;\\n\\n/**\\n * @dev Provides information about the current execution context, including the\\n * sender of the transaction and its data. While these are generally available\\n * via msg.sender and msg.data, they should not be accessed in such a direct\\n * manner, since when dealing with meta-transactions the account sending and\\n * paying for execution may not be the actual sender (as far as an application\\n * is concerned).\\n *\\n * This contract is only required for intermediate, library-like contracts.\\n */\\nabstract contract Context {\\n    function _msgSender() internal view virtual returns (address) {\\n        return msg.sender;\\n    }\\n\\n    function _msgData() internal view virtual returns (bytes calldata) {\\n        return msg.data;\\n    }\\n\\n    function _contextSuffixLength() internal view virtual returns (uint256) {\\n        return 0;\\n    }\\n}\\n\",\"keccak256\":\"0x493033a8d1b176a037b2cc6a04dad01a5c157722049bbecf632ca876224dd4b2\",\"license\":\"MIT\"},\"contracts/BitPesaPriceConsumer.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\r\\npragma solidity ^0.8.28;\\r\\n\\r\\nimport \\\"@chainlink/contracts/src/v0.8/shared/interfaces/LinkTokenInterface.sol\\\";\\r\\nimport \\\"@chainlink/contracts/src/v0.8/shared/interfaces/AggregatorV3Interface.sol\\\";\\r\\nimport \\\"@openzeppelin/contracts/access/Ownable.sol\\\";\\r\\n\\r\\n/**\\r\\n * @title BitPesaPriceConsumer\\r\\n * @dev Contract to consume BTC/USD price data from Chainlink Price Feeds\\r\\n */\\r\\ncontract BitPesaPriceConsumer is Ownable {\\r\\n    // Chainlink Price Feed interfaces\\r\\n    AggregatorV3Interface public btcUsdPriceFeed;\\r\\n    // Price data\\r\\n    uint256 public latestBtcPrice;\\r\\n    uint256 public lastUpdateTimestamp;\\r\\n    // Events\\r\\n    event PriceUpdated(uint256 price, uint256 timestamp);\\r\\n    event PriceFeedChanged(address oldPriceFeed, address newPriceFeed);\\r\\n\\r\\n    /**\\r\\n     * @dev Constructor sets the Chainlink Price Feed address\\r\\n     * @param _btcUsdPriceFeed Address of the BTC/USD price feed\\r\\n     */\\r\\n    constructor(address _btcUsdPriceFeed) Ownable(msg.sender) {\\r\\n        btcUsdPriceFeed = AggregatorV3Interface(_btcUsdPriceFeed);\\r\\n        updatePrice();\\r\\n    }\\r\\n\\r\\n    /**\\r\\n     * @dev Updates the latest price from the Chainlink Price Feed\\r\\n     * @return The latest BTC/USD price\\r\\n     */\\r\\n    function updatePrice() public returns (uint256) {\\r\\n        (\\r\\n            ,\\r\\n            /* uint80 roundID */ int price,\\r\\n            ,\\r\\n            /* uint startedAt */ uint timeStamp /* uint80 answeredInRound */,\\r\\n\\r\\n        ) = btcUsdPriceFeed.latestRoundData();\\r\\n\\r\\n        require(price > 0, \\\"Invalid price\\\");\\r\\n\\r\\n        latestBtcPrice = uint256(price);\\r\\n        lastUpdateTimestamp = timeStamp;\\r\\n\\r\\n        emit PriceUpdated(latestBtcPrice, lastUpdateTimestamp);\\r\\n\\r\\n        return latestBtcPrice;\\r\\n    }\\r\\n\\r\\n    /**\\r\\n     * @dev Gets the latest price without updating storage\\r\\n     * @return The latest BTC/USD price\\r\\n     */\\r\\n    function getLatestPrice() public view returns (uint256) {\\r\\n        (\\r\\n            ,\\r\\n            /* uint80 roundID */ int price /* uint startedAt */ /* uint timeStamp */ /* uint80 answeredInRound */,\\r\\n            ,\\r\\n            ,\\r\\n\\r\\n        ) = btcUsdPriceFeed.latestRoundData();\\r\\n\\r\\n        require(price > 0, \\\"Invalid price\\\");\\r\\n\\r\\n        return uint256(price);\\r\\n    }\\r\\n\\r\\n    /**\\r\\n     * @dev Get the number of decimals in the price feed\\r\\n     * @return The number of decimals\\r\\n     */\\r\\n    function getPriceDecimals() public view returns (uint8) {\\r\\n        return btcUsdPriceFeed.decimals();\\r\\n    }\\r\\n\\r\\n    /**\\r\\n     * @dev Change the price feed address (owner only)\\r\\n     * @param _newPriceFeed New price feed address\\r\\n     */\\r\\n    function changePriceFeed(address _newPriceFeed) external onlyOwner {\\r\\n        address oldPriceFeed = address(btcUsdPriceFeed);\\r\\n        btcUsdPriceFeed = AggregatorV3Interface(_newPriceFeed);\\r\\n\\r\\n        emit PriceFeedChanged(oldPriceFeed, _newPriceFeed);\\r\\n    }\\r\\n}\\r\\n\",\"keccak256\":\"0x99d2ef4ea0a21a84c37470b55263a5dff8eba60488f4d25657ced29e1fd612a7\",\"license\":\"MIT\"}},\"version\":1}",
+  "bytecode": "0x608060405234801561001057600080fd5b5060405161086f38038061086f83398101604081905261002f916101ea565b338061005657604051631e4fbdf760e01b8152600060048201526024015b60405180910390fd5b61005f8161008a565b50600180546001600160a01b0319166001600160a01b0383161790556100836100da565b5050610288565b600080546001600160a01b038381166001600160a01b0319831681178455604051919092169283917f8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e09190a35050565b6000806000600160009054906101000a90046001600160a01b03166001600160a01b031663feaf968c6040518163ffffffff1660e01b815260040160a060405180830381865afa158015610132573d6000803e3d6000fd5b505050506040513d601f19601f820116820180604052508101906101569190610236565b509350509250506000821361019d5760405162461bcd60e51b815260206004820152600d60248201526c496e76616c696420707269636560981b604482015260640161004d565b6002829055600381905560408051838152602081018390527f945c1c4e99aa89f648fbfe3df471b916f719e16d960fcec0737d4d56bd696838910160405180910390a16002549250505090565b6000602082840312156101fc57600080fd5b81516001600160a01b038116811461021357600080fd5b9392505050565b80516001600160501b038116811461023157600080fd5b919050565b600080600080600060a0868803121561024e57600080fd5b6102578661021a565b6020870151604088015160608901519297509095509350915061027c6080870161021a565b90509295509295909350565b6105d8806102976000396000f3fe608060405234801561001057600080fd5b506004361061009e5760003560e01c80638d404e82116100665780638d404e82146100f45780638da5cb5b1461011f5780638e15f47314610130578063cbd3df3814610138578063f2fde38b1461014b57600080fd5b806306420160146100a357806314bcec9f146100bf5780631b30aafc146100c8578063673a7e28146100e2578063715018a6146100ea575b600080fd5b6100ac60025481565b6040519081526020015b60405180910390f35b6100ac60035481565b6100d061015e565b60405160ff90911681526020016100b6565b6100ac6101d1565b6100f26102e6565b005b600154610107906001600160a01b031681565b6040516001600160a01b0390911681526020016100b6565b6000546001600160a01b0316610107565b6100ac6102fa565b6100f26101463660046104e3565b6103bf565b6100f26101593660046104e3565b610428565b6001546040805163313ce56760e01b815290516000926001600160a01b03169163313ce5679160048083019260209291908290030181865afa1580156101a8573d6000803e3d6000fd5b505050506040513d601f19601f820116820180604052508101906101cc9190610513565b905090565b6000806000600160009054906101000a90046001600160a01b03166001600160a01b031663feaf968c6040518163ffffffff1660e01b815260040160a060405180830381865afa158015610229573d6000803e3d6000fd5b505050506040513d601f19601f8201168201806040525081019061024d9190610550565b50935050925050600082136102995760405162461bcd60e51b815260206004820152600d60248201526c496e76616c696420707269636560981b60448201526064015b60405180910390fd5b6002829055600381905560408051838152602081018390527f945c1c4e99aa89f648fbfe3df471b916f719e16d960fcec0737d4d56bd696838910160405180910390a16002549250505090565b6102ee610466565b6102f86000610493565b565b600080600160009054906101000a90046001600160a01b03166001600160a01b031663feaf968c6040518163ffffffff1660e01b815260040160a060405180830381865afa158015610350573d6000803e3d6000fd5b505050506040513d601f19601f820116820180604052508101906103749190610550565b505050915050600081136103ba5760405162461bcd60e51b815260206004820152600d60248201526c496e76616c696420707269636560981b6044820152606401610290565b919050565b6103c7610466565b600180546001600160a01b038381166001600160a01b031983168117909355604080519190921680825260208201939093527ff41a3b1d02012f65ae0013b820b751937676e06fe15550a1841ad88825d0b0dd910160405180910390a15050565b610430610466565b6001600160a01b03811661045a57604051631e4fbdf760e01b815260006004820152602401610290565b61046381610493565b50565b6000546001600160a01b031633146102f85760405163118cdaa760e01b8152336004820152602401610290565b600080546001600160a01b038381166001600160a01b0319831681178455604051919092169283917f8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e09190a35050565b6000602082840312156104f557600080fd5b81356001600160a01b038116811461050c57600080fd5b9392505050565b60006020828403121561052557600080fd5b815160ff8116811461050c57600080fd5b805169ffffffffffffffffffff811681146103ba57600080fd5b600080600080600060a0868803121561056857600080fd5b61057186610536565b6020870151604088015160608901519297509095509350915061059660808701610536565b9050929550929590935056fea2646970667358221220137376a4aaa8840ae65cad771bf3d12e11890e7ea351c70d66afde82cca7575564736f6c634300081c0033",
+  "deployedBytecode": "0x608060405234801561001057600080fd5b506004361061009e5760003560e01c80638d404e82116100665780638d404e82146100f45780638da5cb5b1461011f5780638e15f47314610130578063cbd3df3814610138578063f2fde38b1461014b57600080fd5b806306420160146100a357806314bcec9f146100bf5780631b30aafc146100c8578063673a7e28146100e2578063715018a6146100ea575b600080fd5b6100ac60025481565b6040519081526020015b60405180910390f35b6100ac60035481565b6100d061015e565b60405160ff90911681526020016100b6565b6100ac6101d1565b6100f26102e6565b005b600154610107906001600160a01b031681565b6040516001600160a01b0390911681526020016100b6565b6000546001600160a01b0316610107565b6100ac6102fa565b6100f26101463660046104e3565b6103bf565b6100f26101593660046104e3565b610428565b6001546040805163313ce56760e01b815290516000926001600160a01b03169163313ce5679160048083019260209291908290030181865afa1580156101a8573d6000803e3d6000fd5b505050506040513d601f19601f820116820180604052508101906101cc9190610513565b905090565b6000806000600160009054906101000a90046001600160a01b03166001600160a01b031663feaf968c6040518163ffffffff1660e01b815260040160a060405180830381865afa158015610229573d6000803e3d6000fd5b505050506040513d601f19601f8201168201806040525081019061024d9190610550565b50935050925050600082136102995760405162461bcd60e51b815260206004820152600d60248201526c496e76616c696420707269636560981b60448201526064015b60405180910390fd5b6002829055600381905560408051838152602081018390527f945c1c4e99aa89f648fbfe3df471b916f719e16d960fcec0737d4d56bd696838910160405180910390a16002549250505090565b6102ee610466565b6102f86000610493565b565b600080600160009054906101000a90046001600160a01b03166001600160a01b031663feaf968c6040518163ffffffff1660e01b815260040160a060405180830381865afa158015610350573d6000803e3d6000fd5b505050506040513d601f19601f820116820180604052508101906103749190610550565b505050915050600081136103ba5760405162461bcd60e51b815260206004820152600d60248201526c496e76616c696420707269636560981b6044820152606401610290565b919050565b6103c7610466565b600180546001600160a01b038381166001600160a01b031983168117909355604080519190921680825260208201939093527ff41a3b1d02012f65ae0013b820b751937676e06fe15550a1841ad88825d0b0dd910160405180910390a15050565b610430610466565b6001600160a01b03811661045a57604051631e4fbdf760e01b815260006004820152602401610290565b61046381610493565b50565b6000546001600160a01b031633146102f85760405163118cdaa760e01b8152336004820152602401610290565b600080546001600160a01b038381166001600160a01b0319831681178455604051919092169283917f8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e09190a35050565b6000602082840312156104f557600080fd5b81356001600160a01b038116811461050c57600080fd5b9392505050565b60006020828403121561052557600080fd5b815160ff8116811461050c57600080fd5b805169ffffffffffffffffffff811681146103ba57600080fd5b600080600080600060a0868803121561056857600080fd5b61057186610536565b6020870151604088015160608901519297509095509350915061059660808701610536565b9050929550929590935056fea2646970667358221220137376a4aaa8840ae65cad771bf3d12e11890e7ea351c70d66afde82cca7575564736f6c634300081c0033",
+  "devdoc": {
+    "details": "Contract to consume BTC/USD price data from Chainlink Price Feeds",
+    "errors": {
+      "OwnableInvalidOwner(address)": [
+        {
+          "details": "The owner is not a valid owner account. (eg. `address(0)`)"
+        }
+      ],
+      "OwnableUnauthorizedAccount(address)": [
+        {
+          "details": "The caller account is not authorized to perform an operation."
+        }
+      ]
+    },
+    "kind": "dev",
+    "methods": {
+      "changePriceFeed(address)": {
+        "details": "Change the price feed address (owner only)",
+        "params": {
+          "_newPriceFeed": "New price feed address"
+        }
+      },
+      "constructor": {
+        "details": "Constructor sets the Chainlink Price Feed address",
+        "params": {
+          "_btcUsdPriceFeed": "Address of the BTC/USD price feed"
+        }
+      },
+      "getLatestPrice()": {
+        "details": "Gets the latest price without updating storage",
+        "returns": {
+          "_0": "The latest BTC/USD price"
+        }
+      },
+      "getPriceDecimals()": {
+        "details": "Get the number of decimals in the price feed",
+        "returns": {
+          "_0": "The number of decimals"
+        }
+      },
+      "owner()": {
+        "details": "Returns the address of the current owner."
+      },
+      "renounceOwnership()": {
+        "details": "Leaves the contract without owner. It will not be possible to call `onlyOwner` functions. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby disabling any functionality that is only available to the owner."
+      },
+      "transferOwnership(address)": {
+        "details": "Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner."
+      },
+      "updatePrice()": {
+        "details": "Updates the latest price from the Chainlink Price Feed",
+        "returns": {
+          "_0": "The latest BTC/USD price"
+        }
+      }
+    },
+    "title": "BitPesaPriceConsumer",
+    "version": 1
+  },
+  "userdoc": {
+    "kind": "user",
+    "methods": {},
+    "version": 1
+  },
+  "storageLayout": {
+    "storage": [
+      {
+        "astId": 409,
+        "contract": "contracts/BitPesaPriceConsumer.sol:BitPesaPriceConsumer",
+        "label": "_owner",
+        "offset": 0,
+        "slot": "0",
+        "type": "t_address"
+      },
+      {
+        "astId": 2383,
+        "contract": "contracts/BitPesaPriceConsumer.sol:BitPesaPriceConsumer",
+        "label": "btcUsdPriceFeed",
+        "offset": 0,
+        "slot": "1",
+        "type": "t_contract(AggregatorV3Interface)305"
+      },
+      {
+        "astId": 2385,
+        "contract": "contracts/BitPesaPriceConsumer.sol:BitPesaPriceConsumer",
+        "label": "latestBtcPrice",
+        "offset": 0,
+        "slot": "2",
+        "type": "t_uint256"
+      },
+      {
+        "astId": 2387,
+        "contract": "contracts/BitPesaPriceConsumer.sol:BitPesaPriceConsumer",
+        "label": "lastUpdateTimestamp",
+        "offset": 0,
+        "slot": "3",
+        "type": "t_uint256"
+      }
+    ],
+    "types": {
+      "t_address": {
+        "encoding": "inplace",
+        "label": "address",
+        "numberOfBytes": "20"
+      },
+      "t_contract(AggregatorV3Interface)305": {
+        "encoding": "inplace",
+        "label": "contract AggregatorV3Interface",
+        "numberOfBytes": "20"
+      },
+      "t_uint256": {
+        "encoding": "inplace",
+        "label": "uint256",
+        "numberOfBytes": "32"
+      }
+    }
+  }
+}
