@@ -1,0 +1,113 @@
+.noise-container {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0.05;
+  background-image: url('/noise.png');
+}
+
+.text-outline {
+  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.2);
+  color: transparent;
+}
+
+/* Enhanced smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #1e1e2f;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(to bottom, #f97316, #fbbf24);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(to bottom, #f97316, #f59e0b);
+}
+
+/* Enhanced animations */
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+.float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.float-delay-1 {
+  animation-delay: 1s;
+}
+
+.float-delay-2 {
+  animation-delay: 2s;
+}
+
+/* Text reveal animation styles */
+.reveal-text {
+  visibility: hidden;
+}
+
+.reveal-text.revealed {
+  visibility: visible;
+}
+
+/* Magnetic button effect */
+.btn-magnetic {
+  transition: transform 0.2s;
+}
+
+/* Enhanced hover effects */
+.hover-lift {
+  transition: transform 0.3s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-5px);
+}
+
+/* 3D card effect */
+.card-3d {
+  transition: transform 0.5s ease;
+  transform-style: preserve-3d;
+}
+
+.card-3d:hover {
+  transform: rotateY(10deg) rotateX(5deg);
+}
+
+/* Animated gradient backgrounds */
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.bg-gradient-animate {
+  background: linear-gradient(270deg, #f97316, #fbbf24, #f97316);
+  background-size: 200% 200%;
+  animation: gradient 15s ease infinite;
+}

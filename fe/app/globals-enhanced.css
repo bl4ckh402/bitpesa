@@ -1,0 +1,128 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Import custom animations */
+@import './animations.css';
+
+@layer base {
+  :root {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 210 40% 98%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 212.7 26.8% 83.9%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    cursor: none;
+  }
+
+  @media (max-width: 768px) {
+    body {
+      cursor: auto;
+    }
+  }
+  
+  /* 3D transforms for roadmap cube */
+  .translate-z-\[64px\] {
+    transform: translateZ(64px);
+  }
+  
+  .-translate-z-\[64px\] {
+    transform: translateZ(-64px);
+  }
+  
+  .translate-x-\[64px\] {
+    transform: translateX(64px);
+  }
+  
+  .-translate-x-\[64px\] {
+    transform: translateX(-64px);
+  }
+  
+  .translate-y-\[64px\] {
+    transform: translateY(64px);
+  }
+  
+  .-translate-y-\[64px\] {
+    transform: translateY(-64px);
+  }
+  
+  .rotate-y-90 {
+    transform: rotateY(90deg);
+  }
+  
+  .rotate-x-90 {
+    transform: rotateX(90deg);
+  }
+    /* Smooth scrolling for modern browsers */
+  html {
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+  }
+}
+
+@layer utilities {
+  /* Font styles for text gradients */
+  .text-gradient {
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  /* Perspective and 3D transformations */
+  .perspective-1000 {
+    perspective: 1000px;
+  }
+
+  .preserve-3d {
+    transform-style: preserve-3d;
+  }
+  /* Glass effect */
+  .glass-effect {
+    background-color: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(12px) saturate(150%);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+  /* Enhanced text shadow */
+  .text-shadow-sm {
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .text-shadow-md {
+    text-shadow: 0 4px 8px rgba(0, 0, 0, 0.12), 0 2px 4px rgba(0, 0, 0, 0.08);
+  }
+  
+  .text-shadow-lg {
+    text-shadow: 0 15px 30px rgba(0, 0, 0, 0.11), 0 5px 15px rgba(0, 0, 0, 0.08);
+  }
+  /* Mask image utilities */
+  .mask-gradient-b {
+    mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
+  }
+    .mask-gradient-r {
+    mask-image: linear-gradient(to right, black 50%, transparent 100%);
+  }
+}
