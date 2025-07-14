@@ -25,35 +25,35 @@ export function FeaturesSection() {
 
   // Feature data
   const features = [
-    {
-      title: "Bitcoin-Backed Lending",
-      description: "Use your BTC as collateral to get instant loans in USD, EUR, and other fiat currencies without selling your Bitcoin.",
-      icon: <Coins className="h-12 w-12 text-orange-500" />,
-      gradient: "from-orange-500/20 to-amber-500/5",
-      highlight: "text-orange-400"
-    },
-    {
-      title: "Cross-Chain Token Bridge",
-      description: "Seamlessly move your tokens between different blockchains with our secure, low-fee token bridge solution.",
-      icon: <Waypoints className="h-12 w-12 text-blue-500" />,
-      gradient: "from-blue-500/20 to-indigo-500/5",
-      highlight: "text-blue-400"
-    },
-    {
-      title: "Real-Time Price Feeds",
-      description: "Access accurate, Chainlink-powered price oracles for secure lending, borrowing, and cross-chain transactions.",
-      icon: <BarChart3 className="h-12 w-12 text-green-500" />,
-      gradient: "from-green-500/20 to-emerald-500/5",
-      highlight: "text-green-400"
-    },
-    {
-      title: "Crypto Wills",
-      description: "Secure your digital legacy with smart contract wills that automatically transfer assets to beneficiaries based on configurable conditions.",
-      icon: <ScrollText className="h-12 w-12 text-purple-500" />,
-      gradient: "from-purple-500/20 to-pink-500/5",
-      highlight: "text-purple-400"
-    }
-  ];
+            {
+              title: "Bitcoin-Backed Lending",
+              description: "Use your BTC as collateral to get instant loans in USD, EUR, KES and other fiat currencies without selling your Bitcoin.",
+              icon: <Coins className="h-12 w-12 text-orange-500" />,
+              gradient: "from-orange-500/20 to-amber-500/5",
+              highlight: "text-orange-400"
+            },
+            {
+              title: "Instant Fiat Payouts",
+              description: "Get immediate access to fiat currencies directly to your bank account while your Bitcoin remains secure as collateral.",
+              icon: <Wallet className="h-12 w-12 text-blue-500" />,
+              gradient: "from-blue-500/20 to-indigo-500/5",
+              highlight: "text-blue-400"
+            },
+            {
+              title: "Flexible Repayment Terms",
+              description: "Choose repayment schedules that work for you with competitive interest rates and transparent fee structures.",
+              icon: <FileCheck className="h-12 w-12 text-green-500" />,
+              gradient: "from-green-500/20 to-emerald-500/5",
+              highlight: "text-green-400"
+            },
+            {
+              title: "Non-Custodial Security",
+              description: "Your Bitcoin remains secure in smart contracts while you access fiat liquidity, ensuring you maintain ownership of your assets.",
+              icon: <ShieldCheck className="h-12 w-12 text-purple-500" />,
+              gradient: "from-purple-500/20 to-pink-500/5",
+              highlight: "text-purple-400"
+            }
+          ];
 
   return (
     <section 

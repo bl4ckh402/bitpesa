@@ -21,9 +21,6 @@ import { SplitText } from "gsap/SplitText";
 import { Loader2, ArrowRight, Menu, X } from "lucide-react";
 import { useGSAPContext, useGSAPCleanup } from "@/lib/gsap-cleanup";
 
-// CSS is imported in layout.tsx
-
-// Register GSAP plugins
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger, ScrollToPlugin, SplitText);
 }
@@ -68,26 +65,25 @@ export default function LandingPage() {
 
   // Add GSAP Context and cleanup
   const { createContext } = useGSAPContext();
-  useGSAPCleanup(); // Global cleanup for this component
+  useGSAPCleanup();
 
-  // Mouse movement handler for custom cursor and parallax effects
   const handleMouseMove = useCallback((e: MouseEvent) => {
     const { clientX, clientY } = e;
     setCursorPosition({ x: clientX, y: clientY });
 
-    // Animate cursor with lag effect
+    // Animate cursor
     if (cursorRef.current) {
       gsap.to(cursorRef.current, {
         x: clientX,
         y: clientY,
-        duration: 0.2,
+        duration: 0.01,
         ease: "power2.out",
       });
     }
 
     // Parallax effect for background elements
     parallaxLayers.current.forEach((layer, index) => {
-      const depth = index * 0.05;
+      const depth = index * 100;
       const moveX = (clientX - window.innerWidth / 2) * depth;
       const moveY = (clientY - window.innerHeight / 2) * depth;
 
@@ -155,8 +151,6 @@ export default function LandingPage() {
 
       return tl;
     }, loaderRef.current);
-
-    // No need for explicit cleanup - handled by GSAP Context
   }, [createContext]);
 
   // Main page animation setup
@@ -174,7 +168,7 @@ export default function LandingPage() {
       // Add scroll reveal animation
       gsap.fromTo(
         section,
-        { opacity: 0, y: 100 },
+        { opacity: 0, y: 100, ease: "power2.in"},
         {
           opacity: 1,
           y: 0,
@@ -344,122 +338,12 @@ export default function LandingPage() {
                 scaleX: scrollYProgress,
               }}
             />
-            {/* Navigation bar */}
-            {/* <nav className="fixed top-0 left-0 right-0 z-50 bg-slate-900/80 backdrop-blur-lg border-b border-slate-800/50">
-              <div className="container mx-auto px-4 py-4 flex items-center justify-between">
-                <a href="#" className="flex items-center">
-                  <span className="text-xl font-bold text-gradient bg-gradient-to-r from-orange-500 to-amber-400 bg-clip-text text-transparent">
-                    BITPESA
-                  </span>
-                </a>
-                <div className="hidden md:flex items-center space-x-8">
-                  <a
-                    href="#features"
-                    className="text-slate-300 hover:text-white transition-colors"
-                  >
-                    Features
-                  </a>
-                  <a
-                    href="#how-it-works"
-                    className="text-slate-300 hover:text-white transition-colors"
-                  >
-                    How It Works
-                  </a>
-                  <a
-                    href="#token-bridge"
-                    className="text-slate-300 hover:text-white transition-colors"
-                  >
-                    Token Bridge
-                  </a>
-                  <a
-                    href="#crypto-will"
-                    className="text-slate-300 hover:text-white transition-colors"
-                  >
-                    Crypto Wills
-                  </a>
-                  <a
-                    href="#rates"
-                    className="text-slate-300 hover:text-white transition-colors"
-                  >
-                    Rates
-                  </a>
-                  <a
-                    href="#roadmap"
-                    className="text-slate-300 hover:text-white transition-colors"
-                  >
-                    Roadmap
-                  </a>
-                </div>
-
-                <div className="md:hidden">
-                  <button
-                    onClick={() => setShowMobileNav(!showMobileNav)}
-                    className="text-slate-300 hover:text-white"
-                  >
-                    {showMobileNav ? (
-                      <X className="h-6 w-6" />
-                    ) : (
-                      <Menu className="h-6 w-6" />
-                    )}
-                  </button>
-                </div>
-
-                {showMobileNav && (
-                  <div className="absolute top-full left-0 right-0 bg-slate-900/95 backdrop-blur-lg border-b border-slate-800/50 p-4 md:hidden">
-                    <div className="flex flex-col space-y-4">
-                      <a
-                        href="#features"
-                        className="text-slate-300 hover:text-white transition-colors py-2"
-                        onClick={() => setShowMobileNav(false)}
-                      >
-                        Features
-                      </a>
-                      <a
-                        href="#how-it-works"
-                        className="text-slate-300 hover:text-white transition-colors py-2"
-                        onClick={() => setShowMobileNav(false)}
-                      >
-                        How It Works
-                      </a>
-                      <a
-                        href="#token-bridge"
-                        className="text-slate-300 hover:text-white transition-colors py-2"
-                        onClick={() => setShowMobileNav(false)}
-                      >
-                        Token Bridge
-                      </a>
-                      <a
-                        href="#crypto-will"
-                        className="text-slate-300 hover:text-white transition-colors py-2"
-                        onClick={() => setShowMobileNav(false)}
-                      >
-                        Crypto Wills
-                      </a>
-                      <a
-                        href="#rates"
-                        className="text-slate-300 hover:text-white transition-colors py-2"
-                        onClick={() => setShowMobileNav(false)}
-                      >
-                        Rates
-                      </a>
-                      <a
-                        href="#roadmap"
-                        className="text-slate-300 hover:text-white transition-colors py-2"
-                        onClick={() => setShowMobileNav(false)}
-                      >
-                        Roadmap
-                      </a>
-                    </div>
-                  </div>
-                )}
-              </div>
-            </nav> */}
 
             {/* Hero Section */}
             <div className="section-reveal">
               <HeroSection
                 onOpenCalculator={() => setShowCalculator(true)}
-                onOpenWalletConnect={() => {}}
+                onOpenWalletConnect={() => { }}
               />
             </div>
             {/* Features Overview */}
@@ -472,15 +356,14 @@ export default function LandingPage() {
               <HowItWorksSection />
             </div>
 
-            {/* Token Bridge */}
-            <div id="token-bridge" className="section-reveal">
+            {/* <div id="token-bridge" className="section-reveal">
               <TokenBridgeSection />
             </div>
 
-            {/* Price Oracle */}
+            
             <div id="price-oracle" className="section-reveal">
               <PriceOracleSection />
-            </div>
+            </div> */}
 
             {/* Lightning Network */}
             <div id="lightning-network" className="section-reveal">
@@ -490,9 +373,9 @@ export default function LandingPage() {
             </div>
 
             {/* Crypto Will Section */}
-            <div id="crypto-will" className="section-reveal">
+            {/* <div id="crypto-will" className="section-reveal">
               <CryptoWillSection />
-            </div>
+            </div> */}
             {/* Rates */}
             <div id="rates" className="section-reveal">
               <RatesSection />
