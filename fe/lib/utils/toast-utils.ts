@@ -155,6 +155,21 @@ export const showTransactionError = (
 };
 
 /**
+ * Show simple transaction failure toast
+ */
+export const showTransactionFailed = (message: string, options?: ToastOptions) => {
+  showTransactionToast(
+    'error',
+    message,
+    {
+      id: options?.id,
+      description: options?.description,
+      duration: options?.duration || DURATION.LONG,
+    }
+  );
+};
+
+/**
  * Cross-chain bridge specific toasts
  */
 export const showBridgeInitiated = (

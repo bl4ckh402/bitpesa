@@ -3,6 +3,7 @@
 // Export all contract hooks for easy imports
 export { useBitPesa } from './hooks/useBitPesa';
 export { useTokenAllowance } from './hooks/useTokenAllowance';
+export { useLightningDeposit } from './hooks/useLightningDeposit';
 export { ContractProvider, useContract } from './context/ContractContext';
 export { Web3Provider, useWeb3 } from './providers/web3-provider';
 export { AppProviders } from './providers/AppProviders';
@@ -23,7 +24,8 @@ export {
   useRepayLoan,
   useApproveWBTC,
   useApproveUSDC,
-  useCalculateInterest,  useTransferTokens,
+  useCalculateInterest,
+  useTransferTokens,
   useTransferTokensPayLink,
   useTransferTokensPayNative,
   useLoansList

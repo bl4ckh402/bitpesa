@@ -1,0 +1,32 @@
+{
+  "folders": [
+    {
+      "name": "BitPesa Root",
+      "path": "."
+    },
+    {
+      "name": "Frontend",
+      "path": "./fe"
+    }
+  ],
+  "settings": {
+    "typescript.preferences.includePackageJsonAutoImports": "auto",
+    "typescript.suggest.autoImports": true,
+    "typescript.validate.enable": true,
+    "files.associations": {
+      "*.tsx": "typescriptreact",
+      "*.ts": "typescript"
+    },
+    "emmet.includeLanguages": {
+      "typescript": "html",
+      "typescriptreact": "html"
+    }
+  },
+  "extensions": {
+    "recommendations": [
+      "bradlc.vscode-tailwindcss",
+      "esbenp.prettier-vscode",
+      "ms-vscode.vscode-typescript-next"
+    ]
+  }
+}
