@@ -6,6 +6,7 @@ import { ThemeToggle } from "@/components/theme-toggle";
 import { Bitcoin, Wallet } from "lucide-react";
 import { WalletConnect as WalletConnectButton } from "@/components/wallet-connect";
 import { WalletConnect } from "@/components/wallet-connect-modal";
+import { ICPWalletConnect } from "@/components/icp/ICPWalletConnect";
 import { EnhancedDesktopNavigation } from "@/components/enhanced-desktop-navigation";
 import { useGSAPCleanup } from "@/lib/gsap-cleanup";
 import gsap from "gsap";
@@ -108,6 +109,7 @@ export function Header() {
             <ThemeToggle />
             {/* Use AppKit WalletConnectButton for mobile */}
             <WalletConnectButton />
+            <ICPWalletConnect size="sm" />
           </div>
           <div className="hidden md:flex items-center space-x-4">
             {/* Enhanced Desktop Navigation */}
@@ -117,6 +119,7 @@ export function Header() {
               <ThemeToggle />
               {/* Use AppKit WalletConnectButton for desktop */}
               <WalletConnectButton />
+              <ICPWalletConnect />
             </div>
           </div>
           </div>

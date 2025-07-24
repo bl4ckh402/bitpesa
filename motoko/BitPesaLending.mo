@@ -1,14 +1,43 @@
 import Nat "mo:base/Nat";
 import Nat64 "mo:base/Nat64";
+import Int "mo:base/Int";
 import Principal "mo:base/Principal";
 import Time "mo:base/Time";
 import HashMap "mo:base/HashMap";
+import Hash "mo:base/Hash";
 import Iter "mo:base/Iter";
 import Result "mo:base/Result";
 import Error "mo:base/Error";
-import Text "mo:base/Text";
+import Text "mo:base/Text"  ;
 import Buffer "mo:base/Buffer";
-import { ICRC1 } from "./ICRC1.mo";
+import Debug "mo:base/Debug";
+import Array "mo:base/Array";
+import Blob "mo:base/Blob";
+import Timer         "mo:base/Timer";
+import Management "./Management";
+import PriceParser "./PriceParser";
+
+
+// Define ICRC1 token interface
+type ICRC1 = actor {
+    icrc1_balance_of : (account: {owner: Principal; subaccount: ?Blob}) -> async Nat;
+    icrc1_transfer : (args: {
+        to: {owner: Principal; subaccount: ?Blob};
+        amount: Nat;
+        fee: ?Nat;
+        memo: ?Blob;
+        created_at_time: ?Nat64;
+    }) -> async {#Ok: Nat; #Err: Text};
+    icrc1_transfer_from : (args: {
+        spender_subaccount: ?Blob;
+        from: {owner: Principal; subaccount: ?Blob};
+        to: {owner: Principal; subaccount: ?Blob};
+        amount: Nat;
+        fee: ?Nat;
+        memo: ?Blob;
+        created_at_time: ?Nat64;
+    }) -> async {#Ok: Nat; #Err: Text};
+};
 
 /**
  * @title BitPesa WBTC Lending Canister (Motoko)
@@ -17,9 +46,18 @@ import { ICRC1 } from "./ICRC1.mo";
  *      - Uses HTTPS Outcalls for accurate ckBTC/USD price data.
  *      - Uses Canister Timers for automated liquidation checks.
  */
-actor class BitPesaLending(init : Config) {
+// Configuration provided on canister creation
+type ConfigInit = {
+    owner : Principal;
+    ckbtc_canister : Principal;
+    stablecoin_canister : Principal;
+};
 
-    // Configuration provided on canister creation
+actor class BitPesaLending(init : ConfigInit) {
+    // Define self reference for internal method calls
+    private let self = actor this;
+
+    // Re-export the Config type for external use
     public type Config = {
         owner : Principal;
         ckbtc_canister : Principal;
@@ -58,21 +96,22 @@ actor class BitPesaLending(init : Config) {
     };
 
     let owner : Principal = init.owner;
-    let ckbtcCanister : ICRC1 = actor (init.ckbtc_canister);
-    let stablecoinCanister : ICRC1 = actor (init.stablecoin_canister);
+    let ckbtcCanister : ICRC1 = actor (Principal.toText(init.ckbtc_canister));
+    let stablecoinCanister : ICRC1 = actor (Principal.toText(init.stablecoin_canister));
 
     stable var requiredCollateralRatio : Nat = 150; // 150%
     stable var liquidationThreshold : Nat = 125; // 125%
     stable var borrowFeeBps : Nat = 50; // 0.5% fee on borrowed amount (50 bps)
     stable var interestRatePerYearBps : Nat = 500; // 5% APR (500 bps)
+    stable var maxLoanDurationDays : Nat = 365; // Maximum loan duration in days
+    let SECONDS_IN_YEAR : Nat = 31536000; // 365 days in seconds
 
     stable var loansEntries : [(LoanId, Loan)] = [];
-    var loans = HashMap.HashMap<LoanId, Loan>(10, Nat.equal, Nat.hash);
+    var loans = HashMap.HashMap<LoanId, Loan>(10, Nat.equal, Hash.hash);
     stable var nextLoanId : LoanId = 0;
     
     stable var userCollateralEntries : [(Principal, Nat)] = [];
     var userCollateral = HashMap.HashMap<Principal, Nat>(10, Principal.equal, Principal.hash);
-    stable var userCollateral = StableBTreeMap.init<Principal, Nat>();
 
     stable var totalCollateralLocked : Nat = 0;
     stable var totalLoansOutstanding : Nat = 0;
@@ -82,41 +121,65 @@ actor class BitPesaLending(init : Config) {
 
     private func post_upgrade_init() {
         let interval = 5 * 60 * 1_000_000_000; // 5 minutes in nanoseconds
+        
+        setupTimerInternal();
+    };
+    
+    // Setup the timer with system capability
+    private func setupTimerInternal() : () {
+        // Cancel existing timer if any
+        switch (liquidationTimer) {
+            case (?id) { Timer.cancelTimer<>(id) };
+            case (null) { };
+        };
+        
+        // Schedule the timer to run every 5 minutes
+        liquidationTimer := ?Timer.recurringTimer<system>(#seconds(300), func() : async () {
+            await checkAllLoansForLiquidation();
+        });
     };
     
     // Initialize HashMap from stable storage during upgrades
     system func preupgrade() {
         loansEntries := Iter.toArray(loans.entries());
         userCollateralEntries := Iter.toArray(userCollateral.entries());
+        
+        // Cancel any existing timer
+        switch (liquidationTimer) {
+            case (?id) { Timer.cancelTimer<>(id) };
+            case (null) { };
+        };
     };
 
     system func postupgrade() {
         loans := HashMap.fromIter<LoanId, Loan>(loansEntries.vals(), 10, Nat.equal, Nat.hash);
         userCollateral := HashMap.fromIter<Principal, Nat>(userCollateralEntries.vals(), 10, Principal.equal, Principal.hash);
-        post_upgrade_init();
+        
+        // Setup timer with system capability available in system functions
+        setupTimerInternal();
     };
     
-    post_upgrade_init();
+    // Heartbeat to keep the canister active and check for liquidations periodically
+    system func heartbeat() : async () {
+        await checkAllLoansForLiquidation();
+    };
 
     let BTC_USD_PRICE_API = "https://api.coinbase.com/v2/prices/BTC-USD/spot";
 
-    post_upgrade_init();
-
-    let BTC_USD_PRICE_API = "https://api.coinbase.com/v2/prices/BTC-USD/spot";
     let PRICE_DECIMALS = 2;
 
     // This function will be called by the IC to sanitize the HTTP response.
     // This is a CRITICAL step for security and determinism.
-    public query func transform(raw : Management.HttpResponse) : Management.HttpResponse {
+    public shared query func transform(raw : Management.HttpResponse) : async Management.HttpResponse {
         // Remove all headers except 'Date' for security reasons
-        var sanitized_headers = [];
-        for (h in raw.headers) {
-            if (Text.toLower(h.name) == "date") {
+        var sanitized_headers : [Management.HttpHeader] = [];
+        for (h in raw.headers.vals()) {
+            if (Text.toLowercase(h.name) == "date") {
                 sanitized_headers := Array.append<Management.HttpHeader>([h], sanitized_headers);
             };
         };
         // Return the sanitized response, keeping the body
-        { raw with headers = sanitized_headers };
+        { raw with headers = sanitized_headers }
     };
 
     /**
@@ -124,7 +187,7 @@ actor class BitPesaLending(init : Config) {
      * @dev Uses HTTPS Outcalls. Returns price as an integer, scaled by 10^PRICE_DECIMALS (e.g., 65000.12 -> 6500012)
      * @return Result containing the price or an error.
      */
-    async func getBtcUsdPrice() : Result.Result<Nat, AppError> {
+    public func getBtcUsdPrice() : async Result.Result<Nat, AppError> {
         // Cost of this call is ~0.1B cycles, must be covered by the canister balance.
         let cycles_cost : Nat64 = 100_000_000;
 
@@ -147,44 +210,28 @@ actor class BitPesaLending(init : Config) {
             case (#Ok(response)) {
                 if (response.status != 200) {
                     let err_msg = "HTTP Error: " # Nat.toText(response.status);
-                    return #Err(#PriceOracleFailed(err_msg));
+                    return #err(#PriceOracleFailed(err_msg));
                 };
 
                 // Example Response: {"data":{"base":"BTC","currency":"USD","amount":"65000.12"}}
-                // We need a JSON parser. For simplicity, we'll do basic text matching.
-                // In production, use a robust JSON parsing library.
-                let body = Text.fromBlob(response.body);
-                // A simplified parser for this specific response structure
-                let prefix = "\"amount\":\"";
-                let suffix = "\"}}";
-
-                switch (Text.find(body, prefix)) {
-                    case (?start_idx) {
-                        let price_start = start_idx + Text.size(prefix);
-                        switch (Text.find(body, suffix)) {
-                            case (?end_idx) {
-                                let price_str = Text.slice(body, price_start, end_idx);
-                                // remove decimal point for integer math
-                                let price_no_decimal = Text.replace(price_str, ".", "");
-                                switch (Nat.fromText(price_no_decimal)) {
-                                    case (?p) { return #Ok(p) };
-                                    case (null) {
-                                        return #Err(#PriceOracleFailed("Could not parse price from text"));
-                                    };
-                                };
-                            };
-                            case (null) {
-                                return #Err(#PriceOracleFailed("Could not find price suffix in response"));
-                            };
-                        };
+                // Using our robust PriceParser module to extract the price
+                let body = switch (Text.decodeUtf8(response.body)) {
+                    case (null) { return #err(#PriceOracleFailed("Could not decode response body as UTF-8")); };
+                    case (?decoded) { decoded };
+                };
+                
+                // Parse the response with our specialized parser
+                switch (PriceParser.extractBtcUsdPrice(body)) {
+                    case (?price) { 
+                        return #ok(price);
                     };
                     case (null) {
-                        return #Err(#PriceOracleFailed("Could not find price prefix in response"));
+                        return #err(#PriceOracleFailed("Failed to parse BTC/USD price from API response"));
                     };
                 };
             };
             case (#Err(code, msg)) {
-                return #Err(#PriceOracleFailed("Request failed: " # msg));
+                return #err(#PriceOracleFailed("Request failed: " # msg));
             };
         };
     };
@@ -196,7 +243,7 @@ actor class BitPesaLending(init : Config) {
      * @return A Result indicating success or an AppError.
      */
     public shared (msg) func deposit(amount : Nat) : async Result.Result<Null, AppError> {
-        if (amount == 0) { return #Err(#InvalidAmount) };
+        if (amount == 0) { return #err(#InvalidAmount) };
 
         let transfer_res = await ckbtcCanister.icrc1_transfer_from({
             spender_subaccount = null;
@@ -216,10 +263,10 @@ actor class BitPesaLending(init : Config) {
                 };
                 userCollateral.put(msg.caller, current_balance + amount);
                 totalCollateralLocked += amount;
-                return #Ok(null);
+                return #ok(null);
             };
             case (#Err(err)) {
-                return #Err(#TransferFailed("ckBTC deposit failed. Ensure you have approved this canister."));
+                return #err(#TransferFailed("ckBTC deposit failed. Ensure you have approved this canister."));
             };
         };
     };
@@ -230,13 +277,13 @@ actor class BitPesaLending(init : Config) {
      * @return A Result indicating success or an AppError.
      */
     public shared (msg) func withdraw(amount : Nat) : async Result.Result<Null, AppError> {
-        if (amount == 0) { return #Err(#InvalidAmount) };
+        if (amount == 0) { return #err(#InvalidAmount) };
 
         let caller = msg.caller;
         let available_collateral = getAvailableCollateral(caller);
 
         if (amount > available_collateral) {
-            return #Err(#InsufficientCollateral);
+            return #err(#InsufficientCollateral);
         };
 
         let transfer_res = await ckbtcCanister.icrc1_transfer({
@@ -255,10 +302,10 @@ actor class BitPesaLending(init : Config) {
                 };
                 userCollateral.put(caller, current_balance - amount);
                 totalCollateralLocked -= amount;
-                return #Ok(null);
+                return #ok(null);
             };
             case (#Err(err)) {
-                return #Err(#TransferFailed("ckBTC withdrawal failed."));
+                return #err(#TransferFailed("ckBTC withdrawal failed."));
             };
         };
     };
@@ -273,18 +320,18 @@ actor class BitPesaLending(init : Config) {
     public shared (msg) func createLoan(collateralAmount : Nat, loanAmount : Nat, durationDays : Nat) : async Result.Result<LoanId, AppError> {
         let caller = msg.caller;
         if (collateralAmount == 0 or loanAmount == 0) {
-            return #Err(#InvalidAmount);
+            return #err(#InvalidAmount);
         };
         if (durationDays == 0 or durationDays > maxLoanDurationDays) {
-            return #Err(#InvalidLoanDuration);
+            return #err(#InvalidLoanDuration);
         };
         if (collateralAmount > getAvailableCollateral(caller)) {
-            return #Err(#InsufficientCollateral);
+            return #err(#InsufficientCollateral);
         };
 
         // 1. Check collateralization ratio
-        switch (await getBtcUsdPrice()) {
-            case (#Err(err)) { return #Err(err) };
+        switch (await self.getBtcUsdPrice()) {
+            case (#Err(err)) { return #err(err) };
             case (#Ok(btcPrice)) {
                 // Calculate collateral value in USD, scaled by 10^(PRICE_DECIMALS)
                 // ckBTC has 8 decimals.
@@ -305,14 +352,14 @@ actor class BitPesaLending(init : Config) {
 
         // 2. Check if platform has enough liquidity
         let fee = (loanAmount * borrowFeeBps) / 10000;
-        let amountToDisburse = loanAmount - fee;
+        let amountToDisburse = if (fee >= loanAmount) { 0 } else { loanAmount - fee };
         // This requires a query to the stablecoin canister to get our own balance
         let ourStablecoinBalance = await stablecoinCanister.icrc1_balance_of({
             owner = Principal.fromActor(this);
             subaccount = null;
         });
         if (ourStablecoinBalance < loanAmount) {
-            return #Err(#InsufficientPlatformLiquidity);
+            return #err(#InsufficientPlatformLiquidity);
         };
 
         // 3. Create and store the loan
@@ -326,7 +373,7 @@ actor class BitPesaLending(init : Config) {
             collateralAmount = collateralAmount;
             loanAmount = loanAmount;
             startTimestamp = now;
-            endTimestamp = now + (Nat.toNat64(durationDays) * 24 * 60 * 60 * 1_000_000_000);
+            endTimestamp = now + (Nat64.toNat(Nat64.fromNat(durationDays)) * 24 * 60 * 60 * 1_000_000_000);
             interestRateBps = interestRatePerYearBps;
             active = true;
             liquidated = false;
@@ -341,17 +388,19 @@ actor class BitPesaLending(init : Config) {
         let transfer_res = await stablecoinCanister.icrc1_transfer({
             to = { owner = caller; subaccount = null };
             amount = amountToDisburse;
-            // ... other params
+            fee = null;
+            memo = null;
+            created_at_time = null;
         });
 
         switch (transfer_res) {
-            case (#Ok(_)) { return #Ok(loanId) };
+            case (#Ok(_)) { return #ok(loanId) };
             case (#Err(err)) {
                 // CRITICAL: Revert state changes if transfer fails
-                loans.remove(loanId);
+                let _ = loans.remove(loanId);
                 totalLoansOutstanding -= loanAmount;
                 protocolFeeBalance -= fee;
-                return #Err(#TransferFailed("Failed to disburse loan."));
+                return #err(#TransferFailed("Failed to disburse loan."));
             };
         };
     };
@@ -365,22 +414,25 @@ actor class BitPesaLending(init : Config) {
     public shared (msg) func repayLoan(loanId : LoanId) : async Result.Result<Null, AppError> {
         let caller = msg.caller;
         switch (loans.get(loanId)) {
-            case (null) { return #Err(#LoanNotFound) };
+            case (null) { return #err(#LoanNotFound) };
             case (?loan) {
-                if (loan.borrower != caller) { return #Err(#Unauthorized) };
-                if (not loan.active) { return #Err(#LoanNotActive) };
+                if (loan.borrower != caller) { return #err(#Unauthorized) };
+                if (not loan.active) { return #err(#LoanNotActive) };
 
                 let totalDue = calculateTotalDue(loan);
 
                 // Transfer stablecoin from borrower to this canister
                 let transfer_res = await stablecoinCanister.icrc1_transfer_from({
+                    spender_subaccount = null;
                     from = { owner = caller; subaccount = null };
                     to = {
                         owner = Principal.fromActor(this);
                         subaccount = null;
                     };
                     amount = totalDue;
-                    // ... other params
+                    fee = null;
+                    memo = null;
+                    created_at_time = null;
                 });
 
                 switch (transfer_res) {
@@ -404,10 +456,10 @@ actor class BitPesaLending(init : Config) {
                         // The interest portion of `totalDue` increases platform revenue.
                         // We can track this separately if needed.
 
-                        return #Ok(null);
+                        return #ok(null);
                     };
                     case (#Err(err)) {
-                        return #Err(#TransferFailed("Stablecoin repayment failed. Ensure you have approved this canister."));
+                        return #err(#TransferFailed("Stablecoin repayment failed. Ensure you have approved this canister."));
                     };
                 };
             };
@@ -420,14 +472,15 @@ actor class BitPesaLending(init : Config) {
     // This function is called periodically by the timer we set up.
     // NOTE: This is a private function, it cannot be called externally.
     // Making it async allows it to make await calls (like fetching the price).
-    private async func checkAllLoansForLiquidation() {
-        debug_print(" Kicking off liquidation check...");
+    // Called with system capabilities from Timer
+    private func checkAllLoansForLiquidation() : async () {
+        debug_print("Kicking off liquidation check...");
 
         // Fetch price once for the entire batch to save cycles and for consistency.
-        switch (await getBtcUsdPrice()) {
+        switch (await self.getBtcUsdPrice()) {
             case (#Err(e)) {
                 // If oracle fails, we can't liquidate. Log and try again next time.
-                debug_print("❌ Price oracle failed, skipping liquidation check");
+                debug_print("Price oracle failed, skipping liquidation check");
                 return;
             };
             case (#Ok(btcPrice)) {
@@ -465,14 +518,14 @@ actor class BitPesaLending(init : Config) {
                             // Update platform stats
                             totalLoansOutstanding -= loan.loanAmount;
 
-                            debug_print("✅ Loan " # Nat.toText(id) # " liquidated.");
+                            debug_print("Loan " # Nat.toText(id) # " liquidated.");
                         };
                     };
                 };
             };
         };
 
-        debug_print(" Liquidation check finished.");
+        debug_print("Liquidation check finished.");
     };
 
     public query func getUserCollateral(user : Principal) : async Nat {
@@ -491,9 +544,9 @@ actor class BitPesaLending(init : Config) {
     // PRIVATE HELPERS
     // =================================================================================================
 
-    private func isOwner() {
-        if (caller() != owner) {
-            Error.trap(#Unauthorized);
+    private func isOwner(caller : Principal) {
+        if (caller != owner) {
+            Debug.trap("Unauthorized");
         };
     };
 
@@ -503,9 +556,18 @@ actor class BitPesaLending(init : Config) {
             case (?val) { val };
         };
         var locked : Nat = 0;
-        for ((_, loan) in loans.entries()) {};
+        for ((_, loan) in loans.entries()) {
+            if (loan.borrower == user and loan.active) {
+                locked += loan.collateralAmount;
+            };
+        };
+        return if (total > locked) { total - locked } else { 0 };
+    };
+    
+    private func calculateInterest(loan : Loan) : Nat {
         let timeElapsed = (Time.now() - loan.startTimestamp) / 1_000_000_000; // in seconds
-        return (loan.loanAmount * loan.interestRateBps * Nat.fromNat64(timeElapsed)) / (10000 * SECONDS_IN_YEAR);
+        let timeElapsedNat = Int.abs(timeElapsed);
+        return (loan.loanAmount * loan.interestRateBps * timeElapsedNat) / (10000 * SECONDS_IN_YEAR);
     };
 
     private func calculateTotalDue(loan : Loan) : Nat {
@@ -535,33 +597,35 @@ actor class BitPesaLending(init : Config) {
     // =================================================================================================
 
     public shared (msg) func updateCollateralRatio(newRatio : Nat) {
-        isOwner();
+        isOwner(msg.caller);
         requiredCollateralRatio := newRatio;
     };
 
     public shared (msg) func withdrawFees(amount : Nat) : async Result.Result<Null, AppError> {
-        isOwner();
-        if (amount > protocolFeeBalance) { return #Err(#InsufficientBalance) };
+        isOwner(msg.caller);
+        if (amount > protocolFeeBalance) { return #err(#InsufficientBalance) };
 
         let transfer_res = await stablecoinCanister.icrc1_transfer({
             to = { owner = owner; subaccount = null };
             amount = amount;
-            //...
+            fee = null;
+            memo = null;
+            created_at_time = null;
         });
 
         switch (transfer_res) {
             case (#Ok(_)) {
                 protocolFeeBalance -= amount;
-                return #Ok(null);
+                return #ok(null);
             };
             case (#Err(err)) {
-                return #Err(#TransferFailed("Fee withdrawal failed."));
+                return #err(#TransferFailed("Fee withdrawal failed."));
             };
         };
     };
 
     // Helper for debugging
     private func debug_print(text : Text) {
-        Debug.print(text);
+        Debug.print(debug_show(text));
     };
 };
