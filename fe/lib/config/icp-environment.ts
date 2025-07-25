@@ -3,6 +3,8 @@
  * Manages canister IDs and network settings for different environments
  */
 
+import { stablecoin } from "../declarations/stablecoin";
+
 export interface CanisterIds {
   [key: string]: string;
 }
@@ -16,8 +18,10 @@ export interface ICPEnvironment {
 
 // Default canister IDs - these should be replaced with your actual canister IDs
 const DEFAULT_CANISTER_IDS: CanisterIds = {
-  backend: process.env.NEXT_PUBLIC_BACKEND_CANISTER_ID_LOCAL || 'u6s2n-gx777-77774-qaaba-cai',
-  internet_identity: process.env.NEXT_PUBLIC_INTERNET_IDENTITY_CANISTER_ID_LOCAL || 'uxrrr-q7777-77774-qaaaq-cai',
+  bitpesa_lending: process.env.NEXT_PUBLIC_BITPESA_LENDING_CANISTER_ID_LOCAL || 'u6s2n-gx777-77774-qaaba-cai',
+  stablecoin:process.env.NEXT_PUBLIC_STABLECOIN_LOCAL || "umunu-kh777-77774-qaaca-cai",
+  backend: process.env.NEXT_PUBLIC_BACKEND_CANISTER_ID_LOCAL || 'uxrrr-q7777-77774-qaaaq-cai',
+  internet_identity: process.env.NEXT_PUBLIC_INTERNET_IDENTITY_CANISTER_ID_LOCAL || 'uzt4z-lp777-77774-qaabq-cai',
 };
 
 // Load canister IDs from environment or local files
@@ -40,15 +44,19 @@ function loadCanisterIds(): CanisterIds {
 export function getICPEnvironment(): ICPEnvironment {
   const isProduction = process.env.NODE_ENV === 'production';
   const network = isProduction ? 'ic' : 'local';
+
+  // console.log(`🔧 ICP Environment: ${network}`);
   
   const config: ICPEnvironment = {
     network,
-    host: isProduction ? 'https://icp-api.io' : 'http://127.0.0.1:4943',
+    host: isProduction ? 'https://ic0.app' : 'http://127.0.0.1:4943',
     identityProvider: isProduction 
       ? 'https://identity.ic0.app/#authorize'
-      : `http://localhost:4943?canisterId=${DEFAULT_CANISTER_IDS.internet_identity}`,
+      : `http://${DEFAULT_CANISTER_IDS.internet_identity}.localhost:4943`,
     canisters: loadCanisterIds(),
   };
+
+  // console.log('🔧 Canister IDs:', config.identityProvider);
   
   return config;
 }

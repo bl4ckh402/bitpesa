@@ -1,16 +1,13 @@
 "use client";
 
-import React, { useRef, useEffect } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import * as React from "react";
+import { useRef, useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { RoadmapCube } from "@/components/roadmap-cube";
-import { useGSAPContext, useGSAPCleanup } from "@/lib/gsap-cleanup";
+import { RoadmapCube } from "../../components/roadmap-cube";
 
 export function RoadmapSection() {
+  const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLDivElement>(null);
-  const timelineRef = useRef<HTMLDivElement>(null);
-  const phasesRef = useRef<HTMLDivElement[]>([]);
 
   // Timeline phases data
   const phases = [
@@ -78,164 +75,31 @@ export function RoadmapSection() {
       ],
     },
   ];
-  // Use GSAP context for proper cleanup
-  const { createContext } = useGSAPContext();
 
-  // Add global cleanup for all animations
-  useGSAPCleanup();
-
+  // Simple intersection observer to trigger animations once
   useEffect(() => {
-    if (!sectionRef.current || !timelineRef.current) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !isVisible) {
+          setIsVisible(true);
+        }
+      },
+      {
+        threshold: 0.2,
+        rootMargin: "-10% 0px -10% 0px"
+      }
+    );
 
-    // Register ScrollTrigger if we're in the browser
-    if (typeof window !== "undefined") {
-      gsap.registerPlugin(ScrollTrigger);
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
     }
 
-    // Create a GSAP context for this component
-    const ctx = createContext((self) => {
-      // Timeline animation
-      const timeline = gsap.timeline({
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top 70%",
-          end: "bottom 20%",
-          toggleActions: "play none none reverse",
-        },
-      });
-
-      // Animate the main timeline line with gradient highlight effect
-      timeline.fromTo(
-        timelineRef.current,
-        {
-          scaleX: 0,
-          transformOrigin: "left",
-          background: "linear-gradient(to right, #f97316, #d97706, #f97316)",
-        },
-        {
-          scaleX: 1,
-          duration: 1.5,
-          ease: "power3.inOut",
-          background: "linear-gradient(to right, #f97316, #d97706, #f97316)",
-        }
-      );
-
-      // Create a progress indicator
-      const progressIndicator = document.createElement("div");
-      progressIndicator.className =
-        "absolute h-5 w-5 rounded-full bg-orange-500 border-4 border-slate-900 shadow-lg shadow-orange-500/30 z-20";
-      progressIndicator.style.top = "22px";
-      progressIndicator.style.left = "0";
-      progressIndicator.style.transform = "translate(-50%, -50%)";
-      if (timelineRef.current)
-        timelineRef.current.parentNode?.appendChild(progressIndicator);
-
-      // Animate each phase with staggered effect
-      phasesRef.current.forEach((phase, i) => {
-        if (!phase) return;
-
-        const tl = gsap.timeline({
-          scrollTrigger: {
-            trigger: phase,
-            start: "top 60%",
-            end: "bottom 40%",
-            toggleActions: "play none none reverse",
-            onEnter: () => {
-              // Highlight active phase
-              gsap.to(phase, {
-                borderColor: "rgba(249, 115, 22, 0.5)",
-                backgroundColor: "rgba(30, 41, 59, 0.8)",
-                boxShadow: "0 25px 50px -12px rgba(249, 115, 22, 0.3)",
-                duration: 0.5,
-              });
-
-              // Move progress indicator
-              const phaseWidth = timelineRef.current
-                ? timelineRef.current.offsetWidth / 5
-                : 0;
-              gsap.to(progressIndicator, {
-                left: `${phaseWidth * i + phaseWidth / 2}px`,
-                duration: 0.8,
-                ease: "power2.out",
-              });
-            },
-            onLeave: () => {
-              // Reset phase style
-              gsap.to(phase, {
-                borderColor: "rgba(51, 65, 85, 0.5)",
-                backgroundColor: "rgba(30, 41, 59, 0.6)",
-                boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.2)",
-                duration: 0.5,
-              });
-            },
-            onEnterBack: () => {
-              // Highlight active phase when scrolling back
-              gsap.to(phase, {
-                borderColor: "rgba(249, 115, 22, 0.5)",
-                backgroundColor: "rgba(30, 41, 59, 0.8)",
-                boxShadow: "0 25px 50px -12px rgba(249, 115, 22, 0.3)",
-                duration: 0.5,
-              });
-
-              // Move progress indicator back
-              const phaseWidth = timelineRef.current
-                ? timelineRef.current.offsetWidth / 5
-                : 0;
-              gsap.to(progressIndicator, {
-                left: `${phaseWidth * i + phaseWidth / 2}px`,
-                duration: 0.8,
-                ease: "power2.out",
-              });
-            },
-            onLeaveBack: () => {
-              // Reset phase style when scrolling back
-              gsap.to(phase, {
-                borderColor: "rgba(51, 65, 85, 0.5)",
-                backgroundColor: "rgba(30, 41, 59, 0.6)",
-                boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.2)",
-                duration: 0.5,
-              });
-            },
-          },
-        });
-
-        tl.fromTo(
-          phase,
-          { opacity: 0, x: i % 2 === 0 ? -50 : 50 },
-          {
-            opacity: 1,
-            x: 0,
-            duration: 1,
-            delay: i * 0.2,
-            ease: "power3.out",
-          }
-        );
-
-        // Parallax effect on hover for each phase
-        phase.addEventListener("mouseenter", () => {
-          gsap.to(phase, {
-            y: -10,
-            scale: 1.03,
-            boxShadow: "0 25px 50px -12px rgba(249, 115, 22, 0.3)",
-            borderColor: "rgba(249, 115, 22, 0.7)",
-            duration: 0.3,
-          });
-        });
-
-        phase.addEventListener("mouseleave", () => {
-          gsap.to(phase, {
-            y: 0,
-            scale: 1,
-            boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.2)",
-            borderColor: "rgba(51, 65, 85, 0.5)",
-            duration: 0.3,
-          });
-        });
-      });
-
-      // No need for explicit cleanup - handled by useGSAPContext
-    });
-  }, [createContext]);
+    return () => {
+      if (sectionRef.current) {
+        observer.unobserve(sectionRef.current);
+      }
+    };
+  }, [isVisible]);
 
   return (
     <section
@@ -249,40 +113,59 @@ export function RoadmapSection() {
       </div>
 
       <div className="container mx-auto px-4 relative z-10">
-        {" "}
         <div className="text-center mb-16">
           <div className="mb-10 relative">
             <RoadmapCube />
           </div>
-          <h2 className="text-3xl md:text-5xl font-bold mb-6 text-white reveal-text">
+          <motion.h2 
+            initial={{ opacity: 0, y: 20 }}
+            animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="text-3xl md:text-5xl font-bold mb-6 text-white"
+          >
             Our Roadmap to Success
-          </h2>
-          <p className="text-xl text-slate-400 max-w-3xl mx-auto">
+          </motion.h2>
+          <motion.p 
+            initial={{ opacity: 0, y: 20 }}
+            animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+            className="text-xl text-slate-400 max-w-3xl mx-auto"
+          >
             Follow our ambitious journey as we revolutionize Bitcoin lending and
             crypto asset management
-          </p>
+          </motion.p>
         </div>
+        
         {/* Timeline container */}
         <div className="relative mt-20 pb-10">
           {/* Main timeline line */}
-          <div
-            ref={timelineRef}
-            className="absolute top-24 left-0 right-0 h-1 bg-gradient-to-r from-orange-600 via-amber-400 to-orange-600"
-          ></div>
+          <motion.div
+            initial={{ scaleX: 0 }}
+            animate={isVisible ? { scaleX: 1 } : { scaleX: 0 }}
+            transition={{ duration: 1.5, delay: 0.6, ease: "easeInOut" }}
+            className="absolute top-24 left-0 right-0 h-1 bg-gradient-to-r from-orange-600 via-amber-400 to-orange-600 origin-left"
+          />
 
           {/* Timeline phases */}
           <div className="grid grid-cols-1 md:grid-cols-5 gap-4 md:gap-6 relative z-10">
             {phases.map((phase, i) => (
-              <div
+              <motion.div
                 key={phase.id}
-                ref={(el) => {
-                  if (el) phasesRef.current[i] = el;
+                initial={{ opacity: 0, y: 30 }}
+                animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+                transition={{ 
+                  duration: 0.8, 
+                  delay: 0.8 + (i * 0.2),
+                  ease: "easeOut"
                 }}
                 className={`
                   bg-slate-800/60 backdrop-blur-sm rounded-xl p-6 border border-slate-700/50 
-                  shadow-2xl relative transition-all transform
+                  shadow-lg relative
                   ${i % 2 === 0 ? "mt-16 md:mt-0" : "mt-16"}
                 `}
+                style={{
+                  boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.2)"
+                }}
               >
                 {/* Phase dot on the timeline */}
                 <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-10 md:-translate-y-[86px] flex flex-col items-center">
@@ -309,7 +192,7 @@ export function RoadmapSection() {
                     ))}
                   </ul>
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
@@ -318,6 +201,7 @@ export function RoadmapSection() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.5, duration: 0.8 }}
+          viewport={{ once: true }}
           className="mt-16 text-center bg-gradient-to-r from-slate-800/50 to-slate-900/50 backdrop-blur-sm rounded-2xl p-8 border border-slate-700/30 max-w-3xl mx-auto"
         >
           <h3 className="text-2xl font-bold text-white mb-4">

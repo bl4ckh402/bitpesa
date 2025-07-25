@@ -1,0 +1,197 @@
+type Utxo = 
+ record {
+   height: nat32;
+   outpoint: Outpoint;
+   value: Satoshi;
+ };
+type TransformArgs = 
+ record {
+   context: blob;
+   response: HttpResponse;
+ };
+type Satoshi = nat64;
+type Result_8 = 
+ variant {
+   err: text;
+   ok:
+    record {
+      change_amount: Satoshi;
+      recipients_count: nat;
+      total_amount_sent: Satoshi;
+      total_fee_paid: Satoshi;
+      transaction_bytes: vec nat8;
+    };
+ };
+type Result_7 = 
+ variant {
+   err: text;
+   ok:
+    record {
+      change_output_amount: Satoshi;
+      fee_rate_used: MillisatoshiPerByte;
+      inputs_used: nat;
+      is_rbf_enabled: bool;
+      outputs_created: nat;
+      size_bytes: nat;
+      total_fee_paid: Satoshi;
+      transaction_bytes: vec nat8;
+      transaction_id_preview: text;
+    };
+ };
+type Result_6 = 
+ variant {
+   err: text;
+   ok:
+    record {
+      change_amount: Satoshi;
+      selected_utxos: vec Utxo;
+      total_fee: Satoshi;
+      transaction_bytes: vec nat8;
+    };
+ };
+type Result_5 = 
+ variant {
+   err: text;
+   ok:
+    record {
+      estimated_size_bytes: nat;
+      high_priority_fee: Satoshi;
+      low_priority_fee: Satoshi;
+      medium_priority_fee: Satoshi;
+    };
+ };
+type Result_4 = 
+ variant {
+   err: text;
+   ok: Satoshi;
+ };
+type Result_3 = 
+ variant {
+   err: text;
+   ok: GetUtxosResponse;
+ };
+type Result_2 = 
+ variant {
+   err: text;
+   ok: text;
+ };
+type Result_1 = 
+ variant {
+   err: text;
+   ok: record {
+         address_type: text;
+         is_valid: bool;
+         network: text;
+       };
+ };
+type Result = 
+ variant {
+   err: text;
+   ok:
+    record {
+      estimated_fee_rate: MillisatoshiPerByte;
+      input_count: nat;
+      output_count: nat;
+      size: nat;
+    };
+ };
+type Page = vec nat8;
+type Outpoint = 
+ record {
+   txid: vec nat8;
+   vout: nat32;
+ };
+type MillisatoshiPerByte = nat64;
+type HttpResponse = 
+ record {
+   body: vec nat8;
+   headers: vec HttpHeader;
+   status: nat;
+ };
+type HttpHeader = 
+ record {
+   name: text;
+   value: text;
+ };
+type GetUtxosResponse = 
+ record {
+   next_page: opt Page;
+   tip_block_hash: BlockHash;
+   tip_height: nat32;
+   utxos: vec Utxo;
+ };
+type BlockHash = vec nat8;
+type BitcoinNetwork = 
+ variant {
+   mainnet;
+   regtest;
+   testnet;
+ };
+service : {
+  /// * Batch transaction builder for multiple recipients
+  ///      * Efficiently creates transactions with multiple outputs
+  build_batch_transaction: (recipients:
+   vec record {
+         address: text;
+         amount: Satoshi;
+       }, _fee_strategy: variant {
+                           economical;
+                           priority;
+                           standard;
+                         }) -> (Result_8);
+  /// * Comprehensive transaction building with automatic optimization
+  ///      * This function handles all aspects of transaction creation with best practices
+  build_optimized_transaction: (to_address: text, amount: Satoshi,
+   fee_strategy: variant {
+                   economical;
+                   priority;
+                   standard;
+                 }, include_rbf: bool) -> (Result_7);
+  /// * This is a high-level function that handles the complete transaction building process:
+  ///  * - Fetches current fee rates from the Bitcoin network
+  ///  * - Automatically selects optimal UTXOs
+  ///  * - Calculates accurate fees based on transaction size
+  ///  * - Handles change outputs with dust protection
+  ///  * - Returns detailed transaction information
+  ///  *
+  ///  * @param to_address - Recipient Bitcoin address
+  ///  * @param amount - Amount to send in satoshis
+  ///  * @param fee_priority - Fee priority level (low/medium/high)
+  ///  * @returns Complete transaction details including bytes, fees, and selected UTXOs
+  build_transaction_with_fee_estimation: (to_address: text, amount: Satoshi,
+   fee_priority: variant {
+                   high;
+                   low;
+                   medium;
+                 }) -> (Result_6);
+  create_bitpesa: (owner: principal, ckbtc: principal, stablecoin:
+   principal) -> (principal);
+  demo_bitcoin_transaction_workflow: () -> (Result_2);
+  /// * Estimate transaction fees with different priority levels
+  ///      * Returns fee estimates for low, medium, and high priority transactions
+  estimate_transaction_fees: (input_count: nat, output_count: nat) ->
+   (Result_5);
+  getBtcPrice: () -> (Result_2);
+  getCyclesBalance: () -> (nat) query;
+  get_bitcoin_network_info: () ->
+   (record {
+      balance: opt Satoshi;
+      canister_address: opt text;
+      network: BitcoinNetwork;
+    });
+  get_bitpesa: () -> (opt principal) query;
+  get_canister_bitcoin_address: () -> (Result_2);
+  get_canister_bitcoin_balance: () -> (Result_4);
+  get_canister_utxos: () -> (Result_3);
+  greet: (name: text) -> (text) query;
+  health: () -> (record {
+                   status: text;
+                   timestamp: int;
+                 }) query;
+  send_bitcoin: (to_address: text, amount_satoshi: Satoshi) -> (Result_2);
+  transform: (args: TransformArgs) -> (HttpResponse) query;
+  /// * Advanced Bitcoin address validation with checksum verification
+  ///      * This function provides comprehensive validation of Bitcoin addresses
+  validate_bitcoin_address: (address: text) -> (Result_1) query;
+  validate_transaction: (transaction_bytes: vec nat8) -> (Result) query;
+}
