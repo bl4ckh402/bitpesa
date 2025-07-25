@@ -35,11 +35,15 @@
   }
   body {
     @apply bg-background text-foreground;
+  }
+
+  /* Custom cursor only for landing page */
+  body:has([data-page="landing"]) {
     cursor: none;
   }
 
   @media (max-width: 768px) {
-    body {
+    body:has([data-page="landing"]) {
       cursor: auto;
     }
   }

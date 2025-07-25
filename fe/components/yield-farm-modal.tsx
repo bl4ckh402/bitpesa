@@ -24,7 +24,6 @@ import {
   DURATION
 } from "@/lib/utils/toast-utils";
 import { Progress } from "@/components/ui/progress";
-import { useCCIPBridging, type ChainName } from "@/lib/hooks/useCCIPBridging";
 
 import BitPesaTokenBridgeABI from "@/lib/contracts/BitPesaTokenBridge.json";
 import { CHAIN_SELECTORS, TOKEN_ADDRESSES, BRIDGE_ADDRESSES } from "@/lib/constants/chains";
@@ -52,16 +51,7 @@ export function YieldFarmModal({ isOpen, onClose, pool }: YieldFarmModalProps) {
   const { chain } = useAccount();
   const { switchChain } = useSwitchChain();
   const publicClient = usePublicClient();
-  const { estimateFees } = useCCIPBridging();
   
-  // Get token balance for the selected token
-  const { data: tokenBalance } = useBalance({
-    address: address,
-    token: pool?.tokens?.[0] ? 
-      TOKEN_ADDRESSES[(pool?.sourceChain || "AVALANCHE_FUJI") as keyof typeof TOKEN_ADDRESSES]?.[
-        pool.tokens[0] as keyof (typeof TOKEN_ADDRESSES)[keyof typeof TOKEN_ADDRESSES]
-      ] as `0x${string}` : undefined,
-  });
   
   // Steps in the farming process
   const steps = [
@@ -94,16 +84,16 @@ export function YieldFarmModal({ isOpen, onClose, pool }: YieldFarmModalProps) {
         setEstimatingFee(true);
         try {
           // Use our CCIP bridging hook to estimate fees
-          const fees = await estimateFees(
-            pool.sourceChain as any || "AVALANCHE_FUJI",
-            pool.chain as any,
-            pool.tokens[0],
-            Number(amount)
-          );
+          // const fees = await estimateFees(
+          //   pool.sourceChain as any || "AVALANCHE_FUJI",
+          //   pool.chain as any,
+          //   pool.tokens[0],
+          //   Number(amount)
+          // );
           
-          if (fees) {
-            setBridgeFee(fees.totalFee.toString());
-          }
+          // if (fees) {
+          //   setBridgeFee(fees.totalFee.toString());
+          // }
         } catch (error) {
           console.error("Error estimating fees:", error);
         } finally {
@@ -113,7 +103,7 @@ export function YieldFarmModal({ isOpen, onClose, pool }: YieldFarmModalProps) {
     };
     
     fetchFees();
-  }, [amount, pool, estimateFees]);
+  }, [amount, pool]);
   
   // Get chain selectors based on source and destination chains
   const getChainSelector = (chainName: string): string => {
@@ -260,7 +250,7 @@ export function YieldFarmModal({ isOpen, onClose, pool }: YieldFarmModalProps) {
                     </div>
                   )}
                 </div>
-                <div className="flex justify-between mt-2 text-xs text-slate-400">
+                {/* <div className="flex justify-between mt-2 text-xs text-slate-400">
                   <span>Balance: {tokenBalance ? formatUnits(tokenBalance.value, tokenBalance.decimals) : '0.0'} {tokenBalance?.symbol}</span>
                   <button 
                     type="button" 
@@ -276,7 +266,7 @@ export function YieldFarmModal({ isOpen, onClose, pool }: YieldFarmModalProps) {
                   >
                     Max
                   </button>
-                </div>
+                </div> */}
               </div>
               
               {/* Cross-chain info if needed */}

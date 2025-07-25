@@ -18,6 +18,16 @@ export function LoanCalculator({ onClose }: LoanCalculatorProps) {
   const [currency, setCurrency] = useState("USD")
   const [duration, setDuration] = useState("30")
 
+  const getCurrencySymbol = (curr: string) => {
+    switch(curr) {
+      case "USD": return "$";
+      case "EUR": return "€";
+      case "GBP": return "£";
+      case "KES": return "KSh";
+      default: return "";
+    }
+  }
+
   const btcPrice = 45000 // Mock BTC price
   const interestRates = { "30": 1, "90": 1.2, "180": 1.5, "365": 2 }
 
@@ -80,9 +90,10 @@ export function LoanCalculator({ onClose }: LoanCalculatorProps) {
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="USD">USD</SelectItem>
-                  <SelectItem value="EUR">EUR</SelectItem>
-                  <SelectItem value="GBP">GBP</SelectItem>
+                  <SelectItem value="USD">USD - US Dollar</SelectItem>
+                  <SelectItem value="EUR">EUR - Euro</SelectItem>
+                  <SelectItem value="GBP">GBP - British Pound</SelectItem>
+                  <SelectItem value="KES">KES - Kenyan Shilling</SelectItem>
                 </SelectContent>
               </Select>
             </div>
