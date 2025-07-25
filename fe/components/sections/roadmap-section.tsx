@@ -14,7 +14,7 @@ export function RoadmapSection() {
     {
       id: "phase1",
       title: "Phase 1: MVP Development",
-      date: "Q2 2023",
+      date: "July 2025",
       description:
         "Hackathon launch with core lending functionality, smart contracts, and basic UI",
       milestones: [
@@ -27,7 +27,7 @@ export function RoadmapSection() {
     {
       id: "phase2",
       title: "Phase 2: Platform Enhancement",
-      date: "Q3-Q4 2023",
+      date: "August 2025",
       description: "Expanded functionality and improved user experience",
       milestones: [
         "Implementation of token bridge for cross-chain assets",
@@ -39,7 +39,7 @@ export function RoadmapSection() {
     {
       id: "phase3",
       title: "Phase 3: Crypto Wills Launch",
-      date: "Q1 2024",
+      date: "September 2025",
       description:
         "Revolutionary crypto inheritance features to secure digital assets",
       milestones: [
@@ -52,7 +52,7 @@ export function RoadmapSection() {
     {
       id: "phase4",
       title: "Phase 4: Global Expansion",
-      date: "Q2-Q3 2024",
+      date: "October 2025",
       description: "Scaling the platform to reach global markets",
       milestones: [
         "Multi-language support",
@@ -64,7 +64,7 @@ export function RoadmapSection() {
     {
       id: "phase5",
       title: "Phase 5: Advanced Trust Fund Features",
-      date: "Q4 2024",
+      date: "November 2025",
       description:
         "Sophisticated financial planning and asset protection tools",
       milestones: [
