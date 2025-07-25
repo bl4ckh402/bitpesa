@@ -220,7 +220,7 @@ export function RoadmapSection() {
               Join Community
             </a>
             <a
-              href="https://github.com/yourusername/bitpesa"
+              href="https://github.com/bl4ckh402/bitpesa"
               className="px-6 py-3 rounded-lg bg-slate-700 hover:bg-slate-600 text-white font-medium transition-colors flex items-center justify-center"
             >
               <svg
