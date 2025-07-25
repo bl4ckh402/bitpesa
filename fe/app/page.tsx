@@ -3,15 +3,10 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import { HeroSection } from "@/components/sections/hero-section";
 import { FeaturesSection } from "@/components/sections/features-section";
-import { CryptoWillSection } from "@/components/sections/crypto-will-section";
-import { TokenBridgeSection } from "@/components/sections/token-bridge-section";
-import { PriceOracleSection } from "@/components/sections/price-oracle-section";
-import { LightningNetworkSection } from "@/components/sections/lightning-network-section";
 import { HowItWorksSection } from "@/components/sections/how-it-works-section";
 import { RatesSection } from "@/components/sections/rates-section";
 import { RoadmapSection } from "@/components/sections/roadmap-section";
 import { LoanCalculator } from "@/components/loan-calculator";
-import { LightningWalletConnect } from "@/components/lightning-wallet-connect";
 import { NoiseTexture } from "@/components/noise-texture";
 import { motion, AnimatePresence } from "framer-motion";
 import gsap from "gsap";
@@ -20,6 +15,7 @@ import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 import { SplitText } from "gsap/SplitText";
 import { Loader2, ArrowRight, Menu, X } from "lucide-react";
 import { useGSAPContext, useGSAPCleanup } from "@/lib/gsap-cleanup";
+import {ICPIntegrationSection} from "@/components/sections/icp-integration-section";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger, ScrollToPlugin, SplitText);
@@ -48,7 +44,6 @@ function useScroll() {
 
 export default function LandingPage() {
   const [showCalculator, setShowCalculator] = useState(false);
-  const [showLightningConnect, setShowLightningConnect] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
   const [showMobileNav, setShowMobileNav] = useState(false);
@@ -316,6 +311,7 @@ export default function LandingPage() {
             animate={{ opacity: 1 }}
             transition={{ duration: 1.5 }}
             className="relative overflow-hidden"
+            data-page="landing"
           >
             {/* Parallax background elements */}
             <div className="fixed inset-0 -z-20">
@@ -356,30 +352,15 @@ export default function LandingPage() {
               <HowItWorksSection />
             </div>
 
-            {/* <div id="token-bridge" className="section-reveal">
-              <TokenBridgeSection />
-            </div>
-
-            
-            <div id="price-oracle" className="section-reveal">
-              <PriceOracleSection />
-            </div> */}
-
-            {/* Lightning Network */}
-            <div id="lightning-network" className="section-reveal">
-              <LightningNetworkSection
-                onConnectLightningWallet={() => setShowLightningConnect(true)}
-              />
-            </div>
-
-            {/* Crypto Will Section */}
-            {/* <div id="crypto-will" className="section-reveal">
-              <CryptoWillSection />
-            </div> */}
-            {/* Rates */}
             <div id="rates" className="section-reveal">
               <RatesSection />
             </div>
+
+            {/* ICP Integration Section */}
+            <div id="icp-integration" className="section-reveal">
+              <ICPIntegrationSection />
+            </div>
+
             {/* Roadmap */}
             <div id="roadmap" className="section-reveal">
               <RoadmapSection />
@@ -388,11 +369,6 @@ export default function LandingPage() {
             {/* Modals */}
             {showCalculator && (
               <LoanCalculator onClose={() => setShowCalculator(false)} />
-            )}
-            {showLightningConnect && (
-              <LightningWalletConnect
-                onClose={() => setShowLightningConnect(false)}
-              />
             )}
           </motion.div>
         )}

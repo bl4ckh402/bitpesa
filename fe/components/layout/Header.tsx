@@ -4,8 +4,6 @@ import { useState, useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { Bitcoin, Wallet } from "lucide-react";
-import { WalletConnect as WalletConnectButton } from "@/components/wallet-connect";
-import { WalletConnect } from "@/components/wallet-connect-modal";
 import { ICPWalletConnect } from "@/components/icp/ICPWalletConnect";
 import { EnhancedDesktopNavigation } from "@/components/enhanced-desktop-navigation";
 import { useGSAPCleanup } from "@/lib/gsap-cleanup";
@@ -99,16 +97,12 @@ export function Header() {
                 <a href="#rates" className="text-slate-300 hover:text-white transition-colors">Rates</a>
                 <a href="/dashboard" className="text-slate-300 hover:text-white transition-colors">Dashboard</a>
                 <a href="/earn" className="text-slate-300 hover:text-white transition-colors">Earn</a>
-                <a href="/cross-chain-borrowing" className="text-slate-300 hover:text-white transition-colors">Crosschain Borrowing</a>
-                <a href="/will" className="text-slate-300 hover:text-white transition-colors">Will</a>
               </div>
               )}
             </div>
             </div>
           <div className="flex items-center space-x-2 md:hidden">
             <ThemeToggle />
-            {/* Use AppKit WalletConnectButton for mobile */}
-            <WalletConnectButton />
             <ICPWalletConnect size="sm" />
           </div>
           <div className="hidden md:flex items-center space-x-4">
@@ -117,8 +111,6 @@ export function Header() {
             
             <div className="flex items-center space-x-3 pl-2 border-l border-slate-700/50">
               <ThemeToggle />
-              {/* Use AppKit WalletConnectButton for desktop */}
-              <WalletConnectButton />
               <ICPWalletConnect />
             </div>
           </div>

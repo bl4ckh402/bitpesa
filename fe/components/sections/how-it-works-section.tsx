@@ -108,8 +108,8 @@ export function HowItWorksSection() {
                     </div>
                   </div>
                   <span className="inline-block bg-orange-500/20 text-orange-400 py-1 px-3 rounded-full text-sm font-medium mb-4">STEP 1</span>
-                  <h3 className="text-2xl font-bold text-white mb-4">Deposit BTC</h3>
-                  <p className="text-slate-300 leading-relaxed">Connect your wallet and securely lock your Bitcoin as collateral in our non-custodial smart contract</p>
+                  <h3 className="text-2xl font-bold text-white mb-4">Connect ICP Identity</h3>
+                  <p className="text-slate-300 leading-relaxed">Authenticate with Internet Identity for secure access to the platform. No passwords or seed phrases required</p>
                 </CardContent>
               </Card>
             </motion.div>
@@ -129,8 +129,8 @@ export function HowItWorksSection() {
                     </div>
                   </div>
                   <span className="inline-block bg-green-500/20 text-green-400 py-1 px-3 rounded-full text-sm font-medium mb-4">STEP 2</span>
-                  <h3 className="text-2xl font-bold text-white mb-4">Get Fiat Loan</h3>
-                  <p className="text-slate-300 leading-relaxed">Receive instant fiat loans up to 70% of your BTC value directly to your bank account</p>
+                  <h3 className="text-2xl font-bold text-white mb-4">Generate Bitcoin Address</h3>
+                  <p className="text-slate-300 leading-relaxed">Our canister generates a unique Bitcoin address for you using threshold ECDSA signatures</p>
                 </CardContent>
               </Card>
             </motion.div>
@@ -150,8 +150,8 @@ export function HowItWorksSection() {
                     </div>
                   </div>
                   <span className="inline-block bg-blue-500/20 text-blue-400 py-1 px-3 rounded-full text-sm font-medium mb-4">STEP 3</span>
-                  <h3 className="text-2xl font-bold text-white mb-4">Repay & Withdraw</h3>
-                  <p className="text-slate-300 leading-relaxed">Repay your loan at any time and immediately withdraw your Bitcoin collateral</p>
+                  <h3 className="text-2xl font-bold text-white mb-4">Get Local Currency</h3>
+                  <p className="text-slate-300 leading-relaxed">Send Bitcoin to your address, deposit as collateral, and receive KES, USD, EUR directly to your mobile money account</p>
                 </CardContent>
               </Card>
             </motion.div>
@@ -165,8 +165,8 @@ export function HowItWorksSection() {
             transition={{ duration: 0.6, delay: 0.8 }}
           >
             <div className="inline-flex items-center gap-2 px-4 py-2 bg-slate-800/50 backdrop-blur-sm rounded-full border border-slate-700/50">
-              <Hourglass className="h-5 w-5 text-orange-500 animate-pulse" />
-              <span className="text-slate-300">Typical loan process takes &lt; 5 minutes</span>
+              <Hourglass className="h-5 w-5 text-blue-500 animate-pulse" />
+              <span className="text-slate-300">Powered by ICP's sub-second finality</span>
             </div>
           </motion.div>
         </div>

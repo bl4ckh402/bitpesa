@@ -232,7 +232,7 @@ export function EnhancedDesktopNavigation() {
         className="desktop-nav-item"
       />
       
-      <DesktopNavItem
+      {/* <DesktopNavItem
         label="Services"
         icon={<Shield className="h-4 w-4" />}
         hasDropdown={true}
@@ -264,21 +264,21 @@ export function EnhancedDesktopNavigation() {
             <span>Lending</span>
           </Link>
         </DropdownMenuItem>
-      </DesktopNavItem>
+      </DesktopNavItem> */}
       
       <motion.div
         className="desktop-nav-item relative ml-3 overflow-hidden"
         whileHover={{ scale: 1.03 }}
         transition={{ duration: 0.2 }}
       >
-        <Link href="/will">
+        {/* <Link href="/will">
           <div className="group relative flex items-center gap-1.5 px-3 py-2 rounded-md overflow-hidden">
             <div className="absolute inset-0 bg-gradient-to-r from-orange-500/10 to-amber-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-md"></div>
             <FileText className="h-4 w-4 text-orange-400 group-hover:scale-110 transition-transform duration-300" />
             <span className="text-sm font-medium text-white">Will</span>
             <span className="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-orange-500 to-amber-500 transform origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></span>
           </div>
-        </Link>
+        </Link> */}
       </motion.div>
     </div>
   );

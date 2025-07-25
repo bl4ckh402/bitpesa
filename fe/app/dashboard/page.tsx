@@ -633,7 +633,7 @@ export default function MotokoPage() {
                 onChange={(e) => setLoanAmount(e.target.value)}
               />
               <p className="text-sm text-muted-foreground">
-                Min: $100, Max: Based on available collateral
+                Available in KES, USD, EUR - Min: $100 equivalent
               </p>
             </div>
             <div className="space-y-2">
