@@ -65,17 +65,17 @@ export function Footer() {
             <h3 className="text-white font-semibold mb-4">Connect</h3>
             <ul className="space-y-2 text-sm">
               <li>
-                <Link href="https://twitter.com/bitpesa" target="_blank" className="hover:text-orange-500 transition-colors">
+                <Link href="" target="_blank" className="hover:text-orange-500 transition-colors">
                   Twitter
                 </Link>
               </li>
               <li>
-                <Link href="https://discord.gg/bitpesa" target="_blank" className="hover:text-orange-500 transition-colors">
+                <Link href="" target="_blank" className="hover:text-orange-500 transition-colors">
                   Discord
                 </Link>
               </li>
               <li>
-                <Link href="https://github.com/bitpesa" target="_blank" className="hover:text-orange-500 transition-colors">
+                <Link href="https://bl4ckh402/bitpesa" target="_blank" className="hover:text-orange-500 transition-colors">
                   GitHub
                 </Link>
               </li>
