@@ -1,189 +1,418 @@
-# BitPesa: Bitcoin-Backed Lending for the Real World
+# BitPesa - Cross-Chain Bitcoin Lending Platform
 
-## Vision & Mission
+[![Deployed on Vercel](https://img.shields.io/badge/Deployed%20on-Vercel-black?style=for-the-badge&logo=vercel)](https://vercel.com)
+[![Built with Next.js](https://img.shields.io/badge/Built%20with-Next.js-black?style=for-the-badge&logo=next.js)](https://nextjs.org)
+[![ICP Integration](https://img.shields.io/badge/ICP-Integration-29ABE2?style=for-the-badge&logo=internet-computer)](https://internetcomputer.org)
+[![Chainlink](https://img.shields.io/badge/Chainlink-Oracle-375BD2?style=for-the-badge&logo=chainlink)](https://chain.link)
 
-BitPesa is on a mission to unlock the value of Bitcoin/AVAX for everyone, everywhere. Our dream is to enable anyone to use their BTC as collateral to access instant loans in their local currency—directly to their bank account or mobile money wallet. We believe in a world where your digital assets can power your real-world needs, bridging the gap between decentralized finance and everyday life.
+## 🚀 Overview
 
-- **Lend out fiat, collateralized with BTC**: Secure a loan in your local currency by locking up your Bitcoin as collateral.
-- **Receive funds in your bank or mobile money**: No stablecoin knowledge required—just real cash, delivered where you need it.
-- **Global access, local impact**: Designed for emerging markets and anyone underserved by traditional finance.
+BitPesa is a revolutionary cross-chain DeFi lending platform that bridges traditional financial services with decentralized finance. Built on the Internet Computer Protocol (ICP) and integrated with multiple blockchain networks, BitPesa enables users to:
 
-## Our Plan & Roadmap
+- **Deposit Bitcoin** as collateral
+- **Borrow Local Currency** (KES/USD) against Bitcoin collateral
+- **Integrate with M-Pesa** for seamless African market access
+- **Cross-chain operations** across Avalanche, Ethereum, and other networks
+- **Automated liquidation** protection with real-time price oracles
 
-1. **Hackathon MVP (Current Phase)**
-   - Launch a working prototype using USDC as the loan currency, with WBTC as collateral, on Avalanche Fuji Testnet.
-   - Integrate Chainlink oracles for secure BTC/USD pricing and automated liquidations.
-   - Build a user-friendly web interface for deposits, withdrawals, and loan management.
+## 🏗️ Architecture
 
-2. **Post-Hackathon: Real-World Fiat Integration**
-   - Expand to support direct fiat payouts to bank accounts and mobile money (e.g., M-Pesa, Airtel Money, etc.).
-   - Partner with payment processors and local financial institutions for seamless off-ramps.
-   - Add support for more blockchains and collateral types.
+BitPesa employs a multi-layered architecture combining:
 
-3. **Long-Term Vision**
-   - Become the go-to platform for unlocking liquidity from Bitcoin, serving users globally with instant, borderless, and accessible lending.
-   - Enable new financial products (e.g., savings, remittances, microloans) powered by crypto collateral.
+### Backend Infrastructure
+- **Internet Computer Protocol (ICP)**: Core lending logic and canister-based architecture
+- **HTTPS Outcalls**: Real-time Bitcoin price feeds
+- **Canister Timers**: Automated liquidation monitoring
 
-## Why BitPesa?
+### Frontend Application
+- **Next.js 14**: Modern React framework with App Router
+- **TypeScript**: Type-safe development
+- **Tailwind CSS**: Utility-first styling
+- **GSAP**: Advanced animations and interactions
+- **Radix UI**: Accessible component library
 
-- **Unlock your BTC**: Don’t sell your Bitcoin—use it to access cash when you need it.
-- **No credit checks**: Your crypto is your credit. Instant approval, no paperwork.
-- **Local currency, global reach**: Get paid in the currency you use every day, wherever you are.
-- **Secure & Transparent**: Powered by smart contracts, Chainlink oracles, and non-custodial design.
+### Blockchain Integration
+- **Avalanche Fuji**: Smart contract deployment and testing
+- **Chainlink Price Feeds**: Real-time BTC/USD price data
+- **WalletConnect**: Multi-wallet support
+- **ICRC-1 Tokens**: ckBTC and stablecoin standards
 
----
+## 🛠️ Technology Stack
 
-# BitPesa: WBTC-Based DeFi Platform
+### Smart Contracts & Backend
+- **Motoko** - ICP native language for canister development
+- **ICRC-1** - Token standards for ckBTC and stablecoins
 
-BitPesa is a decentralized finance platform built for the Chromion Chainlink Hackathon. It enables users to utilize WBTC as collateral for stablecoin loans with real-time price feeds from Chainlink, automated liquidations, and cross-chain capabilities.
 
-## Chainlink Hackathon Submission
+### Frontend & UI
+- **Next.js 14** - React framework with App Router
+- **TypeScript** - Type-safe JavaScript
+- **Tailwind CSS** - Utility-first CSS framework
+- **Radix UI** - Accessible component primitives
+- **GSAP** - Professional-grade animations
+- **Framer Motion** - React animation library
+- **React Hook Form** - Form state management
+- **Zod** - TypeScript-first schema validation
 
-This project uses multiple Chainlink services to create an innovative DeFi platform:
+### Authentication & Identity
+- **Internet Identity** - ICP's decentralized identity system
+- **WalletConnect** - Multi-wallet connection protocol
+- **Wagmi** - React hooks for Ethereum interactions
 
-1. **Chainlink Price Feeds** for real-time BTC/USD price data, ensuring accurate collateral valuation
-2. **Chainlink Automation** for automatic health checks and liquidation of undercollateralized loans
-3. **Chainlink CCIP** (Cross-Chain Interoperability Protocol) for seamless transfer of WBTC between blockchains
+### Database & Storage
+- **Supabase** - PostgreSQL database and real-time features
+- **Local Storage** - Client-side state persistence
 
-## Features
+### Development & Deployment
+- **Vercel** - Frontend deployment and hosting
+- **dfx** - DFINITY Canister SDK
+- **Git** - Version control
+- **ESLint & Prettier** - Code formatting and linting
 
-- **WBTC Collateralized Loans**: Use Wrapped Bitcoin (WBTC) as collateral to borrow stablecoins
-- **Advanced Risk Management**: Automated health checks and configurable collateral ratios
-- **Cross-Chain Capabilities**: Bridge WBTC across Avalanche, Ethereum, Polygon, and other chains
-- **Non-Custodial Design**: Users maintain control of their assets at all times
-- **Avalanche Integration**: Deployed on Avalanche Fuji Testnet for fast, low-cost transactions
+## 📁 Project Structure
 
-## Architecture
+```
+bitpesa/
+├── fe/                          # Frontend Next.js application
+│   ├── app/                     # Next.js App Router pages
+│   │   ├── api/                # API routes
+│   │   ├── dashboard/          # User dashboard
+│   │   ├── earn/               # Yield farming section
+│   │   └── settings/           # User settings
+│   ├── components/             # React components
+│   │   ├── forms/              # Form components
+│   │   ├── icp/                # ICP-specific components
+│   │   ├── layout/             # Layout components
+│   │   ├── mpesa/              # M-Pesa integration components
+│   │   ├── sections/           # Landing page sections
+│   │   └── ui/                 # Reusable UI components
+│   ├── lib/                    # Utility libraries
+│   │   ├── constants/          # App constants
+│   │   ├── contracts/          # Smart contract ABIs
+│   │   ├── declarations/       # ICP canister declarations
+│   │   ├── hooks/              # Custom React hooks
+│   │   ├── providers/          # Context providers
+│   │   ├── services/           # External services
+│   │   ├── supabase/           # Database client
+│   │   ├── types/              # TypeScript definitions
+│   │   └── utils/              # Utility functions
+│   └── public/                 # Static assets
+├── motoko/                     # ICP Motoko smart contracts
+│   ├── BitPesaLending.mo       # Main lending canister
+│   ├── CoinbaseParser.mo       # Price oracle parser
+│   ├── ICRC1.mo               # Token standard implementation
+│   └── PriceParser.mo         # Price data utilities
+├── package.json               # Root package configuration
+└── tsconfig.json             # TypeScript configuration
+```
 
-The platform consists of three main smart contracts:
-
-1. **BitPesaLending**: Core lending platform for WBTC collateralized loans
-2. **BitPesaPriceConsumer**: Price feed consumer for BTC/USD data
-3. **BitPesaTokenBridge**: Cross-chain bridge for WBTC transfers using CCIP
-
-## Chainlink Integration
-
-BitPesa leverages multiple Chainlink services:
-
-- **Price Feeds**: For accurate BTC/USD prices
-- **Automation**: For automated loan health monitoring and liquidations
-- **Cross-Chain Interoperability Protocol (CCIP)**: For secure cross-chain WBTC transfers
-
-## Getting Started
+## 🚀 Getting Started
 
 ### Prerequisites
 
-- Node.js v16+
-- npm or yarn package manager
+Before you begin, ensure you have the following installed:
+
+- **Node.js** (v18 or higher)
+- **npm** or **yarn**
+- **Git**
+- **dfx** (DFINITY Canister SDK) - for ICP development
+- **Hardhat** - for EVM smart contract development
 
 ### Installation
 
-1. Clone the repository:
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/bl4ckh402/bitpesa.git
+   cd bitpesa
+   ```
+
+2. **Install root dependencies**
+   ```bash
+   npm install
+   ```
+
+3. **Install frontend dependencies**
+   ```bash
+   cd fe
+   npm install
+   ```
+
+4. **Environment Setup**
+   
+   Create environment files for different configurations:
+   
+   ```bash
+   # In the fe/ directory
+   cp .env.example .env.local
+   ```
+   
+   Configure your environment variables:
+   ```env
+   # ICP Canister IDs
+   NEXT_PUBLIC_BITPESA_BACKEND_CANISTER_ID=your_backend_canister_id
+   NEXT_PUBLIC_BITPESA_ENHANCED_CANISTER_ID=your_enhanced_canister_id
+   NEXT_PUBLIC_INTERNET_IDENTITY_CANISTER_ID=rdmx6-jaaaa-aaaaa-aaadq-cai
+   
+   # WalletConnect Project ID
+   NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID=your_project_id
+   
+   # Supabase Configuration
+   NEXT_PUBLIC_SUPABASE_URL=your_supabase_url
+   NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
+   ```
+
+### Development
+
+#### Running the Frontend
+
+1. **Start the development server**
+   ```bash
+   cd fe
+   npm run dev
+   ```
+   
+   The application will be available at `http://localhost:3000`
+
+2. **Using the VS Code task**
+   
+   Alternatively, you can use the predefined VS Code task:
+   - Open the project in VS Code
+   - Press `Ctrl+Shift+P` (or `Cmd+Shift+P` on Mac)
+   - Type "Tasks: Run Task"
+   - Select "Start BitPesa Frontend"
+
+#### ICP Canister Development
+
+1. **Start the local ICP replica**
+   ```bash
+   dfx start --background
+   ```
+
+2. **Deploy canisters locally**
+   ```bash
+   dfx deploy
+   ```
+
+3. **Auto-generate environment variables**
+   ```bash
+   cd fe
+   npm run setup-icp
+   ```
+
+#### Smart Contract Development (EVM)
+
+1. **Compile contracts**
+   ```bash
+   npm run compile
+   ```
+
+2. **Deploy to Avalanche Fuji testnet**
+   ```bash
+   npm run deploy:fuji
+   ```
+
+3. **Deploy tokens locally**
+   ```bash
+   npm run deploy:tokens:local
+   ```
+
+## 🔧 Available Scripts
+
+### Frontend Scripts
 ```bash
-git clone https://github.com/bl4ckh402/bitpesa.git
-cd bitpesa
+npm run dev          # Start development server
+npm run build        # Build for production
+npm run start        # Start production server
+npm run lint         # Run ESLint
+npm run setup-icp    # Generate ICP environment variables
 ```
 
-2. Install dependencies:
+### Root Scripts
 ```bash
-npm install
+npm run test                 # Run Hardhat tests
+npm run compile             # Compile smart contracts
+npm run deploy:fuji         # Deploy to Avalanche Fuji
+npm run deploy:local        # Deploy to local network
+npm run deploy:tokens       # Deploy token contracts
+npm run verify:contract     # Verify deployed contracts
 ```
 
-3. Create a `.env` file based on `.env.example`:
+## 🌐 Deployment
+
+### Frontend Deployment (Vercel)
+
+The frontend is automatically deployed to Vercel on every push to the main branch.
+
+1. **Manual deployment**
+   ```bash
+   cd fe
+   npm run build
+   vercel --prod
+   ```
+
+### ICP Canister Deployment
+
+1. **Deploy to IC mainnet**
+   ```bash
+   dfx deploy --network ic
+   ```
+
+2. **Deploy to local network**
+   ```bash
+   dfx deploy --network local
+   ```
+
+## 🔗 Core Features
+
+### 1. Bitcoin Collateralized Lending
+- Deposit BTC as collateral
+- Borrow KES/USD against Bitcoin holdings
+- Automated liquidation protection
+- Real-time collateral ratio monitoring
+
+### 2. Cross-Chain Integration
+- Avalanche network support
+- Ethereum compatibility
+- Multi-wallet connection
+- Seamless asset bridging
+
+### 3. M-Pesa Integration
+- Direct disbursements to M-Pesa accounts
+- Transaction history tracking
+- KES currency support
+- Mobile-first user experience
+
+### 4. Advanced UI/UX
+- Responsive design across all devices
+- Dark/light theme support
+- Smooth GSAP animations
+- Accessible component design
+- Real-time data updates
+
+### 5. DeFi Yield Opportunities
+- Yield farming pools
+- Liquidity provision rewards
+- Cross-chain yield strategies
+- Risk assessment tools
+
+## 🔐 Security Features
+
+- **Multi-signature wallets** for enhanced security
+- **Time-locked contracts** for upgrade governance
+- **Automated liquidation** to protect lenders
+- **Oracle price validation** with multiple data sources
+- **Rate limiting** on sensitive operations
+
+## 🧪 Testing
+
+### Frontend Testing
 ```bash
-cp .env.example .env
+cd fe
+npm run test
 ```
 
-4. Fill in your environment variables:
-```
-PRIVATE_KEY=your_wallet_private_key
-SNOWTRACE_API_KEY=your_snowtrace_api_key
-```
-
-### Deployment
-
-Deploy to Avalanche Fuji Testnet:
+### Smart Contract Testing
 ```bash
-npx hardhat deploy --network avalancheFuji
+npm run test
 ```
 
-### Testing
-
-Run tests with:
+### Integration Testing
 ```bash
-npx hardhat test
+# Test ICP integration
+cd fe
+npm run test:icp
+
+# Test cross-chain functionality
+npm run test:cross-chain
 ```
 
-# BitPesa Crypto Will Service
+## 📊 API Documentation
 
-This document provides information about the BitPesa Crypto Will service, which allows users to create digital wills for their crypto assets, ensuring they are transferred to designated beneficiaries upon specific conditions.
+### ICP Canister Methods
 
-## Overview
+#### Lending Operations
+- `depositCollateral(amount: Nat)` - Deposit ckBTC collateral
+- `createLoan(amount: Nat, duration: Nat)` - Create a new loan
+- `repayLoan(loanId: LoanId, amount: Nat)` - Repay loan
+- `withdrawCollateral(amount: Nat)` - Withdraw excess collateral
 
-BitPesa Crypto Will is a decentralized service that enables users to create digital wills for their WBTC assets, with plans to expand to other assets in the future. The service combines blockchain technology with traditional legal frameworks to provide secure and reliable asset transfer upon death, incapacitation, or other specified conditions.
+#### Query Methods
+- `getUserLoans(user: Principal)` - Get user's active loans
+- `getLoanDetails(loanId: LoanId)` - Get specific loan information
+- `getCollateralRatio(user: Principal)` - Get user's collateral ratio
+- `getBtcPrice()` - Get current BTC/USD price
 
-## Key Features
+### REST API Endpoints
 
-- **KYC Verification**: User identity verification for compliance with regulations
-- **Multiple Release Conditions**:
-  - Inactivity period detection ("dead man's switch")
-  - Death certificate validation
-  - Scheduled release
-  - Manual executor approval
-- **Multi-Beneficiary Support**: Designate multiple beneficiaries with custom percentage allocations
-- **Chainlink Automation**: Automatic checking of inactivity periods
-- **Activity Registration**: Register activity to reset inactivity timer
-- **Executor Authority**: Optional trusted third-party approval for will execution
-- **Metadata Storage**: Off-chain storage of additional will details via IPFS
-- **Beneficiary Verification**: Optional KYC verification for beneficiaries
+```
+GET  /api/loans              # Get all loans
+POST /api/loans              # Create new loan
+GET  /api/loans/:id          # Get specific loan
+PUT  /api/loans/:id          # Update loan
+GET  /api/users/:id/profile  # Get user profile
+POST /api/mpesa/disburse     # Initiate M-Pesa disbursement
+GET  /api/mpesa/status/:id   # Check transaction status
+```
 
-## Creating a Will
+## 🤝 Contributing
 
-To create a crypto will using BitPesa:
+We welcome contributions to BitPesa! Please follow these guidelines:
 
-1. Complete KYC verification to ensure legal compliance
-2. Connect your wallet containing WBTC assets
-3. Designate beneficiaries and their respective shares
-4. Choose your preferred release condition:
-   - Inactivity period (e.g., no activity for 12 months)
-   - Death certificate validation
-   - Scheduled release at a specific future date
-   - Manual execution by a trusted executor
-5. Set additional parameters like inactivity period length
-6. Provide off-chain metadata for additional legal documentation
-7. Approve and sign the transaction
+1. **Fork the repository**
+2. **Create a feature branch** (`git checkout -b feature/amazing-feature`)
+3. **Commit your changes** (`git commit -m 'Add amazing feature'`)
+4. **Push to the branch** (`git push origin feature/amazing-feature`)
+5. **Open a Pull Request**
 
-## Security Measures
+### Development Guidelines
 
-- **Smart Contract Security**: Audited and secure smart contracts
-- **Multi-signature Options**: Requirement for multiple approvals for critical actions
-- **KYC Verification**: Identity verification for both will creators and beneficiaries
-- **Activity Monitoring**: Regular prompts for activity registration
-- **Executor Authority**: Optional trusted third-party verification
-- **Death Certificate Validation**: Verification by designated authorities
+- Follow TypeScript strict mode
+- Use conventional commit messages
+- Ensure all tests pass
+- Update documentation for new features
+- Follow the existing code style
 
-## Technical Details
+## 📄 License
 
-The BitPesa Crypto Will service is built on the following technologies:
+This project is licensed under the ISC License - see the [LICENSE](LICENSE) file for details.
 
-- **Smart Contracts**: Ethereum-compatible solidity smart contracts
-- **Chainlink Automation**: For automated checking of inactivity periods
-- **IPFS**: For storing off-chain will metadata and documents
-- **Supabase Database**: For tracking will creation and execution events
-- **Web3 Integration**: For wallet connections and transaction signing
+## 🔗 Links
 
-## Legal Considerations
+- **Website**: [https://bitpesa.xyz](https://bitpesa.xyz)
+- **Documentation**: [https://docs.bitpesa.app](https://docs.bitpesa.app)
+- **ICP Integration Guide**: [fe/docs/ICP_INTEGRATION.md](fe/docs/ICP_INTEGRATION.md)
+- **GitHub**: [https://github.com/bl4ckh401/bitpesa](https://github.com/bl4ckh401/bitpesa)
 
-While BitPesa Crypto Will provides a technical solution for digital asset inheritance, users are advised to also:
+## 📞 Support
 
-- Consult with legal professionals in their jurisdiction
-- Create traditional legal wills that reference their BitPesa Crypto Will
-- Keep beneficiaries informed about the existence and details of the will
-- Regularly review and update their will as needed
+For support and questions:
 
-## Future Developments
+- **GitHub Issues**: [Report bugs or request features](https://github.com/bl4ckh401/bitpesa/issues)
 
-- Support for additional crypto assets beyond WBTC
-- Integration with traditional estate planning services
-- Enhanced privacy features
-- Multi-chain support
+- **Email**: pavkiptoo@gmail.com
+
+## 🎯 Roadmap
+
+### Phase 1 (Current)
+- ✅ Basic lending functionality
+- ✅ ICP integration
+- ✅ M-Pesa integration
+- ✅ Frontend UI/UX
+
+### Phase 2 (Q2 2025)
+- 🔄 Multi-collateral support
+- 🔄 Advanced liquidation mechanisms
+- 🔄 Governance token launch
+- 🔄 Mobile app development
+
+### Phase 3 (Q3 2025)
+- 📋 Additional blockchain integrations
+- 📋 Institutional lending features
+- 📋 Advanced DeFi strategies
+- 📋 Global expansion
+
+---
+
+**Built with ❤️ by the BitPesa Team**
+
+*Empowering financial inclusion through decentralized Bitcoin lending.*
