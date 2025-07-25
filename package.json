@@ -44,6 +44,7 @@
     "@avalabs/builderkit": "^0.0.2",
     "@chainlink/contracts": "^1.4.0",
     "@chainlink/contracts-ccip": "^1.5.0",
+    "@dfinity/auth-client": "^2.4.1",
     "@openzeppelin/contracts": "^5.0.0"
   }
 }

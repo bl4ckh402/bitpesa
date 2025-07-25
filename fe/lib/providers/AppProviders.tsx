@@ -5,6 +5,7 @@ import { WagmiProvider } from 'wagmi';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Web3Provider } from './web3-provider';
 import { ContractProvider } from '../context/ContractContext';
+import { ICPAuthProvider } from '../context/ICPAuthContext';
 import { config, appKit } from '../wagmi-appkit';
 import { GSAPCleanupProvider } from '@/components/providers/gsap-cleanup-provider';
 
@@ -19,13 +20,15 @@ export function AppProviders({ children }: AppProvidersProps) {
   return (
     <WagmiProvider config={config}>
       <QueryClientProvider client={queryClient}>
-        <GSAPCleanupProvider>
-          <Web3Provider>
-            <ContractProvider>
-              {children}
-            </ContractProvider>
-          </Web3Provider>
-        </GSAPCleanupProvider>
+        <ICPAuthProvider>
+          <GSAPCleanupProvider>
+            <Web3Provider>
+              <ContractProvider>
+                {children}
+              </ContractProvider>
+            </Web3Provider>
+          </GSAPCleanupProvider>
+        </ICPAuthProvider>
       </QueryClientProvider>
     </WagmiProvider>
   );

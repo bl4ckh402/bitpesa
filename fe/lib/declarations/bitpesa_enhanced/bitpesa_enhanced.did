@@ -1,0 +1,122 @@
+type TransformArgs = 
+ record {
+   context: blob;
+   response: HttpResponse;
+ };
+type Time = int;
+type Satoshi = nat64;
+type Result_4 = 
+ variant {
+   err: AppError;
+   ok: LoanId;
+ };
+type Result_3 = 
+ variant {
+   err: AppError;
+   ok: nat;
+ };
+type Result_2 = 
+ variant {
+   err: AppError;
+   ok: Satoshi;
+ };
+type Result_1 = 
+ variant {
+   err: AppError;
+   ok: text;
+ };
+type Result = 
+ variant {
+   err: AppError;
+   ok;
+ };
+type LoanId = nat;
+type Loan = 
+ record {
+   active: bool;
+   borrower: principal;
+   collateralAmount: nat;
+   collateralType: CollateralType;
+   endTimestamp: Time;
+   id: LoanId;
+   interestRateBps: nat;
+   liquidated: bool;
+   loanAmount: nat;
+   startTimestamp: Time;
+ };
+type HttpResponse = 
+ record {
+   body: vec nat8;
+   headers: vec HttpHeader;
+   status: nat;
+ };
+type HttpHeader = 
+ record {
+   name: text;
+   value: text;
+ };
+type Config = 
+ record {
+   ckbtc_canister: principal;
+   own_principal: principal;
+   owner: principal;
+   stablecoin_canister: principal;
+ };
+type CollateralType = 
+ variant {
+   NativeBTC;
+   ckBTC;
+ };
+type BitcoinNetwork = 
+ variant {
+   mainnet;
+   regtest;
+   testnet;
+ };
+type BitPesaLending = 
+ service {
+   createBitcoinLoan: (loanAmount: nat, durationDays: nat) -> (Result_4);
+   depositBitcoinCollateral: () -> (Result_2);
+   generateUserBitcoinAddress: () -> (Result_1);
+   getAvailableCollateral: () -> (nat) query;
+   getBtcUsdPrice: () -> (Result_3);
+   getLoan: (loanId: LoanId) -> (opt Loan) query;
+   getPlatformStats: () ->
+    (record {
+       protocolFees: nat;
+       totalBitcoinCollateral: Satoshi;
+       totalCollateral: nat;
+       totalLoans: nat;
+       totalOutstanding: nat;
+     }) query;
+   getUserBitcoinAddress: () -> (opt text) query;
+   getUserBitcoinBalance: () -> (Result_2);
+   getUserBitcoinCollateral: () -> (Satoshi) query;
+   getUserLoans: (user: principal) -> (vec Loan) query;
+   repayLoan: (loanId: LoanId) -> (Result);
+   setBitcoinNetwork: (network: BitcoinNetwork) -> () oneway;
+   transform: (args: TransformArgs) -> (HttpResponse) query;
+   updateCollateralRatio: (newRatio: nat) -> () oneway;
+   update_own_principal: (p: principal) -> ();
+   withdrawBitcoinCollateral: (amount: nat, recipientAddress: text) ->
+    (Result_1);
+   withdrawFees: (amount: nat) -> (Result);
+ };
+type AppError = 
+ variant {
+   AddressGenerationFailed: text;
+   BitcoinError: text;
+   CollateralLocked;
+   InsufficientBalance;
+   InsufficientCollateral;
+   InsufficientPlatformLiquidity;
+   InvalidLoanDuration;
+   LoanExceedsCollateralRatio;
+   LoanNotActive;
+   LoanNotFound;
+   PriceOracleFailed: text;
+   RepaymentTooLow;
+   TransferFailed: text;
+   Unauthorized;
+ };
+service : (init: Config) -> BitPesaLending

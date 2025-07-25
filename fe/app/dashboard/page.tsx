@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import {
   Card,
   CardContent,
@@ -12,6 +12,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Input } from "@/components/ui/input";
 import {
   Bitcoin,
   DollarSign,
@@ -25,831 +26,701 @@ import {
   Loader2,
   Undo2,
 } from "lucide-react";
-import { LoanTermsModal } from "@/components/loan-terms-modal";
-import { DepositModal } from "@/components/deposit-modal";
-import { SmartContracts } from "@/components/smart-contracts";
-import { ThemeToggle } from "@/components/theme-toggle";
-import { useAccount } from "wagmi";
 import { toast } from "sonner";
-import {
-  useGetBtcUsdPrice,
-  useUserCollateralBalance,
-  useTotalCollateralLocked,
-  useTotalLoansOutstanding,
-  useWBTCBalance,
-  useUSDCBalance,
-  useLoansList,
-  useRequiredCollateralRatio,
-  useRepayLoan,
-  useApproveUSDC,
-  useCalculateInterest,
-} from "@/lib/hooks/useContracts";
 import { Label } from "@/components/ui/label";
-import contractAddresses, { AVALANCHE_FUJI_CHAIN_ID } from "@/lib/config";
+import { useBitPesaLendingCanister } from "@/lib/hooks/useBitPesaLendingCanister";
+import { useICP } from "@/lib/hooks/useICP";
+import { Loan, Satoshi } from "@/lib/types/icp";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 
-export default function Dashboard() {
+// Helper function to convert Satoshis to BTC
+const satoshiToBTC = (sats: bigint | number): number => {
+  return Number(sats) / 100000000;
+};
+
+// Helper function to format timestamp
+const formatTimestamp = (timestamp: bigint): string => {
+  // Convert nanoseconds to milliseconds
+  const date = new Date(Number(timestamp) / 1000000);
+  return date.toLocaleString();
+};
+
+// Helper function to format numbers for display
+const formatNumber = (num: number | bigint | null, decimals: number = 2): string => {
+  if (num === null) return '0';
+  return Number(num).toLocaleString(undefined, {
+    minimumFractionDigits: decimals,
+    maximumFractionDigits: decimals
+  });
+};
+
+export default function MotokoPage() {
+  // Modal states
   const [showLoanTerms, setShowLoanTerms] = useState(false);
   const [showDeposit, setShowDeposit] = useState(false);
-  const [isApproving, setIsApproving] = useState(false);
+  const [showWithdraw, setShowWithdraw] = useState(false);
+  
+  // Action states
+  const [isCreatingLoan, setIsCreatingLoan] = useState(false);
   const [isRepaying, setIsRepaying] = useState(false);
   const [isRefreshing, setIsRefreshing] = useState(false);
-  const { address: userAddress, isConnected } = useAccount();
-  // Get data from contracts
-  const { price: btcPrice, isLoading: isPriceLoading } = useGetBtcUsdPrice();
-  const { balance: collateralBalance, isLoading: isCollateralLoading } =
-    useUserCollateralBalance();
-  const { loans, isLoading: isLoansLoading } = useLoansList();
-  const { balance: wbtcBalance, isLoading: isWbtcLoading } = useWBTCBalance();
-  console.log("User Address:", userAddress);
-  console.log("WBTC Balance:", wbtcBalance, "BTC Price:", btcPrice);
-  console.log(contractAddresses[AVALANCHE_FUJI_CHAIN_ID].WBTC as string, "WBTC Contract Address");
-  const { balance: usdcBalance, isLoading: isUsdcLoading } = useUSDCBalance();
-  const { ratio: requiredCollateralRatio, isLoading: isRatioLoading } =
-    useRequiredCollateralRatio();
-  const { approve } = useApproveUSDC();
-  const { repayLoan } = useRepayLoan();
+  const [isWithdrawing, setIsWithdrawing] = useState(false);
+  const [isGeneratingAddress, setIsGeneratingAddress] = useState(false);
+  
+  // Form states
+  const [loanAmount, setLoanAmount] = useState<string>("1000");
+  const [loanDuration, setLoanDuration] = useState<number>(30);
+  const [recipientAddress, setRecipientAddress] = useState<string>("");
+  const [withdrawAmount, setWithdrawAmount] = useState<string>("0.001");
 
-  // Get interest data for active loan
-  const [loanInterest, setLoanInterest] = useState<string>("0");
-  const [isInterestLoading, setIsInterestLoading] = useState(false);
+  // Get ICP authentication state
+  const { isAuthenticated, principal, login } = useICP();
 
-  // Calculate derived values
-  const collateralValue =
-    btcPrice && collateralBalance ? Number(collateralBalance) * btcPrice : 0;
-  // Find active loans and summary data
-  const [activeLoans, setActiveLoans] = useState<any[]>([]);
-  const [activeLoan, setActiveLoan] = useState<any>(null); // Most risky loan for detailed display
-  const [totalLoanAmount, setTotalLoanAmount] = useState<number>(0); // Total of all active loans
-  const [loanHealthRatio, setLoanHealthRatio] = useState<number>(0);
-  const [liquidationPrice, setLiquidationPrice] = useState<number>(0);
+  // Get data from canister
+  const {
+    isLoading,
+    error,
+    isConnected,
+    
+    // Bitcoin Integration Methods
+    getUserBitcoinAddress,
+    getUserBitcoinBalance,
+    depositBitcoinCollateral,
+    getUserBitcoinCollateral,
+    generateUserBitcoinAddress,
+    withdrawBitcoinCollateral,
+
+    // Price Oracle Methods
+    getBtcUsdPrice,
+
+    // Lending Methods
+    createBitcoinLoan,
+    repayLoan,
+
+    // Query Methods
+    getLoan,
+    getAvailableCollateral,
+    getUserLoans,
+    getPlatformStats,
+  } = useBitPesaLendingCanister();
+
+  // State for user data
+  const [btcPrice, setBtcPrice] = useState<number | null>(null);
+  const [bitcoinAddress, setBitcoinAddress] = useState<string | null>(null);
+  const [bitcoinBalance, setBitcoinBalance] = useState<bigint | null>(null);
+  const [bitcoinCollateral, setBitcoinCollateral] = useState<bigint | null>(null);
+  const [availableCollateral, setAvailableCollateral] = useState<bigint | null>(null);
+  const [loans, setLoans] = useState<Loan[]>([]);
+  const [platformStats, setPlatformStats] = useState<any>(null);
+  
+  // Derived state
+  const [activeLoans, setActiveLoans] = useState<Loan[]>([]);
+  
+  // Load initial data
   useEffect(() => {
-    if (loans && loans.length > 0 && btcPrice) {
-      // Find active loans first, then sort by highest loan-to-value ratio (most risky first)
-      const activeLoansArray = loans.filter(
-        (loan: any) => loan.active === true
-      );
-      setActiveLoans(activeLoansArray);
+    if (isAuthenticated && isConnected) {
+      loadUserData();
+    }
+  }, [isAuthenticated, isConnected]);
 
-      // Calculate total loan amount across all active loans
-      const total = activeLoansArray.reduce(
-        (sum, loan) => sum + Number(loan.loanAmount),
-        0
-      );
-      setTotalLoanAmount(total);
-
-      if (activeLoansArray.length > 0) {
-        // Sort loans by LTV ratio (highest risk first)
-        console.log(
-          "Sorting active loans by LTV ratio",
-          activeLoansArray.length,
-          "active loans found"
-        );
-        const sortedLoans = [...activeLoansArray].sort((a, b) => {
-          const aLTV =
-            Number(a.loanAmount) / (Number(a.collateralAmount) * btcPrice);
-          const bLTV =
-            Number(b.loanAmount) / (Number(b.collateralAmount) * btcPrice);
-          return bLTV - aLTV; // Descending order
-        });
-
-        // Use the highest risk loan as the primary active loan for detailed display
-        const active = sortedLoans[0];
-        setActiveLoan(active);
-
-        // Calculate health ratio (collateral value / loan value)
-        const collateralValue = Number(active.collateralAmount) * btcPrice;
-        const loanValue = Number(active.loanAmount);
-        const healthRatio = Math.floor((collateralValue / loanValue) * 100);
-        setLoanHealthRatio(healthRatio);
-
-        // Calculate liquidation price
-        // Liquidation happens when collateral value falls to loan value * required ratio
-        // So liquidation BTC price = loan value * required ratio / collateral amount
-        const reqRatio = requiredCollateralRatio / 100; // Convert from percentage
-        if (reqRatio > 0) {
-          const liquidationBtcPrice =
-            (loanValue * reqRatio) / Number(active.collateralAmount);
-          setLiquidationPrice(liquidationBtcPrice);
-        }
-      } else {
-        // No active loans
-        setActiveLoan(null);
-        setLoanHealthRatio(0);
-        setLiquidationPrice(0);
+  // Load all user data
+  const loadUserData = useCallback(async () => {
+    setIsRefreshing(true);
+    try {
+      // Get BTC price
+      const priceResult = await getBtcUsdPrice();
+      if (priceResult.data) {
+        setBtcPrice(Number(priceResult.data) / 100); // Adjust based on your price format
       }
-    }
-  }, [loans, btcPrice, requiredCollateralRatio]);
-  // Calculate interest whenever active loan changes
-  useEffect(() => {
-    if (activeLoan) {
-      setIsInterestLoading(true);
-      // Calculate interest using real contract data if possible
-      const calculateRealInterest = async () => {
-        try {
-          // Use the useCalculateInterest hook
-          const { interest } = useCalculateInterest(Number(activeLoan.id));
-          // Set the interest value
-          setLoanInterest(interest || "0");
-        } catch (error) {
-          console.error("Error calculating interest from contract:", error);
-          // Fall back to estimation if contract call fails
-          estimateInterest();
-        } finally {
-          setIsInterestLoading(false);
+      
+      // Get user's Bitcoin address or generate one if needed
+      const addressResult = await getUserBitcoinAddress();
+      if (addressResult.data && typeof addressResult.data === "string") {
+        setBitcoinAddress(addressResult.data);
+      } else {
+        // Generate a new address if none exists
+        const newAddressResult = await generateUserBitcoinAddress();
+        if (newAddressResult.data && typeof newAddressResult.data === "string") {
+          setBitcoinAddress(newAddressResult.data);
         }
-      };
-
-      // Calculate interest locally as a fallback
-      const estimateInterest = () => {
-        // Calculate elapsed time since loan creation
-        const startTime = Number(activeLoan.startTimestamp);
-        const now = Math.floor(Date.now() / 1000); // Current time in seconds
-        const timeElapsed = now - startTime;
-
-        // Calculate interest: principal * rate * time
-        // (loanAmount * interestRatePerYear * timeElapsed) / (100 * 365 days)
-        const interestAmount =
-          (Number(activeLoan.loanAmount) *
-            Number(activeLoan.interestRate) *
-            timeElapsed) /
-          (10000 * 365 * 24 * 60 * 60); // Convert from basis points (10000 = 100%)
-
-        setLoanInterest(interestAmount.toFixed(18));
-      };
-
-      // Use local estimation for now as it's more reliable
-      estimateInterest();
-      setIsInterestLoading(false);
-    } else {
-      setLoanInterest("0");
+      }
+      
+      // Get user's Bitcoin balance
+      const balanceResult = await getUserBitcoinBalance();
+      if (balanceResult.data) {
+        setBitcoinBalance(balanceResult.data);
+      }
+      
+      // Get user's Bitcoin collateral
+      const collateralResult = await getUserBitcoinCollateral();
+      if (collateralResult.data) {
+        setBitcoinCollateral(collateralResult.data as bigint);
+      }
+      
+      // Get available collateral
+      const availableResult = await getAvailableCollateral();
+      if (availableResult.data) {
+        setAvailableCollateral(availableResult.data as bigint);
+      }
+      
+      // Get user loans
+      const loansResult = await getUserLoans();
+      if (loansResult.data) {
+        const loansList = loansResult.data as Loan[];
+        setLoans(loansList);
+        // Filter active loans
+        const active = loansList.filter(loan => loan.active);
+        setActiveLoans(active);
+      }
+      
+      // Get platform stats
+      const statsResult = await getPlatformStats();
+      if (statsResult.data) {
+        setPlatformStats(statsResult.data);
+      }
+    } catch (err) {
+      console.error('Error loading data:', err);
+      toast.error('Failed to load dashboard data');
+    } finally {
+      setIsRefreshing(false);
     }
-  }, [activeLoan]);
+  }, [
+    getBtcUsdPrice, 
+    getUserBitcoinAddress, 
+    getUserBitcoinBalance,
+    getUserBitcoinCollateral,
+    getAvailableCollateral,
+    getUserLoans,
+    getPlatformStats
+  ]);
+  
+  // Handler for generating a Bitcoin address
+  const handleGenerateAddress = useCallback(async () => {
+    setIsGeneratingAddress(true);
+    try {
+      const result = await generateUserBitcoinAddress();
+      if (result.data) {
+        setBitcoinAddress(result.data);
+        toast.success('Bitcoin address generated successfully');
+      } else if (result.error) {
+        toast.error(`Failed to generate Bitcoin address: ${result.error}`);
+      }
+    } catch (err) {
+      console.error('Error generating address:', err);
+      toast.error('Failed to generate Bitcoin address');
+    } finally {
+      setIsGeneratingAddress(false);
+    }
+  }, [generateUserBitcoinAddress]);
+  
+  // Handler for depositing Bitcoin collateral
+  const handleDepositCollateral = useCallback(async () => {
+    try {
+      const result = await depositBitcoinCollateral();
+      if (result.data) {
+        toast.success(`Successfully deposited ${satoshiToBTC(result.data)} BTC as collateral`);
+        // Reload data to show updated balances
+        loadUserData();
+      } else if (result.error) {
+        toast.error(`Deposit failed: ${result.error}`);
+      }
+    } catch (err) {
+      console.error('Error depositing collateral:', err);
+      toast.error('Failed to deposit collateral');
+    }
+  }, [depositBitcoinCollateral, loadUserData]);
+  
+  // Handler for creating a loan
+  const handleCreateLoan = useCallback(async () => {
+    setIsCreatingLoan(true);
+    try {
+      // Convert string to bigint with proper decimal handling
+      const loanAmountBigInt = BigInt(Math.floor(Number(loanAmount) * 100));
+      
+      const result = await createBitcoinLoan(loanAmountBigInt, loanDuration);
+      if (result.data) {
+        toast.success(`Loan created successfully! Loan ID: ${result.data}`);
+        setShowLoanTerms(false);
+        // Reload data to show the new loan
+        loadUserData();
+      } else if (result.error) {
+        toast.error(`Failed to create loan: ${result.error}`);
+      }
+    } catch (err) {
+      console.error('Error creating loan:', err);
+      toast.error('Failed to create loan');
+    } finally {
+      setIsCreatingLoan(false);
+    }
+  }, [loanAmount, loanDuration, createBitcoinLoan, loadUserData]);
+  
+  // Handler for repaying a loan
+  const handleRepayLoan = useCallback(async (loanId: bigint) => {
+    setIsRepaying(true);
+    try {
+      const result = await repayLoan(loanId);
+      if (result.data) {
+        toast.success('Loan repaid successfully!');
+        // Reload data to show the updated loan status
+        loadUserData();
+      } else if (result.error) {
+        toast.error(`Failed to repay loan: ${result.error}`);
+      }
+    } catch (err) {
+      console.error('Error repaying loan:', err);
+      toast.error('Failed to repay loan');
+    } finally {
+      setIsRepaying(false);
+    }
+  }, [repayLoan, loadUserData]);
+  
+  // Handler for withdrawing Bitcoin collateral
+  const handleWithdrawCollateral = useCallback(async () => {
+    setIsWithdrawing(true);
+    try {
+      // Convert BTC amount to satoshis
+      const withdrawAmountSats = BigInt(Math.floor(Number(withdrawAmount) * 100000000));
+      
+      if (!recipientAddress) {
+        toast.error('Please enter a valid recipient Bitcoin address');
+        setIsWithdrawing(false);
+        return;
+      }
+      
+      const result = await withdrawBitcoinCollateral(withdrawAmountSats, recipientAddress);
+      if (result.data) {
+        toast.success('Withdrawal initiated successfully!');
+        setShowWithdraw(false);
+        // Reload data to show updated balances
+        loadUserData();
+      } else if (result.error) {
+        toast.error(`Withdrawal failed: ${result.error}`);
+      }
+    } catch (err) {
+      console.error('Error withdrawing collateral:', err);
+      toast.error('Failed to withdraw collateral');
+    } finally {
+      setIsWithdrawing(false);
+    }
+  }, [withdrawAmount, recipientAddress, withdrawBitcoinCollateral, loadUserData]);
 
-  // Helper function to estimate interest for individual loans
-  const estimateInterest = (loan: any): number => {
-    if (!loan) return 0;
-
-    const startTime = Number(loan.startTimestamp);
-    const currentTime = Math.floor(Date.now() / 1000);
-    const timeElapsed = currentTime - startTime;
-    const daysElapsed = timeElapsed / (60 * 60 * 24);
-
-    // Convert interest rate from percentage to decimal (e.g., 5% -> 0.05)
-    const interestRate = Number(loan.interestRate) / 100;
-
-    // Calculate interest: principal * rate * time
-    // Time is in years, so we divide days by 365
-    const interest =
-      Number(loan.loanAmount) * interestRate * (daysElapsed / 365);
-
-    return interest;
-  };
-
-  // Show a loading state if data is being fetched
-  if (isPriceLoading || isCollateralLoading || isLoansLoading || !isConnected) {
+  // Render UI based on authentication state
+  if (!isAuthenticated) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 flex items-center justify-center">
-        <div className="text-center">
-          <Loader2 className="h-12 w-12 animate-spin text-white mb-4 mx-auto" />
-          <h3 className="text-xl text-white">Loading your dashboard data...</h3>
-        </div>
+      <div className="flex flex-col items-center justify-center min-h-screen p-4">
+        <Card className="w-full max-w-md">
+          <CardHeader>
+            <CardTitle className="text-xl">Welcome to BitPesa Lending</CardTitle>
+            <CardDescription>
+              Connect with Internet Identity to access the lending platform
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="flex flex-col gap-4">
+            <Button 
+              onClick={login} 
+              className="w-full"
+              disabled={isLoading}
+            >
+              {isLoading ? (
+                <>
+                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                  Connecting...
+                </>
+              ) : (
+                <>Connect with Internet Identity</>
+              )}
+            </Button>
+          </CardContent>
+        </Card>
       </div>
     );
   }
-
+  
+  // Render main dashboard UI
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
-      <div className="container mx-auto px-4 py-8">
-        {/* Summary Cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6 mb-8">
-          {" "}
-          <Card className="bg-slate-800/50 border-slate-700 backdrop-blur-sm">
-            <CardContent className="p-6">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-slate-400 text-sm">BTC Collateral</p>
-                  <p className="text-2xl font-bold text-white">
-                    {Number(collateralBalance).toFixed(4)} BTC
-                  </p>
-                  <p className="text-slate-400 text-xs">
-                    $
-                    {btcPrice
-                      ? (Number(collateralBalance) * btcPrice).toLocaleString(
-                          undefined,
-                          { maximumFractionDigits: 2 }
-                        )
-                      : "0"}
-                  </p>
-                </div>
-                <Bitcoin className="h-8 w-8 text-orange-500" />
-              </div>
-            </CardContent>
-          </Card>
-          <Card className="bg-slate-800/50 border-slate-700 backdrop-blur-sm">
-            <CardContent className="p-6">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-slate-400 text-sm">Active Loans</p>
-                  <p className="text-2xl font-bold text-white">
-                    ${totalLoanAmount.toLocaleString()}
-                  </p>
-                  <p className="text-slate-400 text-xs">
-                    {activeLoans.length > 0
-                      ? `${activeLoans.length} loan${
-                          activeLoans.length > 1 ? "s" : ""
-                        } active`
-                      : "No active loans"}
-                  </p>
-                </div>
-                <DollarSign className="h-8 w-8 text-green-500" />
-              </div>
-            </CardContent>
-          </Card>{" "}
-          <Card className="bg-slate-800/50 border-slate-700 backdrop-blur-sm">
-            <CardContent className="p-6">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-slate-400 text-sm">Health Ratio</p>
-                  {activeLoan ? (
-                    <>
-                      <p className="text-2xl font-bold text-white">
-                        {loanHealthRatio}%
-                      </p>
-                      <Progress
-                        value={loanHealthRatio}
-                        className={`mt-2 h-2 ${
-                          loanHealthRatio < 150
-                            ? "bg-red-900"
-                            : loanHealthRatio < 180
-                            ? "bg-yellow-900"
-                            : "bg-green-900"
-                        }`}
-                      />
-                    </>
-                  ) : (
-                    <p className="text-2xl font-bold text-white">N/A</p>
-                  )}
-                </div>
-                <TrendingUp className="h-8 w-8 text-blue-500" />
-              </div>
-            </CardContent>
-          </Card>
-          <Card className="bg-slate-800/50 border-slate-700 backdrop-blur-sm">
-            <CardContent className="p-6">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-slate-400 text-sm">Status</p>
-                  {activeLoan ? (
-                    <>
-                      <Badge className="bg-green-500/20 text-green-400 mt-1">
-                        Active
-                      </Badge>
-                      <p className="text-slate-400 text-xs mt-2">
-                        Due:{" "}
-                        {new Date(
-                          Number(activeLoan.endTimestamp) * 1000
-                        ).toLocaleDateString()}
-                      </p>
-                    </>
-                  ) : loans && loans.length > 0 ? (
-                    <>
-                      <Badge className="bg-blue-500/20 text-blue-400 mt-1">
-                        Completed
-                      </Badge>
-                      <p className="text-slate-400 text-xs mt-2">
-                        {loans.length} historical loan
-                        {loans.length !== 1 ? "s" : ""}
-                      </p>
-                    </>
-                  ) : (
-                    <>
-                      <Badge className="bg-slate-500/20 text-slate-400 mt-1">
-                        No Loans
-                      </Badge>
-                      <p className="text-slate-400 text-xs mt-2">
-                        Create your first loan
-                      </p>
-                    </>
-                  )}
-                </div>
-                <Calendar className="h-8 w-8 text-purple-500" />
-              </div>
-            </CardContent>
-          </Card>
-        </div>
-
-        {/* Main Content */}
-        <Tabs defaultValue="overview" className="space-y-6">
-          <TabsList className="bg-muted border flex flex-wrap">
-            <TabsTrigger value="overview" className="flex-1">
-              Overview
-            </TabsTrigger>
-            <TabsTrigger value="deposit" className="flex-1">
-              Deposit
-            </TabsTrigger>
-            <TabsTrigger value="borrow" className="flex-1">
-              Borrow
-            </TabsTrigger>
-            <TabsTrigger value="repay" className="flex-1">
-              Repay
-            </TabsTrigger>
-            <TabsTrigger value="contracts" className="flex-1">
-              Contracts
-            </TabsTrigger>
-          </TabsList>
-
-          <TabsContent value="overview" className="space-y-6">
-            <div className="grid lg:grid-cols-2 gap-6">
-              {/* Active Loan */}
-              <Card className="bg-slate-800/50 border-slate-700 backdrop-blur-sm">
-                <CardHeader>
-                  <CardTitle className="text-white">Active Loan</CardTitle>
-                </CardHeader>
-                <CardContent className="space-y-4">
-                  {activeLoan ? (
-                    <>
-                      <div className="flex justify-between">
-                        <span className="text-slate-400">Loan Amount:</span>
-                        <span className="text-white font-medium">
-                          ${Number(activeLoan.loanAmount).toLocaleString()}
-                        </span>
-                      </div>{" "}
-                      <div className="flex justify-between">
-                        <span className="text-muted-foreground">
-                          Interest Rate:
-                        </span>
-                        <span className="font-medium">
-                          {Number(activeLoan.interestRate) / 100}% APR
-                        </span>
-                      </div>
-                      <div className="flex justify-between">
-                        <span className="text-slate-400">LTV Ratio:</span>
-                        <span className="text-white font-medium">
-                          {requiredCollateralRatio}%
-                        </span>
-                      </div>
-                      <div className="flex justify-between">
-                        <span className="text-slate-400">
-                          Liquidation Price:
-                        </span>
-                        <span className="text-red-400 font-medium">
-                          ${liquidationPrice.toLocaleString()}
-                        </span>
-                      </div>
-                    </>
-                  ) : (
-                    <div className="text-center py-6">
-                      <p className="text-slate-400">No active loans found</p>
-                      <p className="text-xs text-slate-500 mt-2">
-                        Create a loan to see details here
-                      </p>
-                    </div>
-                  )}
-                  {activeLoan && (
-                    <Button className="w-full bg-blue-500 hover:bg-blue-600">
-                      View Transaction History
-                    </Button>
-                  )}
-                </CardContent>
-              </Card>
-
-              {/* Risk Management */}
-              <Card className="bg-slate-800/50 border-slate-700 backdrop-blur-sm">
-                <CardHeader>
-                  <CardTitle className="text-white flex items-center">
-                    <AlertTriangle className="h-5 w-5 text-yellow-500 mr-2" />
-                    Risk Management
-                  </CardTitle>
-                </CardHeader>
-                <CardContent className="space-y-4">
-                  {activeLoan ? (
-                    <>
-                      <div>
-                        <div className="flex justify-between mb-2">
-                          <span className="text-slate-400">Health Ratio</span>
-                          <span className="text-white font-medium">
-                            {loanHealthRatio}%
-                          </span>
-                        </div>
-                        <Progress value={loanHealthRatio} className="h-3" />
-                        <div className="flex justify-between text-xs text-slate-400 mt-1">
-                          <span>Liquidation</span>
-                          <span>Safe</span>
-                        </div>
-                      </div>
-                      <div className="p-3 bg-green-500/10 border border-green-500/20 rounded-lg">
-                        <p className="text-green-400 text-sm font-medium">
-                          Status:{" "}
-                          {loanHealthRatio > 120
-                            ? "Safe"
-                            : loanHealthRatio > 105
-                            ? "Warning"
-                            : "Danger"}
-                        </p>
-                        <p className="text-green-300 text-xs mt-1">
-                          {loanHealthRatio > 120
-                            ? `Your position is healthy. BTC can drop to $${liquidationPrice.toLocaleString()} before liquidation.`
-                            : `Caution: Your position is close to liquidation threshold. Add collateral to improve safety.`}
-                        </p>
-                      </div>
-                    </>
-                  ) : (
-                    <div className="text-center py-6">
-                      <p className="text-slate-400">
-                        No active loans to monitor
-                      </p>
-                    </div>
-                  )}
-                  <Button variant="outline" className="w-full border-slate-600">
-                    Set Price Alerts
-                  </Button>
-                </CardContent>
-              </Card>
-            </div>
-
-            {/* All Active Loans List */}
-            {activeLoans.length > 0 && (
-              <Card className="bg-slate-800/50 border-slate-700 backdrop-blur-sm">
-                <CardHeader>
-                  <CardTitle className="text-white">All Active Loans</CardTitle>
-                  <CardDescription className="text-slate-400">
-                    Showing {activeLoans.length} active loan
-                    {activeLoans.length > 1 ? "s" : ""}
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <div className="space-y-4">
-                    {activeLoans.map((loan, index) => (
-                      <div
-                        key={`loan-${index}-${loan.borrower}`}
-                        className="p-4 border border-slate-700 rounded-lg"
-                      >
-                        <div className="flex justify-between mb-2">
-                          <span className="text-slate-400">Loan Amount:</span>
-                          <span className="text-white font-medium">
-                            ${Number(loan.loanAmount).toLocaleString()}
-                          </span>
-                        </div>
-                        <div className="flex justify-between mb-2">
-                          <span className="text-slate-400">Collateral:</span>
-                          <span className="text-white font-medium">
-                            {Number(loan.collateralAmount).toFixed(4)} BTC
-                          </span>
-                        </div>
-                        <div className="flex justify-between mb-2">
-                          <span className="text-slate-400">Interest Rate:</span>
-                          <span className="text-white font-medium">
-                            {Number(loan.interestRate) / 100}% APR
-                          </span>
-                        </div>
-                        <div className="flex justify-between">
-                          <span className="text-slate-400">Health:</span>
-                          <span
-                            className={`font-medium ${
-                              ((Number(loan.collateralAmount) * btcPrice!) /
-                                Number(loan.loanAmount)) *
-                                100 >=
-                              150
-                                ? "text-green-400"
-                                : "text-yellow-400"
-                            }`}
-                          >
-                            {(
-                              ((Number(loan.collateralAmount) * btcPrice!) /
-                                Number(loan.loanAmount)) *
-                              100
-                            ).toFixed(0)}
-                            %
-                          </span>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </CardContent>
-              </Card>
+    <div className="container mx-auto p-4 space-y-6 max-w-7xl">
+      <div className="flex items-center justify-between">
+        <h1 className="text-3xl font-bold">BitPesa Lending Dashboard</h1>
+        <div className="flex gap-2">
+          <Button 
+            variant="outline" 
+            onClick={loadUserData}
+            disabled={isRefreshing}
+          >
+            {isRefreshing ? (
+              <Loader2 className="h-4 w-4 animate-spin" />
+            ) : (
+              <Undo2 className="h-4 w-4" />
             )}
-          </TabsContent>
-
-          <TabsContent value="deposit">
-            <Card className="bg-slate-800/50 border-slate-700 backdrop-blur-sm">
-              <CardHeader>
-                <CardTitle className="text-white">
-                  Deposit BTC Collateral
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-6">
-                <p className="text-slate-300">
-                  Increase your collateral to improve your health ratio or
-                  enable larger loans.
-                </p>
-                <div className="bg-slate-900/50 p-4 rounded-lg border border-slate-700">
-                  <p className="text-slate-300 text-sm">
-                    Available WBTC Balance
-                  </p>
-                  <p className="text-white text-xl font-bold">
-                    {Number(wbtcBalance).toFixed(4)} WBTC
-                  </p>
-                </div>
-                <Button
-                  className="bg-orange-500 hover:bg-orange-600"
-                  onClick={() => setShowDeposit(true)}
-                >
-                  <Plus className="h-4 w-4 mr-2" />
-                  Deposit More BTC
-                </Button>
-              </CardContent>
-            </Card>
-          </TabsContent>
-
-          <TabsContent value="borrow">
-            <Card className="bg-slate-800/50 border-slate-700 backdrop-blur-sm">
-              <CardHeader>
-                <CardTitle className="text-white">
-                  Borrow Additional Fiat
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-6">
-                {collateralValue > 0 ? (
-                  <>
-                    {" "}
-                    <p className="text-slate-300">
-                      Based on your current collateral, you can borrow up to $
-                      {(
-                        collateralValue *
-                          (requiredCollateralRatio
-                            ? 100 / requiredCollateralRatio
-                            : 0.6) -
-                        (activeLoan ? Number(activeLoan.loanAmount) : 0)
-                      ).toLocaleString()}
-                      .
-                    </p>
-                    <div className="bg-slate-900/50 p-4 rounded-lg border border-slate-700">
-                      <p className="text-slate-300 text-sm">
-                        Available USDC Balance
-                      </p>
-                      <p className="text-white text-xl font-bold">
-                        {Number(usdcBalance).toFixed(2)} USDC
-                      </p>
-                    </div>
-                  </>
-                ) : (
-                  <p className="text-slate-300">
-                    Deposit collateral first to be able to borrow against it.
-                  </p>
-                )}
-                <Button
-                  className="bg-green-500 hover:bg-green-600"
-                  onClick={() => setShowLoanTerms(true)}
-                  disabled={collateralValue === 0}
-                >
-                  <ArrowUpRight className="h-4 w-4 mr-2" />
-                  Borrow More
-                </Button>
-              </CardContent>
-            </Card>
-          </TabsContent>
-
-          <TabsContent value="repay">
-            <Card className="bg-slate-800/50 border-slate-700 backdrop-blur-sm">
-              {" "}
-              <CardHeader className="flex flex-row items-center justify-between">
-                <CardTitle className="text-white">Repay Loan</CardTitle>
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={async () => {
-                    setIsRefreshing(true);
-                    // Small artificial delay to make the loading state visible
-                    await new Promise((resolve) => setTimeout(resolve, 500));
-                    setIsRefreshing(false);
-                  }}
-                  disabled={isRefreshing}
-                >
-                  {isRefreshing ? (
-                    <Loader2 className="h-4 w-4 animate-spin" />
-                  ) : (
-                    "Refresh"
-                  )}
-                </Button>
-              </CardHeader>
-              <CardContent className="space-y-6">
-                {activeLoans.length > 0 ? (
-                  <div className="space-y-6">
-                    {activeLoans.map((loan, index) => {
-                      // Calculate interest for this specific loan - we're using a simple estimation here
-                      // In a real implementation, you'd ideally get this from the contract for each loan
-                      const loanInterestEstimate = estimateInterest(loan);
-                      const loanHealthRatioEstimate = Math.floor(
-                        ((Number(loan.collateralAmount) * btcPrice!) /
-                          Number(loan.loanAmount)) *
-                          100
-                      );
-                      const loanLiquidationPrice =
-                        (Number(loan.loanAmount) *
-                          (requiredCollateralRatio / 100)) /
-                        Number(loan.collateralAmount);
-
-                      return (
-                        <div
-                          key={`repay-loan-${index}`}
-                          className="p-4 border border-slate-700 rounded-lg space-y-4"
-                        >
-                          <Card className="bg-slate-900/50">
-                            <CardContent className="pt-4">
-                              <div className="flex justify-between items-center mb-1">
-                                <span className="text-slate-400">Loan ID:</span>
-                                <Badge variant="outline">
-                                  {loan.id || `#${index + 1}`}
-                                </Badge>
-                              </div>
-                              <div className="flex justify-between">
-                                <span className="text-slate-400">Started:</span>
-                                <span className="text-white/90">
-                                  {new Date(
-                                    Number(loan.startTimestamp) * 1000
-                                  ).toLocaleDateString()}
-                                </span>
-                              </div>
-                            </CardContent>
-                          </Card>
-
-                          <div className="flex justify-between">
-                            <span className="text-slate-400">
-                              Outstanding Principal:
-                            </span>
-                            <span className="text-white font-medium">
-                              ${Number(loan.loanAmount).toLocaleString()}
-                            </span>
-                          </div>
-
-                          <div className="flex justify-between">
-                            <span className="text-slate-400">
-                              Accrued Interest:
-                            </span>
-                            <span className="text-white font-medium">
-                              ${loanInterestEstimate.toLocaleString()}
-                            </span>
-                          </div>
-
-                          <div className="flex justify-between border-t border-slate-700 pt-4">
-                            <span className="text-slate-300 font-medium">
-                              Total Due:
-                            </span>
-                            <span className="text-white font-bold">
-                              $
-                              {(
-                                Number(loan.loanAmount) + loanInterestEstimate
-                              ).toLocaleString()}
-                            </span>
-                          </div>
-
-                          <div
-                            className={`p-4 rounded-lg border ${
-                              loanHealthRatioEstimate >= 150
-                                ? "bg-green-900/20 border-green-900/30"
-                                : "bg-red-900/20 border-red-900/30"
-                            }`}
-                          >
-                            <div className="flex items-start mb-2">
-                              {loanHealthRatioEstimate >= 150 ? (
-                                <Shield className="text-green-400 h-4 w-4 mr-2 mt-0.5" />
-                              ) : (
-                                <AlertTriangle className="text-red-400 h-4 w-4 mr-2 mt-0.5" />
-                              )}
-                              <div>
-                                <h4
-                                  className={`font-medium text-sm ${
-                                    loanHealthRatioEstimate >= 150
-                                      ? "text-green-400"
-                                      : "text-red-400"
-                                  }`}
-                                >
-                                  {loanHealthRatioEstimate >= 150
-                                    ? "Healthy Position"
-                                    : "Liquidation Risk"}
-                                </h4>
-                                <p
-                                  className={`text-xs mt-1 ${
-                                    loanHealthRatioEstimate >= 150
-                                      ? "text-green-300/80"
-                                      : "text-red-300/80"
-                                  }`}
-                                >
-                                  {loanHealthRatioEstimate >= 150
-                                    ? `Your position is healthy with a ${loanHealthRatioEstimate}% health ratio.`
-                                    : `If BTC price falls below $${loanLiquidationPrice.toFixed(
-                                        2
-                                      )}, your position may be liquidated.`}
-                                </p>
-                              </div>
-                            </div>
-                            <div className="flex justify-between items-center mt-3">
-                              <span
-                                className={`text-xs ${
-                                  loanHealthRatioEstimate >= 150
-                                    ? "text-green-300/80"
-                                    : "text-red-300/80"
-                                }`}
-                              >
-                                Current BTC Price:
-                              </span>
-                              <span className="text-white/90 text-xs">
-                                ${btcPrice?.toLocaleString()}
-                              </span>
-                            </div>
-                            <div className="flex justify-between items-center">
-                              <span
-                                className={`text-xs ${
-                                  loanHealthRatioEstimate >= 150
-                                    ? "text-green-300/80"
-                                    : "text-red-300/80"
-                                }`}
-                              >
-                                {loanHealthRatioEstimate >= 150
-                                  ? "Health Ratio:"
-                                  : "Liquidation Price:"}
-                              </span>
-                              <span className="text-white/90 text-xs">
-                                {loanHealthRatioEstimate >= 150
-                                  ? `${loanHealthRatioEstimate}%`
-                                  : `$${loanLiquidationPrice.toFixed(2)}`}
-                              </span>
-                            </div>
-                          </div>
-
-                          <div className="space-y-2">
-                            <div className="flex items-center justify-between">
-                              <Label
-                                htmlFor={`approval-${index}`}
-                                className="text-white"
-                              >
-                                USDC Approval
-                              </Label>
-                              <Button
-                                id={`approval-${index}`}
-                                variant="outline"
-                                size="sm"
-                                onClick={() => approve(loan.loanAmount)}
-                                disabled={isApproving}
-                              >
-                                {isApproving ? (
-                                  <Loader2 className="h-4 w-4 animate-spin" />
-                                ) : (
-                                  "Approve"
-                                )}
-                              </Button>
-                            </div>
-                            <Button
-                              className="w-full bg-blue-500 hover:bg-blue-600"
-                              onClick={() => repayLoan(loan.id, loan.amount)}
-                              disabled={isRepaying}
-                            >
-                              {isRepaying ? (
-                                <Loader2 className="h-4 w-4 animate-spin mr-2" />
-                              ) : (
-                                <Undo2 className="h-4 w-4 mr-2" />
-                              )}
-                              Repay Loan
-                            </Button>
-                          </div>
-                        </div>
-                      );
-                    })}
-                  </div>
-                ) : (
-                  <div className="text-center py-10">
-                    <p className="text-slate-400">No active loans to repay</p>
-                    <p className="text-slate-500 text-sm mt-2">
-                      Create a loan first to see repayment options
-                    </p>
-                  </div>
-                )}
-              </CardContent>
-            </Card>
-          </TabsContent>
-          <TabsContent value="contracts">
-            <SmartContracts />
-          </TabsContent>
-        </Tabs>
+            <span className="ml-2">Refresh</span>
+          </Button>
+        </div>
       </div>
-
-      {/* Modals */}
-      {showLoanTerms && (
-        <LoanTermsModal
-          onClose={() => setShowLoanTerms(false)}
-          btcPrice={btcPrice || 0}
-          collateral={Number(collateralBalance)}
-        />
-      )}
-
-      {showDeposit && (
-        <DepositModal
-          onClose={() => setShowDeposit(false)}
-          btcPrice={btcPrice || 0}
-          currentCollateral={Number(collateralBalance)}
-          availableWbtc={Number(wbtcBalance)}
-        />
-      )}
+      
+      {/* Stats Overview */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        <Card>
+          <CardHeader className="pb-2">
+            <CardTitle className="text-sm font-medium text-muted-foreground">BTC Price</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="flex items-center">
+              <Bitcoin className="mr-2 h-4 w-4 text-yellow-500" />
+              <span className="text-2xl font-bold">
+                ${btcPrice ? formatNumber(btcPrice) : '0.00'}
+              </span>
+            </div>
+          </CardContent>
+        </Card>
+        
+        <Card>
+          <CardHeader className="pb-2">
+            <CardTitle className="text-sm font-medium text-muted-foreground">Your BTC Balance</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="flex items-center">
+              <Bitcoin className="mr-2 h-4 w-4 text-yellow-500" />
+              <span className="text-2xl font-bold">
+                {bitcoinBalance ? formatNumber(satoshiToBTC(bitcoinBalance), 8) : '0.00000000'} BTC
+              </span>
+            </div>
+          </CardContent>
+        </Card>
+        
+        <Card>
+          <CardHeader className="pb-2">
+            <CardTitle className="text-sm font-medium text-muted-foreground">Deposited Collateral</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="flex items-center">
+              <Shield className="mr-2 h-4 w-4 text-blue-500" />
+              <span className="text-2xl font-bold">
+                {bitcoinCollateral ? formatNumber(satoshiToBTC(bitcoinCollateral), 8) : '0.00000000'} BTC
+              </span>
+            </div>
+          </CardContent>
+        </Card>
+        
+        <Card>
+          <CardHeader className="pb-2">
+            <CardTitle className="text-sm font-medium text-muted-foreground">Available Collateral</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="flex items-center">
+              <Shield className="mr-2 h-4 w-4 text-green-500" />
+              <span className="text-2xl font-bold">
+                {availableCollateral ? formatNumber(satoshiToBTC(availableCollateral), 8) : '0.00000000'} BTC
+              </span>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+      
+      {/* Main Tabs */}
+      <Tabs defaultValue="wallet" className="w-full">
+        <TabsList className="grid grid-cols-3 mb-4">
+          <TabsTrigger value="wallet">Bitcoin Wallet</TabsTrigger>
+          <TabsTrigger value="loans">Your Loans</TabsTrigger>
+          <TabsTrigger value="platform">Platform Stats</TabsTrigger>
+        </TabsList>
+        
+        {/* Bitcoin Wallet Tab */}
+        <TabsContent value="wallet" className="space-y-4">
+          <Card>
+            <CardHeader>
+              <CardTitle>Your Bitcoin Wallet</CardTitle>
+              <CardDescription>
+                Deposit Bitcoin to use as collateral for loans
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <div className="space-y-2">
+                <Label>Your Bitcoin Address</Label>
+                <div className="flex gap-2 items-center">
+                  {bitcoinAddress ? (
+                    <div className="p-3 bg-muted rounded-md flex-1 font-mono text-xs break-all">
+                      {bitcoinAddress}
+                    </div>
+                  ) : (
+                    <div className="p-3 bg-muted rounded-md flex-1 text-muted-foreground">
+                      No address generated
+                    </div>
+                  )}
+                  <Button 
+                    onClick={handleGenerateAddress} 
+                    disabled={isGeneratingAddress || !!bitcoinAddress}
+                    variant="outline"
+                  >
+                    {isGeneratingAddress ? (
+                      <><Loader2 className="h-4 w-4 animate-spin mr-2" /> Generating...</>
+                    ) : (
+                      <>Generate Address</>
+                    )}
+                  </Button>
+                </div>
+                <p className="text-sm text-muted-foreground">
+                  Send BTC to this address, then click "Deposit as Collateral" to use it on the platform.
+                </p>
+              </div>
+              
+              <div className="flex flex-col md:flex-row gap-2">
+                <Button 
+                  onClick={handleDepositCollateral} 
+                  disabled={!bitcoinAddress || satoshiToBTC(bitcoinBalance || BigInt(0)) <= 0}
+                  className="flex-1"
+                >
+                  <ArrowDownLeft className="mr-2 h-4 w-4" />
+                  Deposit as Collateral
+                </Button>
+                <Button 
+                  onClick={() => setShowWithdraw(true)}
+                  disabled={satoshiToBTC(availableCollateral || BigInt(0)) <= 0}
+                  variant="outline" 
+                  className="flex-1"
+                >
+                  <ArrowUpRight className="mr-2 h-4 w-4" />
+                  Withdraw BTC
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
+        </TabsContent>
+        
+        {/* Loans Tab */}
+        <TabsContent value="loans" className="space-y-4">
+          <Card>
+            <CardHeader>
+              <div className="flex justify-between items-center">
+                <CardTitle>Your Loans</CardTitle>
+                <Button onClick={() => setShowLoanTerms(true)}>
+                  <Plus className="mr-2 h-4 w-4" />
+                  New Loan
+                </Button>
+              </div>
+              <CardDescription>
+                Manage your current loans and repayments
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              {loans.length > 0 ? (
+                <div className="space-y-4">
+                  {loans.map((loan) => (
+                    <Card key={loan.id.toString()} className="overflow-hidden">
+                      <div className="p-4 border-b">
+                        <div className="flex justify-between items-center">
+                          <div>
+                            <h3 className="font-medium">Loan #{loan.id.toString()}</h3>
+                            <p className="text-sm text-muted-foreground">
+                              Created: {formatTimestamp(loan.startTimestamp)}
+                            </p>
+                          </div>
+                          <Badge variant={loan.active ? "default" : "secondary"}>
+                            {loan.active ? "Active" : "Closed"}
+                          </Badge>
+                        </div>
+                      </div>
+                      <div className="p-4 grid grid-cols-2 gap-4">
+                        <div>
+                          <p className="text-sm text-muted-foreground">Loan Amount</p>
+                          <p className="font-medium">${Number(loan.loanAmount) / 100}</p>
+                        </div>
+                        <div>
+                          <p className="text-sm text-muted-foreground">Collateral</p>
+                          <p className="font-medium">{formatNumber(satoshiToBTC(loan.collateralAmount), 8)} BTC</p>
+                        </div>
+                        <div>
+                          <p className="text-sm text-muted-foreground">End Date</p>
+                          <p className="font-medium">{formatTimestamp(loan.endTimestamp)}</p>
+                        </div>
+                        <div>
+                          <p className="text-sm text-muted-foreground">Interest Rate</p>
+                          <p className="font-medium">{Number(loan.interestRateBps) / 100}%</p>
+                        </div>
+                      </div>
+                      {loan.active && (
+                        <div className="p-4 bg-muted border-t">
+                          <Button
+                            onClick={() => handleRepayLoan(loan.id)}
+                            disabled={isRepaying}
+                            className="w-full"
+                          >
+                            {isRepaying ? (
+                              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                            ) : null}
+                            Repay Loan
+                          </Button>
+                        </div>
+                      )}
+                    </Card>
+                  ))}
+                </div>
+              ) : (
+                <div className="text-center py-8 text-muted-foreground">
+                  <p>You don't have any loans yet</p>
+                  <Button 
+                    variant="outline" 
+                    onClick={() => setShowLoanTerms(true)}
+                    className="mt-2"
+                  >
+                    Create your first loan
+                  </Button>
+                </div>
+              )}
+            </CardContent>
+          </Card>
+        </TabsContent>
+        
+        {/* Platform Stats Tab */}
+        <TabsContent value="platform" className="space-y-4">
+          <Card>
+            <CardHeader>
+              <CardTitle>Platform Statistics</CardTitle>
+              <CardDescription>
+                Overview of the BitPesa lending platform
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              {platformStats ? (
+                <div className="grid grid-cols-2 gap-6">
+                  <div>
+                    <p className="text-sm text-muted-foreground">Total Loans</p>
+                    <p className="text-2xl font-bold">{platformStats.totalLoans.toString()}</p>
+                  </div>
+                  <div>
+                    <p className="text-sm text-muted-foreground">Total BTC Collateral</p>
+                    <p className="text-2xl font-bold">
+                      {formatNumber(satoshiToBTC(platformStats.totalBitcoinCollateral), 8)} BTC
+                    </p>
+                  </div>
+                  <div>
+                    <p className="text-sm text-muted-foreground">Total Outstanding Loans</p>
+                    <p className="text-2xl font-bold">${Number(platformStats.totalOutstanding) / 100}</p>
+                  </div>
+                  <div>
+                    <p className="text-sm text-muted-foreground">Platform Fees Accumulated</p>
+                    <p className="text-2xl font-bold">${Number(platformStats.protocolFees) / 100}</p>
+                  </div>
+                </div>
+              ) : (
+                <div className="text-center py-8 text-muted-foreground">
+                  <Loader2 className="h-8 w-8 animate-spin mx-auto" />
+                  <p className="mt-2">Loading platform statistics...</p>
+                </div>
+              )}
+            </CardContent>
+          </Card>
+        </TabsContent>
+      </Tabs>
+      
+      {/* Loan Terms Modal */}
+      <Dialog open={showLoanTerms} onOpenChange={setShowLoanTerms}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Create New Loan</DialogTitle>
+            <DialogDescription>
+              Enter the loan details and terms
+            </DialogDescription>
+          </DialogHeader>
+          <div className="space-y-4 py-2">
+            <div className="space-y-2">
+              <Label htmlFor="loanAmount">Loan Amount (USD)</Label>
+              <Input
+                id="loanAmount"
+                type="number"
+                min="100"
+                step="100"
+                value={loanAmount}
+                onChange={(e) => setLoanAmount(e.target.value)}
+              />
+              <p className="text-sm text-muted-foreground">
+                Min: $100, Max: Based on available collateral
+              </p>
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="loanDuration">Loan Duration (Days)</Label>
+              <Input
+                id="loanDuration"
+                type="number"
+                min="1"
+                max="365"
+                value={loanDuration}
+                onChange={(e) => setLoanDuration(parseInt(e.target.value))}
+              />
+              <p className="text-sm text-muted-foreground">
+                Max duration: 365 days
+              </p>
+            </div>
+            <div className="pt-4">
+              <Button
+                onClick={handleCreateLoan}
+                disabled={isCreatingLoan || !loanAmount || Number(loanAmount) <= 0}
+                className="w-full"
+              >
+                {isCreatingLoan ? (
+                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                ) : null}
+                Create Loan
+              </Button>
+            </div>
+          </div>
+        </DialogContent>
+      </Dialog>
+      
+      {/* Withdraw Modal */}
+      <Dialog open={showWithdraw} onOpenChange={setShowWithdraw}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Withdraw Bitcoin</DialogTitle>
+            <DialogDescription>
+              Enter withdrawal details
+            </DialogDescription>
+          </DialogHeader>
+          <div className="space-y-4 py-2">
+            <div className="space-y-2">
+              <Label htmlFor="withdrawAmount">Amount (BTC)</Label>
+              <Input
+                id="withdrawAmount"
+                type="number"
+                min="0.00000001"
+                step="0.001"
+                value={withdrawAmount}
+                onChange={(e) => setWithdrawAmount(e.target.value)}
+              />
+              <p className="text-sm text-muted-foreground">
+                Available: {availableCollateral ? formatNumber(satoshiToBTC(availableCollateral), 8) : '0'} BTC
+              </p>
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="recipientAddress">Bitcoin Address</Label>
+              <Input
+                id="recipientAddress"
+                type="text"
+                value={recipientAddress}
+                onChange={(e) => setRecipientAddress(e.target.value)}
+                placeholder="Enter Bitcoin address"
+              />
+            </div>
+            <div className="pt-4">
+              <Button
+                onClick={handleWithdrawCollateral}
+                disabled={
+                  isWithdrawing || 
+                  !recipientAddress || 
+                  !withdrawAmount || 
+                  Number(withdrawAmount) <= 0 ||
+                  Number(withdrawAmount) > satoshiToBTC(availableCollateral || BigInt(0))
+                }
+                className="w-full"
+              >
+                {isWithdrawing ? (
+                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                ) : null}
+                Withdraw Bitcoin
+              </Button>
+            </div>
+          </div>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }
