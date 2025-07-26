@@ -7,7 +7,7 @@
 
 ## 🚀 Overview
 
-BitPesa is a revolutionary cross-chain DeFi lending platform that bridges traditional financial services with decentralized finance. Built on the Internet Computer Protocol (ICP) and integrated with multiple blockchain networks, BitPesa enables users to:
+BitPesa is a cross-chain DeFi lending platform that bridges traditional financial services with decentralized finance. Built on the Internet Computer Protocol (ICP) and integrated with multiple blockchain networks, BitPesa enables users to:
 
 - **Deposit Bitcoin** as collateral
 - **Borrow Local Currency** (KES/USD) against Bitcoin collateral
@@ -32,9 +32,6 @@ BitPesa employs a multi-layered architecture combining:
 - **Radix UI**: Accessible component library
 
 ### Blockchain Integration
-- **Avalanche Fuji**: Smart contract deployment and testing
-- **Chainlink Price Feeds**: Real-time BTC/USD price data
-- **WalletConnect**: Multi-wallet support
 - **ICRC-1 Tokens**: ckBTC and stablecoin standards
 
 ## 🛠️ Technology Stack
@@ -56,8 +53,7 @@ BitPesa employs a multi-layered architecture combining:
 
 ### Authentication & Identity
 - **Internet Identity** - ICP's decentralized identity system
-- **WalletConnect** - Multi-wallet connection protocol
-- **Wagmi** - React hooks for Ethereum interactions
+- **Bitcoin Integration**
 
 ### Database & Storage
 - **Supabase** - PostgreSQL database and real-time features
@@ -67,7 +63,6 @@ BitPesa employs a multi-layered architecture combining:
 - **Vercel** - Frontend deployment and hosting
 - **dfx** - DFINITY Canister SDK
 - **Git** - Version control
-- **ESLint & Prettier** - Code formatting and linting
 
 ## 📁 Project Structure
 
@@ -97,10 +92,11 @@ bitpesa/
 │   │   ├── types/              # TypeScript definitions
 │   │   └── utils/              # Utility functions
 │   └── public/                 # Static assets
-├── motoko/                     # ICP Motoko smart contracts
-│   ├── BitPesaLending.mo       # Main lending canister
-│   ├── CoinbaseParser.mo       # Price oracle parser
+├── bitpesa/                     # ICP Motoko canisters
+│   ├── BitPesaLendingcKBTC.mo       # Main lending canister
+│   ├── PriceParser.mo       # Price oracle parser
 │   ├── ICRC1.mo               # Token standard implementation
+   ├── BitpesaLendingEnhanced.mo #NativeBTC Lending, Actual used contract
 │   └── PriceParser.mo         # Price data utilities
 ├── package.json               # Root package configuration
 └── tsconfig.json             # TypeScript configuration
@@ -116,7 +112,6 @@ Before you begin, ensure you have the following installed:
 - **npm** or **yarn**
 - **Git**
 - **dfx** (DFINITY Canister SDK) - for ICP development
-- **Hardhat** - for EVM smart contract development
 
 ### Installation
 
@@ -173,48 +168,26 @@ Before you begin, ensure you have the following installed:
    
    The application will be available at `http://localhost:3000`
 
-2. **Using the VS Code task**
-   
-   Alternatively, you can use the predefined VS Code task:
-   - Open the project in VS Code
-   - Press `Ctrl+Shift+P` (or `Cmd+Shift+P` on Mac)
-   - Type "Tasks: Run Task"
-   - Select "Start BitPesa Frontend"
 
 #### ICP Canister Development
 
 1. **Start the local ICP replica**
+
    ```bash
-   dfx start --background
+   cd bitpesa
+
+   bitcoind -conf=$(pwd)/bitcoin.conf -datadir=$(pwd)/bitcoin_data --port=18444
+
+   dfx start --enable-bitcoin --background --clean
    ```
 
 2. **Deploy canisters locally**
    ```bash
+   dfx build
+
    dfx deploy
    ```
 
-3. **Auto-generate environment variables**
-   ```bash
-   cd fe
-   npm run setup-icp
-   ```
-
-#### Smart Contract Development (EVM)
-
-1. **Compile contracts**
-   ```bash
-   npm run compile
-   ```
-
-2. **Deploy to Avalanche Fuji testnet**
-   ```bash
-   npm run deploy:fuji
-   ```
-
-3. **Deploy tokens locally**
-   ```bash
-   npm run deploy:tokens:local
-   ```
 
 ## 🔧 Available Scripts
 
@@ -224,17 +197,6 @@ npm run dev          # Start development server
 npm run build        # Build for production
 npm run start        # Start production server
 npm run lint         # Run ESLint
-npm run setup-icp    # Generate ICP environment variables
-```
-
-### Root Scripts
-```bash
-npm run test                 # Run Hardhat tests
-npm run compile             # Compile smart contracts
-npm run deploy:fuji         # Deploy to Avalanche Fuji
-npm run deploy:local        # Deploy to local network
-npm run deploy:tokens       # Deploy token contracts
-npm run verify:contract     # Verify deployed contracts
 ```
 
 ## 🌐 Deployment
