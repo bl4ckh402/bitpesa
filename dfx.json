@@ -4,10 +4,6 @@
       "main": "bitpesa/src/bitpesa_backend/main.mo",
       "type": "motoko"
     },
-    "BitPesaProductionReady": {
-      "main": "bitpesasrc/bitpesa_backend/BitPesaProductionReady.mo", 
-      "type": "motoko"
-    },
     "stablecoin": {
       "type": "motoko",
       "main": "bitpesa/src/bitpesa_backend/ICRC1.mo"
@@ -15,16 +11,6 @@
     "bitpesa_enhanced": {
       "main": "bitpesa/src/bitpesa_backend/BitPesaLendingEnhanced.mo",
       "type": "motoko"
-    },
-    "ckusdc": {
-      "type": "custom",
-      "candid": "https://github.com/dfinity/ic/blob/master/rs/rosetta-api/icrc1/ckusdc/ckUSDC.did",
-      "wasm": "",
-      "remote": {
-        "id": {
-          "ic": "mxzaz-hqaaa-aaaar-qaada-cai"
-        }
-      }
     },
     "internet_identity": {
       "candid": "https://github.com/dfinity/internet-identity/releases/latest/download/internet_identity.did",

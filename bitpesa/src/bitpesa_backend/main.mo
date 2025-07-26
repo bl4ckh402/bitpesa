@@ -17,7 +17,6 @@ import Nat8 "mo:base/Nat8";
 import Nat32 "mo:base/Nat32";
 import Nat64 "mo:base/Nat64";
 import Int32 "mo:base/Int32";
-import EthereumAPI "./EthereumAPI";
 
 actor {
     var bitpesa : ?BitPesaLending.BitPesaLending = null;

@@ -19,6 +19,7 @@ interface SwyptOfframpCardProps {
   onError?: (error: string) => void;
   defaultNetwork?: string;
   defaultToken?: string;
+  defaultAmount?: string;
 }
 
 interface Quote {
@@ -40,10 +41,11 @@ export function SwyptOfframpCard({
   onSuccess,
   onError,
   defaultNetwork = 'celo',
-  defaultToken = 'USDT'
+  defaultToken = 'USDT',
+  defaultAmount = ''
 }: SwyptOfframpCardProps) {
   const [phoneNumber, setPhoneNumber] = useState('');
-  const [amount, setAmount] = useState('');
+  const [amount, setAmount] = useState(defaultAmount);
   const [selectedNetwork, setSelectedNetwork] = useState(defaultNetwork);
   const [selectedToken, setSelectedToken] = useState(defaultToken);
   const [quote, setQuote] = useState<Quote | null>(null);
@@ -73,6 +75,13 @@ export function SwyptOfframpCard({
       stopPolling();
     };
   }, [clearError, stopPolling]);
+
+  // Update amount when defaultAmount prop changes
+  useEffect(() => {
+    if (defaultAmount && defaultAmount !== amount) {
+      setAmount(defaultAmount);
+    }
+  }, [defaultAmount]);
 
   // Handle phone number formatting
   const handlePhoneChange = (value: string) => {
