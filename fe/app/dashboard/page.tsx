@@ -32,6 +32,7 @@ import { useBitPesaLendingCanister } from "@/lib/hooks/useBitPesaLendingCanister
 import { useICP } from "@/lib/hooks/useICP";
 import { Loan, Satoshi } from "@/lib/types/icp";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
+import { SwyptOfframpModal } from "@/components/swypt/swypt-offramp-modal";
 
 // Helper function to convert Satoshis to BTC
 const satoshiToBTC = (sats: bigint | number): number => {
@@ -59,6 +60,7 @@ export default function MotokoPage() {
   const [showLoanTerms, setShowLoanTerms] = useState(false);
   const [showDeposit, setShowDeposit] = useState(false);
   const [showWithdraw, setShowWithdraw] = useState(false);
+  const [showSwyptOfframp, setShowSwyptOfframp] = useState(false);
   
   // Action states
   const [isCreatingLoan, setIsCreatingLoan] = useState(false);
@@ -72,6 +74,13 @@ export default function MotokoPage() {
   const [loanDuration, setLoanDuration] = useState<number>(30);
   const [recipientAddress, setRecipientAddress] = useState<string>("");
   const [withdrawAmount, setWithdrawAmount] = useState<string>("0.001");
+  
+  // Successful loan data for Swypt offramp
+  const [successfulLoanData, setSuccessfulLoanData] = useState<{
+    loanId: string;
+    amount: string;
+    userAddress?: string;
+  } | null>(null);
 
   // Get ICP authentication state
   const { isAuthenticated, principal, login } = useICP();
@@ -130,7 +139,7 @@ export default function MotokoPage() {
       // Get BTC price
       const priceResult = await getBtcUsdPrice();
       if (priceResult.data) {
-        setBtcPrice(Number(priceResult.data) / 100); // Adjust based on your price format
+        setBtcPrice(Number(priceResult.data) / 1000); // Adjust based on your price format
       }
       
       // Get user's Bitcoin address or generate one if needed
@@ -241,6 +250,15 @@ export default function MotokoPage() {
       if (result.data) {
         toast.success(`Loan created successfully! Loan ID: ${result.data}`);
         setShowLoanTerms(false);
+        
+        // Set successful loan data and show Swypt offramp modal
+        setSuccessfulLoanData({
+          loanId: result.data.toString(),
+          amount: loanAmount,
+          userAddress: principal?.toString() // Use principal as user identifier
+        });
+        setShowSwyptOfframp(true);
+        
         // Reload data to show the new loan
         loadUserData();
       } else if (result.error) {
@@ -252,7 +270,7 @@ export default function MotokoPage() {
     } finally {
       setIsCreatingLoan(false);
     }
-  }, [loanAmount, loanDuration, createBitcoinLoan, loadUserData]);
+  }, [loanAmount, loanDuration, createBitcoinLoan, loadUserData, principal]);
   
   // Handler for repaying a loan
   const handleRepayLoan = useCallback(async (loanId: bigint) => {
@@ -721,6 +739,20 @@ export default function MotokoPage() {
           </div>
         </DialogContent>
       </Dialog>
+
+      {/* Swypt Offramp Modal */}
+      <SwyptOfframpModal
+        isOpen={showSwyptOfframp}
+        onClose={() => {
+          setShowSwyptOfframp(false);
+          setSuccessfulLoanData(null);
+        }}
+        userAddress={successfulLoanData?.userAddress}
+        loanAmount={successfulLoanData?.amount}
+        loanId={successfulLoanData?.loanId}
+        defaultNetwork="celo"
+        defaultToken="USDC"
+      />
     </div>
   );
 }
