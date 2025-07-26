@@ -1,0 +1,1492 @@
+
+
+
+
+
+2025-07-17T09:36:26Z Bitcoin Core version v28.1.0 (release build)
+2025-07-17T09:36:26Z Script verification uses 7 additional threads
+2025-07-17T09:36:26Z Using the 'sse4(1way),sse41(4way),avx2(8way)' SHA256 implementation
+2025-07-17T09:36:26Z Using RdSeed as an additional entropy source
+2025-07-17T09:36:26Z Using RdRand as an additional entropy source
+2025-07-17T09:36:26Z Default data directory /home/pavki/.bitcoin
+2025-07-17T09:36:26Z Using data directory /home/pavki/bitpesa/bitcoin_data/regtest
+2025-07-17T09:36:26Z Config file: /home/pavki/bitpesa/bitcoin.conf
+2025-07-17T09:36:26Z Config file arg: regtest="1"
+2025-07-17T09:36:26Z Config file arg: rpcauth=****
+2025-07-17T09:36:26Z Config file arg: rpcpassword=****
+2025-07-17T09:36:26Z Config file arg: rpcuser=****
+2025-07-17T09:36:26Z Config file arg: txindex="1"
+2025-07-17T09:36:26Z Command-line arg: conf="/home/pavki/bitpesa/bitcoin.conf"
+2025-07-17T09:36:26Z Command-line arg: datadir="/home/pavki/bitpesa/bitcoin_data"
+2025-07-17T09:36:26Z Command-line arg: port="18444"
+2025-07-17T09:36:26Z Using at most 125 automatic connections (10240 file descriptors available)
+2025-07-17T09:36:26Z scheduler thread start
+2025-07-17T09:36:26Z Binding RPC on address ::1 port 18443
+2025-07-17T09:36:26Z Binding RPC on address 127.0.0.1 port 18443
+2025-07-17T09:36:26Z Config options rpcuser and rpcpassword will soon be deprecated. Locally-run instances may remove rpcuser to use cookie-based auth, or may be replaced with rpcauth. Please see share/rpcauth for rpcauth auth generation.
+2025-07-17T09:36:26Z Using rpcauth authentication.
+2025-07-17T09:36:26Z Starting HTTP server with 4 worker threads
+2025-07-17T09:36:26Z Using wallet directory /home/pavki/bitpesa/bitcoin_data/regtest/wallets
+2025-07-17T09:36:26Z init message: Verifying wallet(s)…
+2025-07-17T09:36:26Z Using /16 prefix for IP bucketing
+2025-07-17T09:36:26Z init message: Loading P2P addresses…
+2025-07-17T09:36:26Z Creating peers.dat because the file was not found ("/home/pavki/bitpesa/bitcoin_data/regtest/peers.dat")
+2025-07-17T09:36:26Z init message: Loading banlist…
+2025-07-17T09:36:26Z Recreating the banlist database
+2025-07-17T09:36:26Z SetNetworkActive: true
+2025-07-17T09:36:26Z /home/pavki/bitpesa/bitcoin_data/regtest/fee_estimates.dat is not found. Continue anyway.
+2025-07-17T09:36:26Z Script verification uses 7 additional threads
+2025-07-17T09:36:26Z Cache configuration:
+2025-07-17T09:36:26Z * Using 2.0 MiB for block index database
+2025-07-17T09:36:26Z * Using 56.0 MiB for transaction index database
+2025-07-17T09:36:26Z * Using 8.0 MiB for chain state database
+2025-07-17T09:36:26Z * Using 384.0 MiB for in-memory UTXO set (plus up to 286.1 MiB of unused mempool space)
+2025-07-17T09:36:26Z Using obfuscation key for blocksdir *.dat files (/home/pavki/bitpesa/bitcoin_data/regtest/blocks): 'c98ff7e6e1fba2a9'
+2025-07-17T09:36:26Z Using 16 MiB out of 16 MiB requested for signature cache, able to store 524288 elements
+2025-07-17T09:36:26Z Using 16 MiB out of 16 MiB requested for script execution cache, able to store 524288 elements
+2025-07-17T09:36:26Z init message: Loading block index…
+2025-07-17T09:36:26Z Validating signatures for all blocks.
+2025-07-17T09:36:26Z Setting nMinimumChainWork=0000000000000000000000000000000000000000000000000000000000000000
+2025-07-17T09:36:26Z Opening LevelDB in /home/pavki/bitpesa/bitcoin_data/regtest/blocks/index
+2025-07-17T09:36:26Z Opened LevelDB successfully
+2025-07-17T09:36:26Z Using obfuscation key for /home/pavki/bitpesa/bitcoin_data/regtest/blocks/index: 0000000000000000
+2025-07-17T09:36:26Z LoadBlockIndexDB: last block file = 0
+2025-07-17T09:36:26Z LoadBlockIndexDB: last block file info: CBlockFileInfo(blocks=0, size=0, heights=0...0, time=1970-01-01...1970-01-01)
+2025-07-17T09:36:26Z Checking all blk files are present...
+2025-07-17T09:36:26Z Initializing chainstate Chainstate [ibd] @ height -1 (null)
+2025-07-17T09:36:26Z Opening LevelDB in /home/pavki/bitpesa/bitcoin_data/regtest/chainstate
+2025-07-17T09:36:26Z Opened LevelDB successfully
+2025-07-17T09:36:26Z Wrote new obfuscate key for /home/pavki/bitpesa/bitcoin_data/regtest/chainstate: bd75432f146ac156
+2025-07-17T09:36:26Z Using obfuscation key for /home/pavki/bitpesa/bitcoin_data/regtest/chainstate: bd75432f146ac156
+2025-07-17T09:36:26Z Opening LevelDB in /home/pavki/bitpesa/bitcoin_data/regtest/chainstate
+2025-07-17T09:36:26Z Opened LevelDB successfully
+2025-07-17T09:36:26Z Using obfuscation key for /home/pavki/bitpesa/bitcoin_data/regtest/chainstate: bd75432f146ac156
+2025-07-17T09:36:26Z [Chainstate [ibd] @ height -1 (null)] resized coinsdb cache to 8.0 MiB
+2025-07-17T09:36:26Z [Chainstate [ibd] @ height -1 (null)] resized coinstip cache to 384.0 MiB
+2025-07-17T09:36:26Z init message: Verifying blocks…
+2025-07-17T09:36:26Z  block index             141ms
+2025-07-17T09:36:26Z Opening LevelDB in /home/pavki/bitpesa/bitcoin_data/regtest/indexes/txindex
+2025-07-17T09:36:26Z Opened LevelDB successfully
+2025-07-17T09:36:26Z Using obfuscation key for /home/pavki/bitpesa/bitcoin_data/regtest/indexes/txindex: 0000000000000000
+2025-07-17T09:36:26Z Setting NODE_NETWORK on non-prune mode
+2025-07-17T09:36:26Z initload thread start
+2025-07-17T09:36:26Z UpdateTip: new best=0f9188f13cb7b2c71f2a335e3a4fc328bf5beb436012afca590b1a11466e2206 height=0 version=0x00000001 log2_work=1.000000 tx=1 date='2011-02-02T23:16:42Z' progress=1.000000 cache=0.3MiB(0txo)
+2025-07-17T09:36:26Z block tree size = 1
+2025-07-17T09:36:26Z nBestHeight = 0
+2025-07-17T09:36:26Z Failed to open mempool file. Continuing anyway.
+2025-07-17T09:36:26Z initload thread exit
+2025-07-17T09:36:26Z txindex thread start
+2025-07-17T09:36:26Z txindex is enabled
+2025-07-17T09:36:26Z txindex thread exit
+2025-07-17T09:36:26Z torcontrol thread start
+2025-07-17T09:36:26Z Bound to 127.0.0.1:18445
+2025-07-17T09:36:26Z Bound to [::]:18444
+2025-07-17T09:36:26Z Bound to 0.0.0.0:18444
+2025-07-17T09:36:26Z 0 block-relay-only anchors will be tried for connections.
+2025-07-17T09:36:26Z init message: Starting network threads…
+2025-07-17T09:36:26Z net thread start
+2025-07-17T09:36:26Z dnsseed thread start
+2025-07-17T09:36:26Z Loading addresses from DNS seed dummySeed.invalid.
+2025-07-17T09:36:26Z addcon thread start
+2025-07-17T09:36:26Z opencon thread start
+2025-07-17T09:36:26Z init message: Done loading
+2025-07-17T09:36:26Z msghand thread start
+2025-07-17T09:36:36Z 0 addresses found from DNS seeds
+2025-07-17T09:36:36Z dnsseed thread exit
+2025-07-17T09:37:27Z Adding fixed seeds as 60 seconds have passed and addrman is empty for at least one reachable network
+2025-07-17T09:37:27Z Added 0 fixed seeds from reachable networks.
+2025-07-17T09:40:20Z tor: Thread interrupt
+2025-07-17T09:40:20Z addcon thread exit
+2025-07-17T09:40:20Z Shutdown: In progress...
+2025-07-17T09:40:20Z opencon thread exit
+2025-07-17T09:40:20Z torcontrol thread exit
+2025-07-17T09:40:20Z net thread exit
+2025-07-17T09:40:20Z msghand thread exit
+2025-07-17T09:40:20Z DumpAnchors: Flush 0 outbound block-relay-only peer addresses to anchors.dat started
+2025-07-17T09:40:20Z DumpAnchors: Flush 0 outbound block-relay-only peer addresses to anchors.dat completed (0.01s)
+2025-07-17T09:40:20Z scheduler thread exit
+2025-07-17T09:40:20Z Writing 0 mempool transactions to file...
+2025-07-17T09:40:20Z Writing 0 unbroadcast transactions to file.
+2025-07-17T09:40:20Z Dumped mempool: 0.000s to copy, 0.009s to dump, 27 bytes dumped to file
+2025-07-17T09:40:20Z Flushed fee estimates to fee_estimates.dat.
+2025-07-17T09:40:20Z Shutdown: done
+
+
+
+
+
+2025-07-17T09:42:04Z Bitcoin Core version v28.1.0 (release build)
+2025-07-17T09:42:04Z Script verification uses 7 additional threads
+2025-07-17T09:42:04Z Using the 'sse4(1way),sse41(4way),avx2(8way)' SHA256 implementation
+2025-07-17T09:42:04Z Using RdSeed as an additional entropy source
+2025-07-17T09:42:04Z Using RdRand as an additional entropy source
+2025-07-17T09:42:04Z Default data directory /home/pavki/.bitcoin
+2025-07-17T09:42:04Z Using data directory /home/pavki/bitpesa/bitcoin_data/regtest
+2025-07-17T09:42:04Z Config file: /home/pavki/bitpesa/bitcoin.conf
+2025-07-17T09:42:04Z Config file arg: regtest="1"
+2025-07-17T09:42:04Z Config file arg: rpcauth=****
+2025-07-17T09:42:04Z Config file arg: rpcpassword=****
+2025-07-17T09:42:04Z Config file arg: rpcuser=****
+2025-07-17T09:42:04Z Config file arg: txindex="1"
+2025-07-17T09:42:04Z Command-line arg: conf="/home/pavki/bitpesa/bitcoin.conf"
+2025-07-17T09:42:04Z Command-line arg: datadir="/home/pavki/bitpesa/bitcoin_data"
+2025-07-17T09:42:04Z Command-line arg: port="18444"
+2025-07-17T09:42:04Z Using at most 125 automatic connections (10240 file descriptors available)
+2025-07-17T09:42:04Z scheduler thread start
+2025-07-17T09:42:04Z Binding RPC on address ::1 port 18443
+2025-07-17T09:42:04Z Binding RPC on address 127.0.0.1 port 18443
+2025-07-17T09:42:04Z Config options rpcuser and rpcpassword will soon be deprecated. Locally-run instances may remove rpcuser to use cookie-based auth, or may be replaced with rpcauth. Please see share/rpcauth for rpcauth auth generation.
+2025-07-17T09:42:04Z Using rpcauth authentication.
+2025-07-17T09:42:04Z Starting HTTP server with 4 worker threads
+2025-07-17T09:42:04Z Using wallet directory /home/pavki/bitpesa/bitcoin_data/regtest/wallets
+2025-07-17T09:42:04Z init message: Verifying wallet(s)…
+2025-07-17T09:42:04Z Using /16 prefix for IP bucketing
+2025-07-17T09:42:04Z init message: Loading P2P addresses…
+2025-07-17T09:42:04Z Loaded 0 addresses from peers.dat  1ms
+2025-07-17T09:42:04Z init message: Loading banlist…
+2025-07-17T09:42:04Z SetNetworkActive: true
+2025-07-17T09:42:04Z Script verification uses 7 additional threads
+2025-07-17T09:42:04Z Cache configuration:
+2025-07-17T09:42:04Z * Using 2.0 MiB for block index database
+2025-07-17T09:42:04Z * Using 56.0 MiB for transaction index database
+2025-07-17T09:42:04Z * Using 8.0 MiB for chain state database
+2025-07-17T09:42:04Z * Using 384.0 MiB for in-memory UTXO set (plus up to 286.1 MiB of unused mempool space)
+2025-07-17T09:42:04Z Using obfuscation key for blocksdir *.dat files (/home/pavki/bitpesa/bitcoin_data/regtest/blocks): 'c98ff7e6e1fba2a9'
+2025-07-17T09:42:04Z Using 16 MiB out of 16 MiB requested for signature cache, able to store 524288 elements
+2025-07-17T09:42:04Z Using 16 MiB out of 16 MiB requested for script execution cache, able to store 524288 elements
+2025-07-17T09:42:04Z init message: Loading block index…
+2025-07-17T09:42:04Z Validating signatures for all blocks.
+2025-07-17T09:42:04Z Setting nMinimumChainWork=0000000000000000000000000000000000000000000000000000000000000000
+2025-07-17T09:42:04Z Opening LevelDB in /home/pavki/bitpesa/bitcoin_data/regtest/blocks/index
+2025-07-17T09:42:04Z Opened LevelDB successfully
+2025-07-17T09:42:04Z Using obfuscation key for /home/pavki/bitpesa/bitcoin_data/regtest/blocks/index: 0000000000000000
+2025-07-17T09:42:04Z LoadBlockIndexDB: last block file = 0
+2025-07-17T09:42:04Z LoadBlockIndexDB: last block file info: CBlockFileInfo(blocks=1, size=293, heights=0...0, time=2011-02-02...2011-02-02)
+2025-07-17T09:42:04Z Checking all blk files are present...
+2025-07-17T09:42:04Z Initializing chainstate Chainstate [ibd] @ height -1 (null)
+2025-07-17T09:42:04Z Opening LevelDB in /home/pavki/bitpesa/bitcoin_data/regtest/chainstate
+2025-07-17T09:42:04Z Opened LevelDB successfully
+2025-07-17T09:42:04Z Using obfuscation key for /home/pavki/bitpesa/bitcoin_data/regtest/chainstate: bd75432f146ac156
+2025-07-17T09:42:04Z Loaded best chain: hashBestChain=0f9188f13cb7b2c71f2a335e3a4fc328bf5beb436012afca590b1a11466e2206 height=0 date=2011-02-02T23:16:42Z progress=1.000000
+2025-07-17T09:42:04Z Opening LevelDB in /home/pavki/bitpesa/bitcoin_data/regtest/chainstate
+2025-07-17T09:42:04Z Opened LevelDB successfully
+2025-07-17T09:42:04Z Using obfuscation key for /home/pavki/bitpesa/bitcoin_data/regtest/chainstate: bd75432f146ac156
+2025-07-17T09:42:04Z [Chainstate [ibd] @ height 0 (0f9188f13cb7b2c71f2a335e3a4fc328bf5beb436012afca590b1a11466e2206)] resized coinsdb cache to 8.0 MiB
+2025-07-17T09:42:04Z [Chainstate [ibd] @ height 0 (0f9188f13cb7b2c71f2a335e3a4fc328bf5beb436012afca590b1a11466e2206)] resized coinstip cache to 384.0 MiB
+2025-07-17T09:42:04Z init message: Verifying blocks…
+2025-07-17T09:42:04Z  block index              71ms
+2025-07-17T09:42:04Z Opening LevelDB in /home/pavki/bitpesa/bitcoin_data/regtest/indexes/txindex
+2025-07-17T09:42:04Z Opened LevelDB successfully
+2025-07-17T09:42:04Z Using obfuscation key for /home/pavki/bitpesa/bitcoin_data/regtest/indexes/txindex: 0000000000000000
+2025-07-17T09:42:04Z Setting NODE_NETWORK on non-prune mode
+2025-07-17T09:42:04Z block tree size = 1
+2025-07-17T09:42:04Z nBestHeight = 0
+2025-07-17T09:42:04Z initload thread start
+2025-07-17T09:42:04Z Loading 0 mempool transactions from file...
+2025-07-17T09:42:04Z Bound to 127.0.0.1:18445
+2025-07-17T09:42:04Z Imported mempool transactions from file: 0 succeeded, 0 failed, 0 expired, 0 already there, 0 waiting for initial broadcast
+2025-07-17T09:42:04Z initload thread exit
+2025-07-17T09:42:04Z torcontrol thread start
+2025-07-17T09:42:04Z txindex thread start
+2025-07-17T09:42:04Z txindex is enabled at height 0
+2025-07-17T09:42:04Z txindex thread exit
+2025-07-17T09:42:04Z Bound to [::]:18444
+2025-07-17T09:42:04Z Bound to 0.0.0.0:18444
+2025-07-17T09:42:04Z Loaded 0 addresses from "anchors.dat"
+2025-07-17T09:42:04Z 0 block-relay-only anchors will be tried for connections.
+2025-07-17T09:42:04Z init message: Starting network threads…
+2025-07-17T09:42:04Z net thread start
+2025-07-17T09:42:04Z dnsseed thread start
+2025-07-17T09:42:04Z addcon thread start
+2025-07-17T09:42:04Z opencon thread start
+2025-07-17T09:42:04Z init message: Done loading
+2025-07-17T09:42:04Z msghand thread start
+2025-07-17T09:42:04Z Loading addresses from DNS seed dummySeed.invalid.
+2025-07-17T09:42:24Z 0 addresses found from DNS seeds
+2025-07-17T09:42:24Z dnsseed thread exit
+2025-07-17T09:43:05Z Adding fixed seeds as 60 seconds have passed and addrman is empty for at least one reachable network
+2025-07-17T09:43:05Z Added 0 fixed seeds from reachable networks.
+2025-07-17T09:46:23Z tor: Thread interrupt
+2025-07-17T09:46:23Z torcontrol thread exit
+2025-07-17T09:46:23Z addcon thread exit
+2025-07-17T09:46:23Z opencon thread exit
+2025-07-17T09:46:23Z Shutdown: In progress...
+2025-07-17T09:46:23Z net thread exit
+2025-07-17T09:46:23Z msghand thread exit
+2025-07-17T09:46:23Z DumpAnchors: Flush 0 outbound block-relay-only peer addresses to anchors.dat started
+2025-07-17T09:46:23Z DumpAnchors: Flush 0 outbound block-relay-only peer addresses to anchors.dat completed (0.01s)
+2025-07-17T09:46:23Z scheduler thread exit
+2025-07-17T09:46:23Z Writing 0 mempool transactions to file...
+2025-07-17T09:46:23Z Writing 0 unbroadcast transactions to file.
+2025-07-17T09:46:23Z Dumped mempool: 0.000s to copy, 0.007s to dump, 27 bytes dumped to file
+2025-07-17T09:46:23Z Flushed fee estimates to fee_estimates.dat.
+2025-07-17T09:46:23Z Shutdown: done
+
+
+
+
+
+2025-07-17T09:46:34Z Bitcoin Core version v28.1.0 (release build)
+2025-07-17T09:46:34Z Script verification uses 7 additional threads
+2025-07-17T09:46:34Z Using the 'sse4(1way),sse41(4way),avx2(8way)' SHA256 implementation
+2025-07-17T09:46:34Z Using RdSeed as an additional entropy source
+2025-07-17T09:46:34Z Using RdRand as an additional entropy source
+2025-07-17T09:46:34Z Default data directory /home/pavki/.bitcoin
+2025-07-17T09:46:34Z Using data directory /home/pavki/bitpesa/bitcoin_data/regtest
+2025-07-17T09:46:34Z Config file: /home/pavki/bitpesa/bitcoin.conf
+2025-07-17T09:46:34Z Config file arg: regtest="1"
+2025-07-17T09:46:34Z Config file arg: rpcauth=****
+2025-07-17T09:46:34Z Config file arg: rpcpassword=****
+2025-07-17T09:46:34Z Config file arg: rpcuser=****
+2025-07-17T09:46:34Z Config file arg: txindex="1"
+2025-07-17T09:46:34Z Command-line arg: conf="/home/pavki/bitpesa/bitcoin.conf"
+2025-07-17T09:46:34Z Command-line arg: datadir="/home/pavki/bitpesa/bitcoin_data"
+2025-07-17T09:46:34Z Command-line arg: port="18444"
+2025-07-17T09:46:34Z Using at most 125 automatic connections (10240 file descriptors available)
+2025-07-17T09:46:34Z scheduler thread start
+2025-07-17T09:46:34Z Binding RPC on address ::1 port 18443
+2025-07-17T09:46:34Z Binding RPC on address 127.0.0.1 port 18443
+2025-07-17T09:46:34Z Config options rpcuser and rpcpassword will soon be deprecated. Locally-run instances may remove rpcuser to use cookie-based auth, or may be replaced with rpcauth. Please see share/rpcauth for rpcauth auth generation.
+2025-07-17T09:46:34Z Using rpcauth authentication.
+2025-07-17T09:46:34Z Starting HTTP server with 4 worker threads
+2025-07-17T09:46:34Z Using wallet directory /home/pavki/bitpesa/bitcoin_data/regtest/wallets
+2025-07-17T09:46:34Z init message: Verifying wallet(s)…
+2025-07-17T09:46:34Z Using /16 prefix for IP bucketing
+2025-07-17T09:46:34Z init message: Loading P2P addresses…
+2025-07-17T09:46:34Z Loaded 0 addresses from peers.dat  0ms
+2025-07-17T09:46:34Z init message: Loading banlist…
+2025-07-17T09:46:34Z SetNetworkActive: true
+2025-07-17T09:46:34Z Script verification uses 7 additional threads
+2025-07-17T09:46:34Z Cache configuration:
+2025-07-17T09:46:34Z * Using 2.0 MiB for block index database
+2025-07-17T09:46:34Z * Using 56.0 MiB for transaction index database
+2025-07-17T09:46:34Z * Using 8.0 MiB for chain state database
+2025-07-17T09:46:34Z * Using 384.0 MiB for in-memory UTXO set (plus up to 286.1 MiB of unused mempool space)
+2025-07-17T09:46:34Z Using obfuscation key for blocksdir *.dat files (/home/pavki/bitpesa/bitcoin_data/regtest/blocks): 'c98ff7e6e1fba2a9'
+2025-07-17T09:46:34Z Using 16 MiB out of 16 MiB requested for signature cache, able to store 524288 elements
+2025-07-17T09:46:34Z Using 16 MiB out of 16 MiB requested for script execution cache, able to store 524288 elements
+2025-07-17T09:46:34Z init message: Loading block index…
+2025-07-17T09:46:34Z Validating signatures for all blocks.
+2025-07-17T09:46:34Z Setting nMinimumChainWork=0000000000000000000000000000000000000000000000000000000000000000
+2025-07-17T09:46:34Z Opening LevelDB in /home/pavki/bitpesa/bitcoin_data/regtest/blocks/index
+2025-07-17T09:46:34Z Opened LevelDB successfully
+2025-07-17T09:46:34Z Using obfuscation key for /home/pavki/bitpesa/bitcoin_data/regtest/blocks/index: 0000000000000000
+2025-07-17T09:46:34Z LoadBlockIndexDB: last block file = 0
+2025-07-17T09:46:34Z LoadBlockIndexDB: last block file info: CBlockFileInfo(blocks=1, size=293, heights=0...0, time=2011-02-02...2011-02-02)
+2025-07-17T09:46:34Z Checking all blk files are present...
+2025-07-17T09:46:34Z Initializing chainstate Chainstate [ibd] @ height -1 (null)
+2025-07-17T09:46:34Z Opening LevelDB in /home/pavki/bitpesa/bitcoin_data/regtest/chainstate
+2025-07-17T09:46:34Z Opened LevelDB successfully
+2025-07-17T09:46:34Z Using obfuscation key for /home/pavki/bitpesa/bitcoin_data/regtest/chainstate: bd75432f146ac156
+2025-07-17T09:46:34Z Loaded best chain: hashBestChain=0f9188f13cb7b2c71f2a335e3a4fc328bf5beb436012afca590b1a11466e2206 height=0 date=2011-02-02T23:16:42Z progress=1.000000
+2025-07-17T09:46:34Z Opening LevelDB in /home/pavki/bitpesa/bitcoin_data/regtest/chainstate
+2025-07-17T09:46:34Z Opened LevelDB successfully
+2025-07-17T09:46:34Z Using obfuscation key for /home/pavki/bitpesa/bitcoin_data/regtest/chainstate: bd75432f146ac156
+2025-07-17T09:46:34Z [Chainstate [ibd] @ height 0 (0f9188f13cb7b2c71f2a335e3a4fc328bf5beb436012afca590b1a11466e2206)] resized coinsdb cache to 8.0 MiB
+2025-07-17T09:46:34Z [Chainstate [ibd] @ height 0 (0f9188f13cb7b2c71f2a335e3a4fc328bf5beb436012afca590b1a11466e2206)] resized coinstip cache to 384.0 MiB
+2025-07-17T09:46:34Z init message: Verifying blocks…
+2025-07-17T09:46:34Z  block index             140ms
+2025-07-17T09:46:34Z Opening LevelDB in /home/pavki/bitpesa/bitcoin_data/regtest/indexes/txindex
+2025-07-17T09:46:34Z Opened LevelDB successfully
+2025-07-17T09:46:34Z Using obfuscation key for /home/pavki/bitpesa/bitcoin_data/regtest/indexes/txindex: 0000000000000000
+2025-07-17T09:46:34Z Setting NODE_NETWORK on non-prune mode
+2025-07-17T09:46:34Z block tree size = 1
+2025-07-17T09:46:34Z initload thread start
+2025-07-17T09:46:34Z nBestHeight = 0
+2025-07-17T09:46:34Z Loading 0 mempool transactions from file...
+2025-07-17T09:46:34Z Imported mempool transactions from file: 0 succeeded, 0 failed, 0 expired, 0 already there, 0 waiting for initial broadcast
+2025-07-17T09:46:34Z initload thread exit
+2025-07-17T09:46:34Z Bound to 127.0.0.1:18445
+2025-07-17T09:46:34Z txindex thread start
+2025-07-17T09:46:34Z Bound to [::]:18444
+2025-07-17T09:46:34Z txindex is enabled at height 0
+2025-07-17T09:46:34Z torcontrol thread start
+2025-07-17T09:46:34Z txindex thread exit
+2025-07-17T09:46:34Z Bound to 0.0.0.0:18444
+2025-07-17T09:46:34Z Loaded 0 addresses from "anchors.dat"
+2025-07-17T09:46:34Z 0 block-relay-only anchors will be tried for connections.
+2025-07-17T09:46:34Z init message: Starting network threads…
+2025-07-17T09:46:34Z net thread start
+2025-07-17T09:46:34Z dnsseed thread start
+2025-07-17T09:46:34Z Loading addresses from DNS seed dummySeed.invalid.
+2025-07-17T09:46:34Z init message: Done loading
+2025-07-17T09:46:34Z opencon thread start
+2025-07-17T09:46:34Z addcon thread start
+2025-07-17T09:46:34Z msghand thread start
+2025-07-17T09:46:35Z 0 addresses found from DNS seeds
+2025-07-17T09:46:35Z dnsseed thread exit
+2025-07-17T09:47:35Z Adding fixed seeds as 60 seconds have passed and addrman is empty for at least one reachable network
+2025-07-17T09:47:35Z Added 0 fixed seeds from reachable networks.
+2025-07-17T10:18:50Z Potential stale tip detected, will try using extra outbound peer (last tip update: 1890 seconds ago)
+2025-07-17T10:29:20Z Potential stale tip detected, will try using extra outbound peer (last tip update: 2521 seconds ago)
+2025-07-17T10:39:50Z Potential stale tip detected, will try using extra outbound peer (last tip update: 3151 seconds ago)
+2025-07-17T10:48:18Z Flushed fee estimates to fee_estimates.dat.
+2025-07-17T10:50:37Z Potential stale tip detected, will try using extra outbound peer (last tip update: 3798 seconds ago)
+2025-07-17T11:00:41Z Potential stale tip detected, will try using extra outbound peer (last tip update: 4402 seconds ago)
+2025-07-17T11:11:23Z Potential stale tip detected, will try using extra outbound peer (last tip update: 5044 seconds ago)
+2025-07-17T11:21:54Z Potential stale tip detected, will try using extra outbound peer (last tip update: 5675 seconds ago)
+2025-07-17T11:31:57Z Potential stale tip detected, will try using extra outbound peer (last tip update: 6278 seconds ago)
+2025-07-17T11:42:05Z Potential stale tip detected, will try using extra outbound peer (last tip update: 6886 seconds ago)
+2025-07-17T11:49:54Z Flushed fee estimates to fee_estimates.dat.
+2025-07-17T11:52:17Z Potential stale tip detected, will try using extra outbound peer (last tip update: 7498 seconds ago)
+2025-07-17T14:54:37Z Potential stale tip detected, will try using extra outbound peer (last tip update: 18438 seconds ago)
+2025-07-17T18:16:59Z Potential stale tip detected, will try using extra outbound peer (last tip update: 30580 seconds ago)
+2025-07-17T18:27:29Z Potential stale tip detected, will try using extra outbound peer (last tip update: 31210 seconds ago)
+2025-07-17T18:38:00Z Potential stale tip detected, will try using extra outbound peer (last tip update: 31841 seconds ago)
+2025-07-17T18:48:30Z Potential stale tip detected, will try using extra outbound peer (last tip update: 32471 seconds ago)
+2025-07-17T18:59:03Z Potential stale tip detected, will try using extra outbound peer (last tip update: 33104 seconds ago)
+2025-07-17T19:21:21Z Potential stale tip detected, will try using extra outbound peer (last tip update: 34442 seconds ago)
+                                                                 
+
+
+
+
+2025-07-22T02:55:41Z Bitcoin Core version v28.1.0 (release build)
+2025-07-22T02:55:41Z Script verification uses 7 additional threads
+2025-07-22T02:55:41Z Using the 'sse4(1way),sse41(4way),avx2(8way)' SHA256 implementation
+2025-07-22T02:55:41Z Using RdSeed as an additional entropy source
+2025-07-22T02:55:41Z Using RdRand as an additional entropy source
+2025-07-22T02:55:41Z Default data directory /home/pavki/.bitcoin
+2025-07-22T02:55:41Z Using data directory /home/pavki/bitpesa/bitcoin_data/regtest
+2025-07-22T02:55:41Z Config file: /home/pavki/bitpesa/bitcoin.conf
+2025-07-22T02:55:41Z Config file arg: regtest="1"
+2025-07-22T02:55:41Z Config file arg: rpcauth=****
+2025-07-22T02:55:41Z Config file arg: rpcpassword=****
+2025-07-22T02:55:41Z Config file arg: rpcuser=****
+2025-07-22T02:55:41Z Config file arg: txindex="1"
+2025-07-22T02:55:41Z Command-line arg: conf="/home/pavki/bitpesa/bitcoin.conf"
+2025-07-22T02:55:41Z Command-line arg: datadir="/home/pavki/bitpesa/bitcoin_data"
+2025-07-22T02:55:41Z Command-line arg: port="18444"
+2025-07-22T02:55:41Z Using at most 125 automatic connections (10240 file descriptors available)
+2025-07-22T02:55:41Z scheduler thread start
+2025-07-22T02:55:41Z Binding RPC on address ::1 port 18443
+2025-07-22T02:55:41Z Binding RPC on address 127.0.0.1 port 18443
+2025-07-22T02:55:41Z Config options rpcuser and rpcpassword will soon be deprecated. Locally-run instances may remove rpcuser to use cookie-based auth, or may be replaced with rpcauth. Please see share/rpcauth for rpcauth auth generation.
+2025-07-22T02:55:41Z Using rpcauth authentication.
+2025-07-22T02:55:41Z Starting HTTP server with 4 worker threads
+2025-07-22T02:55:41Z Using wallet directory /home/pavki/bitpesa/bitcoin_data/regtest/wallets
+2025-07-22T02:55:41Z init message: Verifying wallet(s)…
+2025-07-22T02:55:41Z Using /16 prefix for IP bucketing
+2025-07-22T02:55:41Z init message: Loading P2P addresses…
+2025-07-22T02:55:41Z Loaded 0 addresses from peers.dat  1ms
+2025-07-22T02:55:41Z init message: Loading banlist…
+2025-07-22T02:55:41Z SetNetworkActive: true
+2025-07-22T02:55:41Z Fee estimation file /home/pavki/bitpesa/bitcoin_data/regtest/fee_estimates.dat too old (age=103 > 60 hours) and will not be used to avoid serving stale estimates.
+2025-07-22T02:55:41Z Script verification uses 7 additional threads
+2025-07-22T02:55:41Z Cache configuration:
+2025-07-22T02:55:41Z * Using 2.0 MiB for block index database
+2025-07-22T02:55:41Z * Using 56.0 MiB for transaction index database
+2025-07-22T02:55:41Z * Using 8.0 MiB for chain state database
+2025-07-22T02:55:41Z * Using 384.0 MiB for in-memory UTXO set (plus up to 286.1 MiB of unused mempool space)
+2025-07-22T02:55:41Z Using obfuscation key for blocksdir *.dat files (/home/pavki/bitpesa/bitcoin_data/regtest/blocks): 'c98ff7e6e1fba2a9'
+2025-07-22T02:55:41Z Using 16 MiB out of 16 MiB requested for signature cache, able to store 524288 elements
+2025-07-22T02:55:41Z Using 16 MiB out of 16 MiB requested for script execution cache, able to store 524288 elements
+2025-07-22T02:55:41Z init message: Loading block index…
+2025-07-22T02:55:41Z Validating signatures for all blocks.
+2025-07-22T02:55:41Z Setting nMinimumChainWork=0000000000000000000000000000000000000000000000000000000000000000
+2025-07-22T02:55:41Z Opening LevelDB in /home/pavki/bitpesa/bitcoin_data/regtest/blocks/index
+2025-07-22T02:55:41Z Opened LevelDB successfully
+2025-07-22T02:55:41Z Using obfuscation key for /home/pavki/bitpesa/bitcoin_data/regtest/blocks/index: 0000000000000000
+2025-07-22T02:55:41Z LoadBlockIndexDB: last block file = 0
+2025-07-22T02:55:41Z LoadBlockIndexDB: last block file info: CBlockFileInfo(blocks=1, size=293, heights=0...0, time=2011-02-02...2011-02-02)
+2025-07-22T02:55:41Z Checking all blk files are present...
+2025-07-22T02:55:41Z Initializing chainstate Chainstate [ibd] @ height -1 (null)
+2025-07-22T02:55:41Z Opening LevelDB in /home/pavki/bitpesa/bitcoin_data/regtest/chainstate
+2025-07-22T02:55:41Z Opened LevelDB successfully
+2025-07-22T02:55:41Z Using obfuscation key for /home/pavki/bitpesa/bitcoin_data/regtest/chainstate: bd75432f146ac156
+2025-07-22T02:55:41Z Loaded best chain: hashBestChain=0f9188f13cb7b2c71f2a335e3a4fc328bf5beb436012afca590b1a11466e2206 height=0 date=2011-02-02T23:16:42Z progress=1.000000
+2025-07-22T02:55:41Z Opening LevelDB in /home/pavki/bitpesa/bitcoin_data/regtest/chainstate
+2025-07-22T02:55:41Z Opened LevelDB successfully
+2025-07-22T02:55:41Z Using obfuscation key for /home/pavki/bitpesa/bitcoin_data/regtest/chainstate: bd75432f146ac156
+2025-07-22T02:55:41Z [Chainstate [ibd] @ height 0 (0f9188f13cb7b2c71f2a335e3a4fc328bf5beb436012afca590b1a11466e2206)] resized coinsdb cache to 8.0 MiB
+2025-07-22T02:55:41Z [Chainstate [ibd] @ height 0 (0f9188f13cb7b2c71f2a335e3a4fc328bf5beb436012afca590b1a11466e2206)] resized coinstip cache to 384.0 MiB
+2025-07-22T02:55:41Z init message: Verifying blocks…
+2025-07-22T02:55:41Z  block index             124ms
+2025-07-22T02:55:41Z Opening LevelDB in /home/pavki/bitpesa/bitcoin_data/regtest/indexes/txindex
+2025-07-22T02:55:41Z Opened LevelDB successfully
+2025-07-22T02:55:41Z Using obfuscation key for /home/pavki/bitpesa/bitcoin_data/regtest/indexes/txindex: 0000000000000000
+2025-07-22T02:55:41Z Setting NODE_NETWORK on non-prune mode
+2025-07-22T02:55:41Z block tree size = 1
+2025-07-22T02:55:41Z nBestHeight = 0
+2025-07-22T02:55:41Z initload thread start
+2025-07-22T02:55:41Z Loading 0 mempool transactions from file...
+2025-07-22T02:55:41Z Imported mempool transactions from file: 0 succeeded, 0 failed, 0 expired, 0 already there, 0 waiting for initial broadcast
+2025-07-22T02:55:41Z initload thread exit
+2025-07-22T02:55:41Z txindex thread start
+2025-07-22T02:55:41Z txindex is enabled at height 0
+2025-07-22T02:55:41Z txindex thread exit
+2025-07-22T02:55:41Z torcontrol thread start
+2025-07-22T02:55:41Z Bound to 127.0.0.1:18445
+2025-07-22T02:55:41Z Bound to [::]:18444
+2025-07-22T02:55:41Z Bound to 0.0.0.0:18444
+2025-07-22T02:55:41Z 0 block-relay-only anchors will be tried for connections.
+2025-07-22T02:55:41Z init message: Starting network threads…
+2025-07-22T02:55:41Z net thread start
+2025-07-22T02:55:41Z dnsseed thread start
+2025-07-22T02:55:41Z Loading addresses from DNS seed dummySeed.invalid.
+2025-07-22T02:55:41Z addcon thread start
+2025-07-22T02:55:41Z init message: Done loading
+2025-07-22T02:55:41Z opencon thread start
+2025-07-22T02:55:41Z msghand thread start
+2025-07-22T02:55:42Z 0 addresses found from DNS seeds
+2025-07-22T02:55:42Z dnsseed thread exit
+2025-07-22T02:56:42Z Adding fixed seeds as 60 seconds have passed and addrman is empty for at least one reachable network
+2025-07-22T02:56:42Z Added 0 fixed seeds from reachable networks.
+2025-07-22T03:26:33Z Potential stale tip detected, will try using extra outbound peer (last tip update: 1808 seconds ago)
+2025-07-22T03:36:34Z Potential stale tip detected, will try using extra outbound peer (last tip update: 2409 seconds ago)
+2025-07-22T06:01:52Z Potential stale tip detected, will try using extra outbound peer (last tip update: 11127 seconds ago)
+2025-07-22T06:08:17Z Flushed fee estimates to fee_estimates.dat.
+2025-07-22T06:12:34Z Potential stale tip detected, will try using extra outbound peer (last tip update: 11769 seconds ago)
+2025-07-22T06:30:09Z Potential stale tip detected, will try using extra outbound peer (last tip update: 12824 seconds ago)
+2025-07-22T06:40:44Z Potential stale tip detected, will try using extra outbound peer (last tip update: 13459 seconds ago)
+2025-07-22T06:51:17Z Potential stale tip detected, will try using extra outbound peer (last tip update: 14092 seconds ago)
+2025-07-22T06:51:42Z tor: Thread interrupt
+2025-07-22T06:51:42Z addcon thread exit
+2025-07-22T06:51:42Z opencon thread exit
+2025-07-22T06:51:42Z torcontrol thread exit
+2025-07-22T06:51:42Z Shutdown: In progress...
+2025-07-22T06:51:42Z net thread exit
+2025-07-22T06:51:42Z msghand thread exit
+2025-07-22T06:51:42Z DumpAnchors: Flush 0 outbound block-relay-only peer addresses to anchors.dat started
+2025-07-22T06:51:42Z DumpAnchors: Flush 0 outbound block-relay-only peer addresses to anchors.dat completed (0.01s)
+2025-07-22T06:51:42Z scheduler thread exit
+2025-07-22T06:51:42Z Writing 0 mempool transactions to file...
+2025-07-22T06:51:42Z Writing 0 unbroadcast transactions to file.
+2025-07-22T06:51:42Z Dumped mempool: 0.000s to copy, 0.015s to dump, 27 bytes dumped to file
+2025-07-22T06:51:42Z Flushed fee estimates to fee_estimates.dat.
+2025-07-22T06:51:42Z Shutdown: done
+
+
+
+
+
+2025-07-22T06:53:01Z Bitcoin Core version v28.1.0 (release build)
+2025-07-22T06:53:01Z Script verification uses 7 additional threads
+2025-07-22T06:53:01Z Using the 'sse4(1way),sse41(4way),avx2(8way)' SHA256 implementation
+2025-07-22T06:53:01Z Using RdSeed as an additional entropy source
+2025-07-22T06:53:01Z Using RdRand as an additional entropy source
+2025-07-22T06:53:01Z Default data directory /home/pavki/.bitcoin
+2025-07-22T06:53:01Z Using data directory /home/pavki/bitpesa/bitcoin_data/regtest
+2025-07-22T06:53:01Z Config file: /home/pavki/bitpesa/bitcoin.conf
+2025-07-22T06:53:01Z Config file arg: regtest="1"
+2025-07-22T06:53:01Z Config file arg: rpcauth=****
+2025-07-22T06:53:01Z Config file arg: rpcpassword=****
+2025-07-22T06:53:01Z Config file arg: rpcuser=****
+2025-07-22T06:53:01Z Config file arg: txindex="1"
+2025-07-22T06:53:01Z Command-line arg: conf="/home/pavki/bitpesa/bitcoin.conf"
+2025-07-22T06:53:01Z Command-line arg: datadir="/home/pavki/bitpesa/bitcoin_data"
+2025-07-22T06:53:01Z Command-line arg: port="18444"
+2025-07-22T06:53:01Z Using at most 125 automatic connections (10240 file descriptors available)
+2025-07-22T06:53:01Z scheduler thread start
+2025-07-22T06:53:01Z Binding RPC on address ::1 port 18443
+2025-07-22T06:53:01Z Binding RPC on address 127.0.0.1 port 18443
+2025-07-22T06:53:01Z Config options rpcuser and rpcpassword will soon be deprecated. Locally-run instances may remove rpcuser to use cookie-based auth, or may be replaced with rpcauth. Please see share/rpcauth for rpcauth auth generation.
+2025-07-22T06:53:01Z Using rpcauth authentication.
+2025-07-22T06:53:01Z Starting HTTP server with 4 worker threads
+2025-07-22T06:53:01Z Using wallet directory /home/pavki/bitpesa/bitcoin_data/regtest/wallets
+2025-07-22T06:53:01Z init message: Verifying wallet(s)…
+2025-07-22T06:53:01Z Using /16 prefix for IP bucketing
+2025-07-22T06:53:01Z init message: Loading P2P addresses…
+2025-07-22T06:53:01Z Loaded 0 addresses from peers.dat  0ms
+2025-07-22T06:53:01Z init message: Loading banlist…
+2025-07-22T06:53:01Z SetNetworkActive: true
+2025-07-22T06:53:01Z Script verification uses 7 additional threads
+2025-07-22T06:53:01Z Cache configuration:
+2025-07-22T06:53:01Z * Using 2.0 MiB for block index database
+2025-07-22T06:53:01Z * Using 56.0 MiB for transaction index database
+2025-07-22T06:53:01Z * Using 8.0 MiB for chain state database
+2025-07-22T06:53:01Z * Using 384.0 MiB for in-memory UTXO set (plus up to 286.1 MiB of unused mempool space)
+2025-07-22T06:53:01Z Using obfuscation key for blocksdir *.dat files (/home/pavki/bitpesa/bitcoin_data/regtest/blocks): 'c98ff7e6e1fba2a9'
+2025-07-22T06:53:01Z Using 16 MiB out of 16 MiB requested for signature cache, able to store 524288 elements
+2025-07-22T06:53:01Z Using 16 MiB out of 16 MiB requested for script execution cache, able to store 524288 elements
+2025-07-22T06:53:01Z init message: Loading block index…
+2025-07-22T06:53:01Z Validating signatures for all blocks.
+2025-07-22T06:53:01Z Setting nMinimumChainWork=0000000000000000000000000000000000000000000000000000000000000000
+2025-07-22T06:53:01Z Opening LevelDB in /home/pavki/bitpesa/bitcoin_data/regtest/blocks/index
+2025-07-22T06:53:01Z Opened LevelDB successfully
+2025-07-22T06:53:01Z Using obfuscation key for /home/pavki/bitpesa/bitcoin_data/regtest/blocks/index: 0000000000000000
+2025-07-22T06:53:01Z LoadBlockIndexDB: last block file = 0
+2025-07-22T06:53:01Z LoadBlockIndexDB: last block file info: CBlockFileInfo(blocks=1, size=293, heights=0...0, time=2011-02-02...2011-02-02)
+2025-07-22T06:53:01Z Checking all blk files are present...
+2025-07-22T06:53:01Z Initializing chainstate Chainstate [ibd] @ height -1 (null)
+2025-07-22T06:53:01Z Opening LevelDB in /home/pavki/bitpesa/bitcoin_data/regtest/chainstate
+2025-07-22T06:53:01Z Opened LevelDB successfully
+2025-07-22T06:53:01Z Using obfuscation key for /home/pavki/bitpesa/bitcoin_data/regtest/chainstate: bd75432f146ac156
+2025-07-22T06:53:01Z Loaded best chain: hashBestChain=0f9188f13cb7b2c71f2a335e3a4fc328bf5beb436012afca590b1a11466e2206 height=0 date=2011-02-02T23:16:42Z progress=1.000000
+2025-07-22T06:53:01Z Opening LevelDB in /home/pavki/bitpesa/bitcoin_data/regtest/chainstate
+2025-07-22T06:53:01Z Opened LevelDB successfully
+2025-07-22T06:53:01Z Using obfuscation key for /home/pavki/bitpesa/bitcoin_data/regtest/chainstate: bd75432f146ac156
+2025-07-22T06:53:01Z [Chainstate [ibd] @ height 0 (0f9188f13cb7b2c71f2a335e3a4fc328bf5beb436012afca590b1a11466e2206)] resized coinsdb cache to 8.0 MiB
+2025-07-22T06:53:01Z [Chainstate [ibd] @ height 0 (0f9188f13cb7b2c71f2a335e3a4fc328bf5beb436012afca590b1a11466e2206)] resized coinstip cache to 384.0 MiB
+2025-07-22T06:53:01Z init message: Verifying blocks…
+2025-07-22T06:53:01Z  block index              87ms
+2025-07-22T06:53:01Z Opening LevelDB in /home/pavki/bitpesa/bitcoin_data/regtest/indexes/txindex
+2025-07-22T06:53:01Z Opened LevelDB successfully
+2025-07-22T06:53:01Z Using obfuscation key for /home/pavki/bitpesa/bitcoin_data/regtest/indexes/txindex: 0000000000000000
+2025-07-22T06:53:01Z Setting NODE_NETWORK on non-prune mode
+2025-07-22T06:53:01Z block tree size = 1
+2025-07-22T06:53:01Z nBestHeight = 0
+2025-07-22T06:53:01Z initload thread start
+2025-07-22T06:53:01Z torcontrol thread start
+2025-07-22T06:53:01Z Bound to 127.0.0.1:18445
+2025-07-22T06:53:01Z txindex thread start
+2025-07-22T06:53:01Z Bound to [::]:18444
+2025-07-22T06:53:01Z Loading 0 mempool transactions from file...
+2025-07-22T06:53:01Z Bound to 0.0.0.0:18444
+2025-07-22T06:53:01Z txindex is enabled at height 0
+2025-07-22T06:53:01Z txindex thread exit
+2025-07-22T06:53:01Z Imported mempool transactions from file: 0 succeeded, 0 failed, 0 expired, 0 already there, 0 waiting for initial broadcast
+2025-07-22T06:53:01Z Loaded 0 addresses from "anchors.dat"
+2025-07-22T06:53:01Z initload thread exit
+2025-07-22T06:53:01Z 0 block-relay-only anchors will be tried for connections.
+2025-07-22T06:53:01Z init message: Starting network threads…
+2025-07-22T06:53:01Z net thread start
+2025-07-22T06:53:01Z dnsseed thread start
+2025-07-22T06:53:01Z Loading addresses from DNS seed dummySeed.invalid.
+2025-07-22T06:53:01Z addcon thread start
+2025-07-22T06:53:01Z opencon thread start
+2025-07-22T06:53:01Z init message: Done loading
+2025-07-22T06:53:01Z msghand thread start
+2025-07-22T06:53:02Z 0 addresses found from DNS seeds
+2025-07-22T06:53:02Z dnsseed thread exit
+2025-07-22T06:54:02Z Adding fixed seeds as 60 seconds have passed and addrman is empty for at least one reachable network
+2025-07-22T06:54:02Z Added 0 fixed seeds from reachable networks.
+2025-07-22T07:32:22Z Potential stale tip detected, will try using extra outbound peer (last tip update: 2318 seconds ago)
+2025-07-22T07:43:05Z Potential stale tip detected, will try using extra outbound peer (last tip update: 2961 seconds ago)
+2025-07-22T07:53:44Z Potential stale tip detected, will try using extra outbound peer (last tip update: 3600 seconds ago)
+2025-07-22T08:04:07Z Flushed fee estimates to fee_estimates.dat.
+2025-07-22T08:04:08Z Potential stale tip detected, will try using extra outbound peer (last tip update: 4224 seconds ago)
+2025-07-22T08:56:51Z Potential stale tip detected, will try using extra outbound peer (last tip update: 7387 seconds ago)
+2025-07-22T09:06:55Z Potential stale tip detected, will try using extra outbound peer (last tip update: 7991 seconds ago)
+2025-07-22T09:16:59Z Potential stale tip detected, will try using extra outbound peer (last tip update: 8595 seconds ago)
+2025-07-22T09:27:02Z Potential stale tip detected, will try using extra outbound peer (last tip update: 9198 seconds ago)
+2025-07-22T09:37:46Z Potential stale tip detected, will try using extra outbound peer (last tip update: 9842 seconds ago)
+2025-07-22T09:48:29Z Potential stale tip detected, will try using extra outbound peer (last tip update: 10485 seconds ago)
+2025-07-22T09:50:37Z Flushed fee estimates to fee_estimates.dat.
+2025-07-22T09:58:30Z Potential stale tip detected, will try using extra outbound peer (last tip update: 11086 seconds ago)
+2025-07-22T10:02:09Z tor: Thread interrupt
+2025-07-22T10:02:09Z addcon thread exit
+2025-07-22T10:02:09Z msghand thread exit
+2025-07-22T10:02:09Z opencon thread exit
+2025-07-22T10:02:09Z torcontrol thread exit
+2025-07-22T10:02:09Z Shutdown: In progress...
+2025-07-22T10:02:09Z net thread exit
+2025-07-22T10:02:09Z DumpAnchors: Flush 0 outbound block-relay-only peer addresses to anchors.dat started
+2025-07-22T10:02:09Z DumpAnchors: Flush 0 outbound block-relay-only peer addresses to anchors.dat completed (0.01s)
+2025-07-22T10:02:09Z scheduler thread exit
+2025-07-22T10:02:09Z Writing 0 mempool transactions to file...
+2025-07-22T10:02:09Z Writing 0 unbroadcast transactions to file.
+2025-07-22T10:02:09Z Dumped mempool: 0.000s to copy, 0.007s to dump, 27 bytes dumped to file
+2025-07-22T10:02:09Z Flushed fee estimates to fee_estimates.dat.
+2025-07-22T10:02:09Z Shutdown: done
+
+
+
+
+
+2025-07-22T10:02:15Z Bitcoin Core version v28.1.0 (release build)
+2025-07-22T10:02:15Z Script verification uses 7 additional threads
+2025-07-22T10:02:15Z Using the 'sse4(1way),sse41(4way),avx2(8way)' SHA256 implementation
+2025-07-22T10:02:15Z Using RdSeed as an additional entropy source
+2025-07-22T10:02:15Z Using RdRand as an additional entropy source
+2025-07-22T10:02:15Z Default data directory /home/pavki/.bitcoin
+2025-07-22T10:02:15Z Using data directory /home/pavki/bitpesa/bitcoin_data/regtest
+2025-07-22T10:02:15Z Config file: /home/pavki/bitpesa/bitcoin.conf
+2025-07-22T10:02:15Z Config file arg: regtest="1"
+2025-07-22T10:02:15Z Config file arg: rpcauth=****
+2025-07-22T10:02:15Z Config file arg: rpcpassword=****
+2025-07-22T10:02:15Z Config file arg: rpcuser=****
+2025-07-22T10:02:15Z Config file arg: txindex="1"
+2025-07-22T10:02:15Z Command-line arg: conf="/home/pavki/bitpesa/bitcoin.conf"
+2025-07-22T10:02:15Z Command-line arg: datadir="/home/pavki/bitpesa/bitcoin_data"
+2025-07-22T10:02:15Z Command-line arg: port="18444"
+2025-07-22T10:02:15Z Using at most 125 automatic connections (10240 file descriptors available)
+2025-07-22T10:02:15Z scheduler thread start
+2025-07-22T10:02:15Z Binding RPC on address ::1 port 18443
+2025-07-22T10:02:15Z Binding RPC on address 127.0.0.1 port 18443
+2025-07-22T10:02:15Z Config options rpcuser and rpcpassword will soon be deprecated. Locally-run instances may remove rpcuser to use cookie-based auth, or may be replaced with rpcauth. Please see share/rpcauth for rpcauth auth generation.
+2025-07-22T10:02:15Z Using rpcauth authentication.
+2025-07-22T10:02:15Z Starting HTTP server with 4 worker threads
+2025-07-22T10:02:15Z Using wallet directory /home/pavki/bitpesa/bitcoin_data/regtest/wallets
+2025-07-22T10:02:15Z init message: Verifying wallet(s)…
+2025-07-22T10:02:15Z Using /16 prefix for IP bucketing
+2025-07-22T10:02:15Z init message: Loading P2P addresses…
+2025-07-22T10:02:15Z Loaded 0 addresses from peers.dat  2ms
+2025-07-22T10:02:15Z init message: Loading banlist…
+2025-07-22T10:02:15Z SetNetworkActive: true
+2025-07-22T10:02:15Z Script verification uses 7 additional threads
+2025-07-22T10:02:15Z Cache configuration:
+2025-07-22T10:02:15Z * Using 2.0 MiB for block index database
+2025-07-22T10:02:15Z * Using 56.0 MiB for transaction index database
+2025-07-22T10:02:15Z * Using 8.0 MiB for chain state database
+2025-07-22T10:02:15Z * Using 384.0 MiB for in-memory UTXO set (plus up to 286.1 MiB of unused mempool space)
+2025-07-22T10:02:15Z Using obfuscation key for blocksdir *.dat files (/home/pavki/bitpesa/bitcoin_data/regtest/blocks): 'c98ff7e6e1fba2a9'
+2025-07-22T10:02:16Z Using 16 MiB out of 16 MiB requested for signature cache, able to store 524288 elements
+2025-07-22T10:02:16Z Using 16 MiB out of 16 MiB requested for script execution cache, able to store 524288 elements
+2025-07-22T10:02:16Z init message: Loading block index…
+2025-07-22T10:02:16Z Validating signatures for all blocks.
+2025-07-22T10:02:16Z Setting nMinimumChainWork=0000000000000000000000000000000000000000000000000000000000000000
+2025-07-22T10:02:16Z Opening LevelDB in /home/pavki/bitpesa/bitcoin_data/regtest/blocks/index
+2025-07-22T10:02:16Z Opened LevelDB successfully
+2025-07-22T10:02:16Z Using obfuscation key for /home/pavki/bitpesa/bitcoin_data/regtest/blocks/index: 0000000000000000
+2025-07-22T10:02:16Z LoadBlockIndexDB: last block file = 0
+2025-07-22T10:02:16Z LoadBlockIndexDB: last block file info: CBlockFileInfo(blocks=1, size=293, heights=0...0, time=2011-02-02...2011-02-02)
+2025-07-22T10:02:16Z Checking all blk files are present...
+2025-07-22T10:02:16Z Initializing chainstate Chainstate [ibd] @ height -1 (null)
+2025-07-22T10:02:16Z Opening LevelDB in /home/pavki/bitpesa/bitcoin_data/regtest/chainstate
+2025-07-22T10:02:16Z Opened LevelDB successfully
+2025-07-22T10:02:16Z Using obfuscation key for /home/pavki/bitpesa/bitcoin_data/regtest/chainstate: bd75432f146ac156
+2025-07-22T10:02:16Z Loaded best chain: hashBestChain=0f9188f13cb7b2c71f2a335e3a4fc328bf5beb436012afca590b1a11466e2206 height=0 date=2011-02-02T23:16:42Z progress=1.000000
+2025-07-22T10:02:16Z Opening LevelDB in /home/pavki/bitpesa/bitcoin_data/regtest/chainstate
+2025-07-22T10:02:16Z Opened LevelDB successfully
+2025-07-22T10:02:16Z Using obfuscation key for /home/pavki/bitpesa/bitcoin_data/regtest/chainstate: bd75432f146ac156
+2025-07-22T10:02:16Z [Chainstate [ibd] @ height 0 (0f9188f13cb7b2c71f2a335e3a4fc328bf5beb436012afca590b1a11466e2206)] resized coinsdb cache to 8.0 MiB
+2025-07-22T10:02:16Z [Chainstate [ibd] @ height 0 (0f9188f13cb7b2c71f2a335e3a4fc328bf5beb436012afca590b1a11466e2206)] resized coinstip cache to 384.0 MiB
+2025-07-22T10:02:16Z init message: Verifying blocks…
+2025-07-22T10:02:16Z  block index             103ms
+2025-07-22T10:02:16Z Opening LevelDB in /home/pavki/bitpesa/bitcoin_data/regtest/indexes/txindex
+2025-07-22T10:02:16Z Opened LevelDB successfully
+2025-07-22T10:02:16Z Using obfuscation key for /home/pavki/bitpesa/bitcoin_data/regtest/indexes/txindex: 0000000000000000
+2025-07-22T10:02:16Z Setting NODE_NETWORK on non-prune mode
+2025-07-22T10:02:16Z block tree size = 1
+2025-07-22T10:02:16Z nBestHeight = 0
+2025-07-22T10:02:16Z initload thread start
+2025-07-22T10:02:16Z torcontrol thread start
+2025-07-22T10:02:16Z Bound to 127.0.0.1:18445
+2025-07-22T10:02:16Z Bound to [::]:18444
+2025-07-22T10:02:16Z Loading 0 mempool transactions from file...
+2025-07-22T10:02:16Z Bound to 0.0.0.0:18444
+2025-07-22T10:02:16Z txindex thread start
+2025-07-22T10:02:16Z Imported mempool transactions from file: 0 succeeded, 0 failed, 0 expired, 0 already there, 0 waiting for initial broadcast
+2025-07-22T10:02:16Z initload thread exit
+2025-07-22T10:02:16Z txindex is enabled at height 0
+2025-07-22T10:02:16Z txindex thread exit
+2025-07-22T10:02:16Z Loaded 0 addresses from "anchors.dat"
+2025-07-22T10:02:16Z 0 block-relay-only anchors will be tried for connections.
+2025-07-22T10:02:16Z init message: Starting network threads…
+2025-07-22T10:02:16Z net thread start
+2025-07-22T10:02:16Z dnsseed thread start
+2025-07-22T10:02:16Z Loading addresses from DNS seed dummySeed.invalid.
+2025-07-22T10:02:16Z addcon thread start
+2025-07-22T10:02:16Z opencon thread start
+2025-07-22T10:02:16Z init message: Done loading
+2025-07-22T10:02:16Z msghand thread start
+2025-07-22T10:02:16Z 0 addresses found from DNS seeds
+2025-07-22T10:02:16Z dnsseed thread exit
+2025-07-22T10:03:17Z Adding fixed seeds as 60 seconds have passed and addrman is empty for at least one reachable network
+2025-07-22T10:03:17Z Added 0 fixed seeds from reachable networks.
+2025-07-22T10:33:04Z Potential stale tip detected, will try using extra outbound peer (last tip update: 1805 seconds ago)
+2025-07-22T10:43:07Z Potential stale tip detected, will try using extra outbound peer (last tip update: 2408 seconds ago)
+2025-07-22T10:53:51Z Potential stale tip detected, will try using extra outbound peer (last tip update: 3052 seconds ago)
+2025-07-22T10:59:34Z Flushed fee estimates to fee_estimates.dat.
+2025-07-22T11:03:53Z Potential stale tip detected, will try using extra outbound peer (last tip update: 3654 seconds ago)
+2025-07-22T11:13:55Z Potential stale tip detected, will try using extra outbound peer (last tip update: 4256 seconds ago)
+2025-07-22T11:24:32Z Potential stale tip detected, will try using extra outbound peer (last tip update: 4893 seconds ago)
+2025-07-22T11:34:34Z Potential stale tip detected, will try using extra outbound peer (last tip update: 5495 seconds ago)
+2025-07-22T11:43:39Z CreateNewBlock(): block weight: 896 txs: 0 fees: 0 sigops 400
+2025-07-22T11:43:39Z Leaving InitialBlockDownload (latching to false)
+2025-07-22T11:43:39Z UpdateTip: new best=56ff95515924c7bb95084723339a20246161d0ecdee2a6b42affb7825e90e4bf height=1 version=0x20000000 log2_work=2.000000 tx=2 date='2025-07-22T11:43:39Z' progress=1.000000 cache=0.3MiB(1txo)
+2025-07-22T11:43:39Z CreateNewBlock(): block weight: 896 txs: 0 fees: 0 sigops 400
+2025-07-22T11:43:39Z Saw new header hash=099cb653a5fa80c839c22a082c77efc69f33b7d13a733f4024acc9f53bc00eb3 height=2
+2025-07-22T11:43:39Z UpdateTip: new best=099cb653a5fa80c839c22a082c77efc69f33b7d13a733f4024acc9f53bc00eb3 height=2 version=0x20000000 log2_work=2.584963 tx=3 date='2025-07-22T11:43:40Z' progress=1.000000 cache=0.3MiB(2txo)
+2025-07-22T11:43:39Z CreateNewBlock(): block weight: 896 txs: 0 fees: 0 sigops 400
+2025-07-22T11:43:39Z Saw new header hash=185aebaf93ddfd985179491698876d42e4071bb0f9f3225184079616863a1ac3 height=3
+2025-07-22T11:43:39Z UpdateTip: new best=185aebaf93ddfd985179491698876d42e4071bb0f9f3225184079616863a1ac3 height=3 version=0x20000000 log2_work=3.000000 tx=4 date='2025-07-22T11:43:40Z' progress=1.000000 cache=0.3MiB(3txo)
+2025-07-22T11:58:51Z Flushed fee estimates to fee_estimates.dat.
+2025-07-22T12:15:21Z Potential stale tip detected, will try using extra outbound peer (last tip update: 1902 seconds ago)
+2025-07-22T12:25:31Z Potential stale tip detected, will try using extra outbound peer (last tip update: 2512 seconds ago)
+2025-07-22T12:35:37Z Potential stale tip detected, will try using extra outbound peer (last tip update: 3118 seconds ago)
+2025-07-22T12:45:42Z Potential stale tip detected, will try using extra outbound peer (last tip update: 3723 seconds ago)
+2025-07-22T13:25:46Z Potential stale tip detected, will try using extra outbound peer (last tip update: 6127 seconds ago)
+2025-07-22T13:30:06Z Flushed fee estimates to fee_estimates.dat.
+2025-07-22T13:35:53Z Potential stale tip detected, will try using extra outbound peer (last tip update: 6734 seconds ago)
+2025-07-22T13:46:03Z Potential stale tip detected, will try using extra outbound peer (last tip update: 7344 seconds ago)
+2025-07-22T13:56:13Z Potential stale tip detected, will try using extra outbound peer (last tip update: 7954 seconds ago)
+2025-07-22T14:06:23Z Potential stale tip detected, will try using extra outbound peer (last tip update: 8564 seconds ago)
+2025-07-22T14:16:35Z Potential stale tip detected, will try using extra outbound peer (last tip update: 9176 seconds ago)
+2025-07-22T14:26:46Z Potential stale tip detected, will try using extra outbound peer (last tip update: 9787 seconds ago)
+2025-07-22T14:28:12Z Flushed fee estimates to fee_estimates.dat.
+2025-07-22T14:36:57Z Potential stale tip detected, will try using extra outbound peer (last tip update: 10398 seconds ago)
+2025-07-22T14:47:09Z Potential stale tip detected, will try using extra outbound peer (last tip update: 11010 seconds ago)
+2025-07-22T14:57:20Z Potential stale tip detected, will try using extra outbound peer (last tip update: 11621 seconds ago)
+2025-07-22T15:07:32Z Potential stale tip detected, will try using extra outbound peer (last tip update: 12233 seconds ago)
+2025-07-22T15:17:43Z Potential stale tip detected, will try using extra outbound peer (last tip update: 12844 seconds ago)
+2025-07-22T15:26:28Z Flushed fee estimates to fee_estimates.dat.
+2025-07-22T15:27:56Z Potential stale tip detected, will try using extra outbound peer (last tip update: 13457 seconds ago)
+2025-07-22T15:38:08Z Potential stale tip detected, will try using extra outbound peer (last tip update: 14069 seconds ago)
+2025-07-22T15:48:21Z Potential stale tip detected, will try using extra outbound peer (last tip update: 14682 seconds ago)
+2025-07-22T15:58:33Z Potential stale tip detected, will try using extra outbound peer (last tip update: 15294 seconds ago)
+2025-07-22T16:09:11Z Potential stale tip detected, will try using extra outbound peer (last tip update: 15932 seconds ago)
+2025-07-22T16:19:15Z Potential stale tip detected, will try using extra outbound peer (last tip update: 16536 seconds ago)
+2025-07-22T16:27:48Z Flushed fee estimates to fee_estimates.dat.
+2025-07-22T16:29:57Z Potential stale tip detected, will try using extra outbound peer (last tip update: 17178 seconds ago)
+2025-07-22T16:40:39Z Potential stale tip detected, will try using extra outbound peer (last tip update: 17820 seconds ago)
+2025-07-22T16:51:20Z Potential stale tip detected, will try using extra outbound peer (last tip update: 18461 seconds ago)
+2025-07-22T17:02:02Z Potential stale tip detected, will try using extra outbound peer (last tip update: 19103 seconds ago)
+2025-07-22T17:18:37Z Potential stale tip detected, will try using extra outbound peer (last tip update: 20098 seconds ago)
+2025-07-22T17:29:19Z Potential stale tip detected, will try using extra outbound peer (last tip update: 20740 seconds ago)
+2025-07-22T17:34:26Z Flushed fee estimates to fee_estimates.dat.
+2025-07-22T17:54:10Z Potential stale tip detected, will try using extra outbound peer (last tip update: 22231 seconds ago)
+2025-07-22T18:04:26Z Potential stale tip detected, will try using extra outbound peer (last tip update: 22847 seconds ago)
+2025-07-22T18:14:44Z Potential stale tip detected, will try using extra outbound peer (last tip update: 23465 seconds ago)
+2025-07-22T18:25:10Z Potential stale tip detected, will try using extra outbound peer (last tip update: 24091 seconds ago)
+2025-07-22T18:35:34Z Potential stale tip detected, will try using extra outbound peer (last tip update: 24715 seconds ago)
+2025-07-22T18:45:52Z Potential stale tip detected, will try using extra outbound peer (last tip update: 25333 seconds ago)
+2025-07-22T18:48:05Z Flushed fee estimates to fee_estimates.dat.
+2025-07-22T18:56:09Z Potential stale tip detected, will try using extra outbound peer (last tip update: 25950 seconds ago)
+2025-07-22T19:06:24Z Potential stale tip detected, will try using extra outbound peer (last tip update: 26565 seconds ago)
+2025-07-22T19:16:43Z Potential stale tip detected, will try using extra outbound peer (last tip update: 27184 seconds ago)
+2025-07-22T19:26:55Z Potential stale tip detected, will try using extra outbound peer (last tip update: 27796 seconds ago)
+2025-07-22T19:37:06Z Potential stale tip detected, will try using extra outbound peer (last tip update: 28407 seconds ago)
+2025-07-22T19:46:31Z Flushed fee estimates to fee_estimates.dat.
+2025-07-22T19:47:16Z Potential stale tip detected, will try using extra outbound peer (last tip update: 29017 seconds ago)
+2025-07-22T19:57:27Z Potential stale tip detected, will try using extra outbound peer (last tip update: 29628 seconds ago)
+2025-07-22T20:07:38Z Potential stale tip detected, will try using extra outbound peer (last tip update: 30239 seconds ago)
+2025-07-22T20:17:49Z Potential stale tip detected, will try using extra outbound peer (last tip update: 30850 seconds ago)
+2025-07-22T20:28:00Z Potential stale tip detected, will try using extra outbound peer (last tip update: 31461 seconds ago)
+2025-07-22T20:38:09Z Potential stale tip detected, will try using extra outbound peer (last tip update: 32070 seconds ago)
+2025-07-22T20:44:40Z Flushed fee estimates to fee_estimates.dat.
+2025-07-22T20:48:20Z Potential stale tip detected, will try using extra outbound peer (last tip update: 32681 seconds ago)
+2025-07-22T20:58:31Z Potential stale tip detected, will try using extra outbound peer (last tip update: 33292 seconds ago)
+2025-07-22T21:08:42Z Potential stale tip detected, will try using extra outbound peer (last tip update: 33903 seconds ago)
+2025-07-22T21:18:55Z Potential stale tip detected, will try using extra outbound peer (last tip update: 34516 seconds ago)
+2025-07-22T21:29:06Z Potential stale tip detected, will try using extra outbound peer (last tip update: 35127 seconds ago)
+2025-07-22T21:39:18Z Potential stale tip detected, will try using extra outbound peer (last tip update: 35739 seconds ago)
+2025-07-22T21:42:55Z Flushed fee estimates to fee_estimates.dat.
+2025-07-22T21:49:31Z Potential stale tip detected, will try using extra outbound peer (last tip update: 36352 seconds ago)
+2025-07-22T21:59:44Z Potential stale tip detected, will try using extra outbound peer (last tip update: 36965 seconds ago)
+2025-07-22T22:09:58Z Potential stale tip detected, will try using extra outbound peer (last tip update: 37579 seconds ago)
+2025-07-22T22:20:14Z Potential stale tip detected, will try using extra outbound peer (last tip update: 38195 seconds ago)
+2025-07-23T01:09:37Z Potential stale tip detected, will try using extra outbound peer (last tip update: 48358 seconds ago)
+2025-07-23T01:19:42Z Potential stale tip detected, will try using extra outbound peer (last tip update: 48963 seconds ago)
+2025-07-23T01:23:59Z Flushed fee estimates to fee_estimates.dat.
+2025-07-23T01:29:45Z Potential stale tip detected, will try using extra outbound peer (last tip update: 49566 seconds ago)
+2025-07-23T01:40:27Z Potential stale tip detected, will try using extra outbound peer (last tip update: 50208 seconds ago)
+2025-07-23T01:51:08Z Potential stale tip detected, will try using extra outbound peer (last tip update: 50849 seconds ago)
+2025-07-23T02:01:47Z Potential stale tip detected, will try using extra outbound peer (last tip update: 51488 seconds ago)
+2025-07-23T02:12:26Z Potential stale tip detected, will try using extra outbound peer (last tip update: 52127 seconds ago)
+2025-07-23T02:20:56Z Flushed fee estimates to fee_estimates.dat.
+2025-07-23T02:23:06Z Potential stale tip detected, will try using extra outbound peer (last tip update: 52767 seconds ago)
+2025-07-23T02:33:44Z Potential stale tip detected, will try using extra outbound peer (last tip update: 53405 seconds ago)
+2025-07-23T02:43:47Z Potential stale tip detected, will try using extra outbound peer (last tip update: 54008 seconds ago)
+2025-07-23T02:54:12Z Potential stale tip detected, will try using extra outbound peer (last tip update: 54633 seconds ago)
+2025-07-23T03:04:42Z Potential stale tip detected, will try using extra outbound peer (last tip update: 55263 seconds ago)
+2025-07-23T03:15:12Z Potential stale tip detected, will try using extra outbound peer (last tip update: 55893 seconds ago)
+2025-07-23T03:19:40Z Flushed fee estimates to fee_estimates.dat.
+2025-07-23T03:25:42Z Potential stale tip detected, will try using extra outbound peer (last tip update: 56523 seconds ago)
+2025-07-23T03:36:12Z Potential stale tip detected, will try using extra outbound peer (last tip update: 57153 seconds ago)
+2025-07-23T03:46:42Z Potential stale tip detected, will try using extra outbound peer (last tip update: 57783 seconds ago)
+2025-07-23T03:57:12Z Potential stale tip detected, will try using extra outbound peer (last tip update: 58413 seconds ago)
+2025-07-23T04:07:42Z Potential stale tip detected, will try using extra outbound peer (last tip update: 59043 seconds ago)
+2025-07-23T04:18:12Z Potential stale tip detected, will try using extra outbound peer (last tip update: 59673 seconds ago)
+2025-07-23T04:19:40Z Flushed fee estimates to fee_estimates.dat.
+2025-07-23T04:28:42Z Potential stale tip detected, will try using extra outbound peer (last tip update: 60303 seconds ago)
+2025-07-23T04:39:12Z Potential stale tip detected, will try using extra outbound peer (last tip update: 60933 seconds ago)
+2025-07-23T04:49:43Z Potential stale tip detected, will try using extra outbound peer (last tip update: 61564 seconds ago)
+2025-07-23T05:00:13Z Potential stale tip detected, will try using extra outbound peer (last tip update: 62194 seconds ago)
+2025-07-23T05:10:43Z Potential stale tip detected, will try using extra outbound peer (last tip update: 62824 seconds ago)
+2025-07-23T05:19:40Z Flushed fee estimates to fee_estimates.dat.
+2025-07-23T05:21:13Z Potential stale tip detected, will try using extra outbound peer (last tip update: 63454 seconds ago)
+2025-07-23T05:31:43Z Potential stale tip detected, will try using extra outbound peer (last tip update: 64084 seconds ago)
+2025-07-23T05:42:13Z Potential stale tip detected, will try using extra outbound peer (last tip update: 64714 seconds ago)
+2025-07-23T05:52:43Z Potential stale tip detected, will try using extra outbound peer (last tip update: 65344 seconds ago)
+2025-07-23T06:03:13Z Potential stale tip detected, will try using extra outbound peer (last tip update: 65974 seconds ago)
+2025-07-23T06:13:43Z Potential stale tip detected, will try using extra outbound peer (last tip update: 66604 seconds ago)
+2025-07-23T06:19:40Z Flushed fee estimates to fee_estimates.dat.
+2025-07-23T06:24:13Z Potential stale tip detected, will try using extra outbound peer (last tip update: 67234 seconds ago)
+2025-07-23T06:34:43Z Potential stale tip detected, will try using extra outbound peer (last tip update: 67864 seconds ago)
+2025-07-23T06:45:13Z Potential stale tip detected, will try using extra outbound peer (last tip update: 68494 seconds ago)
+2025-07-23T06:55:43Z Potential stale tip detected, will try using extra outbound peer (last tip update: 69124 seconds ago)
+2025-07-23T07:06:13Z Potential stale tip detected, will try using extra outbound peer (last tip update: 69754 seconds ago)
+2025-07-23T07:16:43Z Potential stale tip detected, will try using extra outbound peer (last tip update: 70384 seconds ago)
+2025-07-23T07:19:40Z Flushed fee estimates to fee_estimates.dat.
+2025-07-23T07:27:13Z Potential stale tip detected, will try using extra outbound peer (last tip update: 71014 seconds ago)
+2025-07-23T07:37:43Z Potential stale tip detected, will try using extra outbound peer (last tip update: 71644 seconds ago)
+2025-07-23T07:43:49Z tor: Thread interrupt
+2025-07-23T07:43:49Z addcon thread exit
+2025-07-23T07:43:49Z opencon thread exit
+2025-07-23T07:43:49Z torcontrol thread exit
+2025-07-23T07:43:49Z Shutdown: In progress...
+2025-07-23T07:43:49Z msghand thread exit
+2025-07-23T07:43:49Z net thread exit
+2025-07-23T07:43:49Z DumpAnchors: Flush 0 outbound block-relay-only peer addresses to anchors.dat started
+2025-07-23T07:43:49Z DumpAnchors: Flush 0 outbound block-relay-only peer addresses to anchors.dat completed (0.01s)
+2025-07-23T07:43:49Z scheduler thread exit
+2025-07-23T07:43:49Z Writing 0 mempool transactions to file...
+2025-07-23T07:43:49Z Writing 0 unbroadcast transactions to file.
+2025-07-23T07:43:49Z Dumped mempool: 0.001s to copy, 0.007s to dump, 27 bytes dumped to file
+2025-07-23T07:43:49Z Flushed fee estimates to fee_estimates.dat.
+2025-07-23T07:43:49Z Shutdown: done
+
+
+
+
+
+2025-07-23T09:00:24Z Bitcoin Core version v28.1.0 (release build)
+2025-07-23T09:00:24Z Script verification uses 7 additional threads
+2025-07-23T09:00:24Z Using the 'sse4(1way),sse41(4way),avx2(8way)' SHA256 implementation
+2025-07-23T09:00:24Z Using RdSeed as an additional entropy source
+2025-07-23T09:00:24Z Using RdRand as an additional entropy source
+2025-07-23T09:00:24Z Default data directory /home/pavki/.bitcoin
+2025-07-23T09:00:24Z Using data directory /home/pavki/bitpesa/bitcoin_data/regtest
+2025-07-23T09:00:24Z Config file: /home/pavki/bitpesa/bitcoin.conf
+2025-07-23T09:00:24Z Config file arg: regtest="1"
+2025-07-23T09:00:24Z Config file arg: rpcauth=****
+2025-07-23T09:00:24Z Config file arg: rpcpassword=****
+2025-07-23T09:00:24Z Config file arg: rpcuser=****
+2025-07-23T09:00:24Z Config file arg: txindex="1"
+2025-07-23T09:00:24Z Command-line arg: conf="/home/pavki/bitpesa/bitcoin.conf"
+2025-07-23T09:00:24Z Command-line arg: datadir="/home/pavki/bitpesa/bitcoin_data"
+2025-07-23T09:00:24Z Command-line arg: port="18444"
+2025-07-23T09:00:24Z Using at most 125 automatic connections (10240 file descriptors available)
+2025-07-23T09:00:24Z scheduler thread start
+2025-07-23T09:00:24Z Binding RPC on address ::1 port 18443
+2025-07-23T09:00:24Z Binding RPC on address 127.0.0.1 port 18443
+2025-07-23T09:00:24Z Config options rpcuser and rpcpassword will soon be deprecated. Locally-run instances may remove rpcuser to use cookie-based auth, or may be replaced with rpcauth. Please see share/rpcauth for rpcauth auth generation.
+2025-07-23T09:00:24Z Using rpcauth authentication.
+2025-07-23T09:00:24Z Starting HTTP server with 4 worker threads
+2025-07-23T09:00:24Z Using wallet directory /home/pavki/bitpesa/bitcoin_data/regtest/wallets
+2025-07-23T09:00:24Z init message: Verifying wallet(s)…
+2025-07-23T09:00:24Z Using /16 prefix for IP bucketing
+2025-07-23T09:00:24Z init message: Loading P2P addresses…
+2025-07-23T09:00:24Z Loaded 0 addresses from peers.dat  3ms
+2025-07-23T09:00:24Z init message: Loading banlist…
+2025-07-23T09:00:24Z SetNetworkActive: true
+2025-07-23T09:00:24Z Script verification uses 7 additional threads
+2025-07-23T09:00:24Z Cache configuration:
+2025-07-23T09:00:24Z * Using 2.0 MiB for block index database
+2025-07-23T09:00:24Z * Using 56.0 MiB for transaction index database
+2025-07-23T09:00:24Z * Using 8.0 MiB for chain state database
+2025-07-23T09:00:24Z * Using 384.0 MiB for in-memory UTXO set (plus up to 286.1 MiB of unused mempool space)
+2025-07-23T09:00:24Z Using obfuscation key for blocksdir *.dat files (/home/pavki/bitpesa/bitcoin_data/regtest/blocks): 'c98ff7e6e1fba2a9'
+2025-07-23T09:00:24Z Using 16 MiB out of 16 MiB requested for signature cache, able to store 524288 elements
+2025-07-23T09:00:25Z Using 16 MiB out of 16 MiB requested for script execution cache, able to store 524288 elements
+2025-07-23T09:00:25Z init message: Loading block index…
+2025-07-23T09:00:25Z Validating signatures for all blocks.
+2025-07-23T09:00:25Z Setting nMinimumChainWork=0000000000000000000000000000000000000000000000000000000000000000
+2025-07-23T09:00:25Z Opening LevelDB in /home/pavki/bitpesa/bitcoin_data/regtest/blocks/index
+2025-07-23T09:00:25Z Opened LevelDB successfully
+2025-07-23T09:00:25Z Using obfuscation key for /home/pavki/bitpesa/bitcoin_data/regtest/blocks/index: 0000000000000000
+2025-07-23T09:00:25Z LoadBlockIndexDB: last block file = 0
+2025-07-23T09:00:25Z LoadBlockIndexDB: last block file info: CBlockFileInfo(blocks=4, size=1070, heights=0...3, time=2011-02-02...2025-07-22)
+2025-07-23T09:00:25Z Checking all blk files are present...
+2025-07-23T09:00:25Z Initializing chainstate Chainstate [ibd] @ height -1 (null)
+2025-07-23T09:00:25Z Opening LevelDB in /home/pavki/bitpesa/bitcoin_data/regtest/chainstate
+2025-07-23T09:00:25Z Opened LevelDB successfully
+2025-07-23T09:00:25Z Using obfuscation key for /home/pavki/bitpesa/bitcoin_data/regtest/chainstate: bd75432f146ac156
+2025-07-23T09:00:25Z Loaded best chain: hashBestChain=185aebaf93ddfd985179491698876d42e4071bb0f9f3225184079616863a1ac3 height=3 date=2025-07-22T11:43:40Z progress=1.000000
+2025-07-23T09:00:25Z Opening LevelDB in /home/pavki/bitpesa/bitcoin_data/regtest/chainstate
+2025-07-23T09:00:25Z Opened LevelDB successfully
+2025-07-23T09:00:25Z Using obfuscation key for /home/pavki/bitpesa/bitcoin_data/regtest/chainstate: bd75432f146ac156
+2025-07-23T09:00:25Z [Chainstate [ibd] @ height 3 (185aebaf93ddfd985179491698876d42e4071bb0f9f3225184079616863a1ac3)] resized coinsdb cache to 8.0 MiB
+2025-07-23T09:00:25Z [Chainstate [ibd] @ height 3 (185aebaf93ddfd985179491698876d42e4071bb0f9f3225184079616863a1ac3)] resized coinstip cache to 384.0 MiB
+2025-07-23T09:00:25Z init message: Verifying blocks…
+2025-07-23T09:00:25Z Verifying last 3 blocks at level 3
+2025-07-23T09:00:25Z Verification progress: 0%
+2025-07-23T09:00:25Z Verification progress: 33%
+2025-07-23T09:00:25Z Verification progress: 66%
+2025-07-23T09:00:25Z Verification: No coin database inconsistencies in last 3 blocks (3 transactions)
+2025-07-23T09:00:25Z  block index             113ms
+2025-07-23T09:00:25Z Opening LevelDB in /home/pavki/bitpesa/bitcoin_data/regtest/indexes/txindex
+2025-07-23T09:00:25Z Opened LevelDB successfully
+2025-07-23T09:00:25Z Using obfuscation key for /home/pavki/bitpesa/bitcoin_data/regtest/indexes/txindex: 0000000000000000
+2025-07-23T09:00:25Z Setting NODE_NETWORK on non-prune mode
+2025-07-23T09:00:25Z block tree size = 4
+2025-07-23T09:00:25Z nBestHeight = 3
+2025-07-23T09:00:25Z initload thread start
+2025-07-23T09:00:25Z torcontrol thread start
+2025-07-23T09:00:25Z txindex thread start
+2025-07-23T09:00:25Z txindex is enabled at height 3
+2025-07-23T09:00:25Z txindex thread exit
+2025-07-23T09:00:25Z Bound to 127.0.0.1:18445
+2025-07-23T09:00:25Z Bound to [::]:18444
+2025-07-23T09:00:25Z Loading 0 mempool transactions from file...
+2025-07-23T09:00:25Z Imported mempool transactions from file: 0 succeeded, 0 failed, 0 expired, 0 already there, 0 waiting for initial broadcast
+2025-07-23T09:00:25Z initload thread exit
+2025-07-23T09:00:25Z Bound to 0.0.0.0:18444
+2025-07-23T09:00:25Z Loaded 0 addresses from "anchors.dat"
+2025-07-23T09:00:25Z 0 block-relay-only anchors will be tried for connections.
+2025-07-23T09:00:25Z init message: Starting network threads…
+2025-07-23T09:00:25Z net thread start
+2025-07-23T09:00:25Z dnsseed thread start
+2025-07-23T09:00:25Z Loading addresses from DNS seed dummySeed.invalid.
+2025-07-23T09:00:25Z addcon thread start
+2025-07-23T09:00:25Z opencon thread start
+2025-07-23T09:00:25Z init message: Done loading
+2025-07-23T09:00:25Z msghand thread start
+2025-07-23T09:00:45Z 0 addresses found from DNS seeds
+2025-07-23T09:00:45Z dnsseed thread exit
+2025-07-23T09:01:05Z Leaving InitialBlockDownload (latching to false)
+2025-07-23T09:01:26Z Adding fixed seeds as 60 seconds have passed and addrman is empty for at least one reachable network
+2025-07-23T09:01:26Z Added 0 fixed seeds from reachable networks.
+2025-07-23T09:33:13Z Potential stale tip detected, will try using extra outbound peer (last tip update: 1923 seconds ago)
+2025-07-23T09:36:47Z CreateNewBlock(): block weight: 896 txs: 0 fees: 0 sigops 400
+2025-07-23T09:36:47Z Saw new header hash=695643694151b7d02c78f502843a5b9e69aacc9f7f77de795e454eb2cb5ee1ac height=4
+2025-07-23T09:36:47Z UpdateTip: new best=695643694151b7d02c78f502843a5b9e69aacc9f7f77de795e454eb2cb5ee1ac height=4 version=0x20000000 log2_work=3.321928 tx=5 date='2025-07-23T09:36:47Z' progress=1.000000 cache=0.3MiB(1txo)
+2025-07-23T09:36:47Z CreateNewBlock(): block weight: 896 txs: 0 fees: 0 sigops 400
+2025-07-23T09:36:47Z Saw new header hash=5a977ffd858fec911466d81d1d1f0915dd380c679f31e10cb3e028848d0f144b height=5
+2025-07-23T09:36:47Z UpdateTip: new best=5a977ffd858fec911466d81d1d1f0915dd380c679f31e10cb3e028848d0f144b height=5 version=0x20000000 log2_work=3.584963 tx=6 date='2025-07-23T09:36:47Z' progress=1.000000 cache=0.3MiB(2txo)
+2025-07-23T09:36:47Z CreateNewBlock(): block weight: 896 txs: 0 fees: 0 sigops 400
+2025-07-23T09:36:47Z Saw new header hash=217b4c218aab622952f6427db1ebe04225f9f4a1735406350dca35fe199032af height=6
+2025-07-23T09:36:47Z UpdateTip: new best=217b4c218aab622952f6427db1ebe04225f9f4a1735406350dca35fe199032af height=6 version=0x20000000 log2_work=3.807355 tx=7 date='2025-07-23T09:36:47Z' progress=1.000000 cache=0.3MiB(3txo)
+2025-07-23T09:36:47Z CreateNewBlock(): block weight: 896 txs: 0 fees: 0 sigops 400
+2025-07-23T09:36:47Z Saw new header hash=1308417a4ea33aeea1ec036330e3033b63fc7900e95aa4a6c5337334ba82223b height=7
+2025-07-23T09:36:47Z UpdateTip: new best=1308417a4ea33aeea1ec036330e3033b63fc7900e95aa4a6c5337334ba82223b height=7 version=0x20000000 log2_work=4.000000 tx=8 date='2025-07-23T09:36:47Z' progress=1.000000 cache=0.3MiB(4txo)
+2025-07-23T10:01:28Z Flushed fee estimates to fee_estimates.dat.
+2025-07-23T10:16:01Z Potential stale tip detected, will try using extra outbound peer (last tip update: 2354 seconds ago)
+2025-07-23T10:26:44Z Potential stale tip detected, will try using extra outbound peer (last tip update: 2997 seconds ago)
+2025-07-23T10:37:27Z Potential stale tip detected, will try using extra outbound peer (last tip update: 3640 seconds ago)
+2025-07-23T10:48:12Z Potential stale tip detected, will try using extra outbound peer (last tip update: 4285 seconds ago)
+2025-07-23T10:58:48Z Potential stale tip detected, will try using extra outbound peer (last tip update: 4921 seconds ago)
+2025-07-23T11:04:00Z Flushed fee estimates to fee_estimates.dat.
+2025-07-23T11:09:15Z Potential stale tip detected, will try using extra outbound peer (last tip update: 5548 seconds ago)
+2025-07-23T11:19:39Z Potential stale tip detected, will try using extra outbound peer (last tip update: 6172 seconds ago)
+2025-07-23T11:29:58Z Potential stale tip detected, will try using extra outbound peer (last tip update: 6791 seconds ago)
+2025-07-23T11:40:16Z Potential stale tip detected, will try using extra outbound peer (last tip update: 7409 seconds ago)
+2025-07-23T11:50:37Z Potential stale tip detected, will try using extra outbound peer (last tip update: 8030 seconds ago)
+2025-07-23T11:52:21Z CreateNewBlock(): block weight: 896 txs: 0 fees: 0 sigops 400
+2025-07-23T11:52:21Z Saw new header hash=651ce4e02b82c18531fdfa594cbb23817bc2e4039706217b736cc8b46f0a9dae height=8
+2025-07-23T11:52:21Z UpdateTip: new best=651ce4e02b82c18531fdfa594cbb23817bc2e4039706217b736cc8b46f0a9dae height=8 version=0x20000000 log2_work=4.169925 tx=9 date='2025-07-23T11:52:21Z' progress=1.000000 cache=0.3MiB(5txo)
+2025-07-23T11:52:21Z CreateNewBlock(): block weight: 896 txs: 0 fees: 0 sigops 400
+2025-07-23T11:52:21Z Saw new header hash=21f4efb571d5187dddceec0978cede4a80ef4fcc3f7c0e16c1c90d7608b4772b height=9
+2025-07-23T11:52:21Z UpdateTip: new best=21f4efb571d5187dddceec0978cede4a80ef4fcc3f7c0e16c1c90d7608b4772b height=9 version=0x20000000 log2_work=4.321928 tx=10 date='2025-07-23T11:52:21Z' progress=1.000000 cache=0.3MiB(6txo)
+2025-07-23T11:52:21Z CreateNewBlock(): block weight: 896 txs: 0 fees: 0 sigops 400
+2025-07-23T11:52:21Z Saw new header hash=4baf78e6f6f1579c64be0d70af679b3b7de40b7ec0731fc0a318153ae3150add height=10
+2025-07-23T11:52:21Z UpdateTip: new best=4baf78e6f6f1579c64be0d70af679b3b7de40b7ec0731fc0a318153ae3150add height=10 version=0x20000000 log2_work=4.459432 tx=11 date='2025-07-23T11:52:21Z' progress=1.000000 cache=0.3MiB(7txo)
+2025-07-23T11:52:21Z CreateNewBlock(): block weight: 896 txs: 0 fees: 0 sigops 400
+2025-07-23T11:52:21Z Saw new header hash=582a8485eaa7f24fe7e268b3812ec938953a441a9c0b92dc1d1a2b6c6c00f616 height=11
+2025-07-23T11:52:21Z UpdateTip: new best=582a8485eaa7f24fe7e268b3812ec938953a441a9c0b92dc1d1a2b6c6c00f616 height=11 version=0x20000000 log2_work=4.584963 tx=12 date='2025-07-23T11:52:21Z' progress=1.000000 cache=0.3MiB(8txo)
+2025-07-23T12:03:07Z Flushed fee estimates to fee_estimates.dat.
+2025-07-23T12:31:50Z Potential stale tip detected, will try using extra outbound peer (last tip update: 2369 seconds ago)
+2025-07-23T12:42:13Z Potential stale tip detected, will try using extra outbound peer (last tip update: 2992 seconds ago)
+2025-07-23T12:52:40Z Potential stale tip detected, will try using extra outbound peer (last tip update: 3619 seconds ago)
+2025-07-23T13:02:22Z Flushed fee estimates to fee_estimates.dat.
+2025-07-23T13:03:07Z Potential stale tip detected, will try using extra outbound peer (last tip update: 4246 seconds ago)
+2025-07-23T13:13:27Z Potential stale tip detected, will try using extra outbound peer (last tip update: 4866 seconds ago)
+2025-07-23T13:23:53Z Potential stale tip detected, will try using extra outbound peer (last tip update: 5492 seconds ago)
+2025-07-23T13:34:17Z Potential stale tip detected, will try using extra outbound peer (last tip update: 6116 seconds ago)
+2025-07-23T13:44:38Z Potential stale tip detected, will try using extra outbound peer (last tip update: 6737 seconds ago)
+2025-07-23T13:55:07Z Potential stale tip detected, will try using extra outbound peer (last tip update: 7366 seconds ago)
+2025-07-23T14:01:45Z Flushed fee estimates to fee_estimates.dat.
+2025-07-23T14:05:28Z Potential stale tip detected, will try using extra outbound peer (last tip update: 7987 seconds ago)
+2025-07-23T14:15:47Z Potential stale tip detected, will try using extra outbound peer (last tip update: 8606 seconds ago)
+2025-07-23T14:26:06Z Potential stale tip detected, will try using extra outbound peer (last tip update: 9225 seconds ago)
+2025-07-23T14:36:25Z Potential stale tip detected, will try using extra outbound peer (last tip update: 9844 seconds ago)
+2025-07-23T23:04:58Z Potential stale tip detected, will try using extra outbound peer (last tip update: 40357 seconds ago)
+2025-07-23T23:15:27Z Potential stale tip detected, will try using extra outbound peer (last tip update: 40986 seconds ago)
+2025-07-23T23:20:40Z Flushed fee estimates to fee_estimates.dat.
+2025-07-23T23:25:55Z Potential stale tip detected, will try using extra outbound peer (last tip update: 41614 seconds ago)
+2025-07-23T23:36:25Z Potential stale tip detected, will try using extra outbound peer (last tip update: 42244 seconds ago)
+2025-07-23T23:46:53Z Potential stale tip detected, will try using extra outbound peer (last tip update: 42872 seconds ago)
+2025-07-23T23:57:23Z Potential stale tip detected, will try using extra outbound peer (last tip update: 43502 seconds ago)
+2025-07-24T01:02:25Z Potential stale tip detected, will try using extra outbound peer (last tip update: 47404 seconds ago)
+2025-07-24T01:12:29Z Potential stale tip detected, will try using extra outbound peer (last tip update: 48008 seconds ago)
+2025-07-24T01:21:46Z Flushed fee estimates to fee_estimates.dat.
+2025-07-24T01:23:12Z Potential stale tip detected, will try using extra outbound peer (last tip update: 48651 seconds ago)
+2025-07-24T01:37:48Z Potential stale tip detected, will try using extra outbound peer (last tip update: 49527 seconds ago)
+2025-07-24T01:47:55Z Potential stale tip detected, will try using extra outbound peer (last tip update: 50134 seconds ago)
+2025-07-24T01:58:01Z Potential stale tip detected, will try using extra outbound peer (last tip update: 50740 seconds ago)
+2025-07-24T02:08:02Z Potential stale tip detected, will try using extra outbound peer (last tip update: 51341 seconds ago)
+2025-07-24T02:18:04Z Potential stale tip detected, will try using extra outbound peer (last tip update: 51943 seconds ago)
+2025-07-24T02:28:48Z Potential stale tip detected, will try using extra outbound peer (last tip update: 52587 seconds ago)
+2025-07-24T02:30:12Z Flushed fee estimates to fee_estimates.dat.
+2025-07-24T02:38:49Z Potential stale tip detected, will try using extra outbound peer (last tip update: 53188 seconds ago)
+2025-07-24T02:49:32Z Potential stale tip detected, will try using extra outbound peer (last tip update: 53831 seconds ago)
+2025-07-24T03:00:15Z Potential stale tip detected, will try using extra outbound peer (last tip update: 54474 seconds ago)
+2025-07-24T03:10:58Z Potential stale tip detected, will try using extra outbound peer (last tip update: 55117 seconds ago)
+2025-07-24T03:21:41Z Potential stale tip detected, will try using extra outbound peer (last tip update: 55760 seconds ago)
+2025-07-24T03:27:22Z Flushed fee estimates to fee_estimates.dat.
+2025-07-24T03:32:23Z Potential stale tip detected, will try using extra outbound peer (last tip update: 56402 seconds ago)
+2025-07-24T06:12:54Z Potential stale tip detected, will try using extra outbound peer (last tip update: 66033 seconds ago)
+2025-07-24T06:23:31Z Potential stale tip detected, will try using extra outbound peer (last tip update: 66670 seconds ago)
+2025-07-24T06:33:34Z Potential stale tip detected, will try using extra outbound peer (last tip update: 67273 seconds ago)
+2025-07-24T06:43:43Z Potential stale tip detected, will try using extra outbound peer (last tip update: 67882 seconds ago)
+2025-07-24T06:54:24Z Potential stale tip detected, will try using extra outbound peer (last tip update: 68523 seconds ago)
+2025-07-24T07:04:26Z Flushed fee estimates to fee_estimates.dat.
+2025-07-24T07:04:27Z Potential stale tip detected, will try using extra outbound peer (last tip update: 69126 seconds ago)
+2025-07-24T07:14:32Z Potential stale tip detected, will try using extra outbound peer (last tip update: 69731 seconds ago)
+2025-07-24T07:24:33Z Potential stale tip detected, will try using extra outbound peer (last tip update: 70332 seconds ago)
+2025-07-24T07:35:15Z Potential stale tip detected, will try using extra outbound peer (last tip update: 70974 seconds ago)
+2025-07-24T07:45:53Z Potential stale tip detected, will try using extra outbound peer (last tip update: 71612 seconds ago)
+2025-07-24T07:56:27Z Potential stale tip detected, will try using extra outbound peer (last tip update: 72246 seconds ago)
+2025-07-24T08:01:23Z Flushed fee estimates to fee_estimates.dat.
+2025-07-24T08:19:11Z Potential stale tip detected, will try using extra outbound peer (last tip update: 73610 seconds ago)
+2025-07-24T08:29:54Z Potential stale tip detected, will try using extra outbound peer (last tip update: 74253 seconds ago)
+2025-07-24T08:42:06Z Potential stale tip detected, will try using extra outbound peer (last tip update: 74985 seconds ago)
+2025-07-24T08:52:46Z Potential stale tip detected, will try using extra outbound peer (last tip update: 75625 seconds ago)
+2025-07-24T09:06:49Z Potential stale tip detected, will try using extra outbound peer (last tip update: 76468 seconds ago)
+2025-07-24T09:11:31Z tor: Thread interrupt
+2025-07-24T09:11:31Z addcon thread exit
+2025-07-24T09:11:31Z opencon thread exit
+2025-07-24T09:11:31Z Shutdown: In progress...
+2025-07-24T09:11:31Z torcontrol thread exit
+2025-07-24T09:11:31Z net thread exit
+2025-07-24T09:11:31Z msghand thread exit
+2025-07-24T09:11:31Z DumpAnchors: Flush 0 outbound block-relay-only peer addresses to anchors.dat started
+2025-07-24T09:11:31Z DumpAnchors: Flush 0 outbound block-relay-only peer addresses to anchors.dat completed (0.02s)
+2025-07-24T09:11:31Z scheduler thread exit
+2025-07-24T09:11:31Z Writing 0 mempool transactions to file...
+2025-07-24T09:11:31Z Writing 0 unbroadcast transactions to file.
+2025-07-24T09:11:31Z Dumped mempool: 0.002s to copy, 0.018s to dump, 27 bytes dumped to file
+2025-07-24T09:11:31Z Flushed fee estimates to fee_estimates.dat.
+2025-07-24T09:11:31Z Shutdown: done
+
+
+
+
+
+2025-07-24T09:11:36Z Bitcoin Core version v28.1.0 (release build)
+2025-07-24T09:11:36Z Script verification uses 7 additional threads
+2025-07-24T09:11:36Z Using the 'sse4(1way),sse41(4way),avx2(8way)' SHA256 implementation
+2025-07-24T09:11:36Z Using RdSeed as an additional entropy source
+2025-07-24T09:11:36Z Using RdRand as an additional entropy source
+2025-07-24T09:11:36Z Default data directory /home/pavki/.bitcoin
+2025-07-24T09:11:36Z Using data directory /home/pavki/bitpesa/bitcoin_data/regtest
+2025-07-24T09:11:36Z Config file: /home/pavki/bitpesa/bitcoin.conf
+2025-07-24T09:11:36Z Config file arg: regtest="1"
+2025-07-24T09:11:36Z Config file arg: rpcauth=****
+2025-07-24T09:11:36Z Config file arg: rpcpassword=****
+2025-07-24T09:11:36Z Config file arg: rpcuser=****
+2025-07-24T09:11:36Z Config file arg: txindex="1"
+2025-07-24T09:11:36Z Command-line arg: conf="/home/pavki/bitpesa/bitcoin.conf"
+2025-07-24T09:11:36Z Command-line arg: datadir="/home/pavki/bitpesa/bitcoin_data"
+2025-07-24T09:11:36Z Command-line arg: port="18444"
+2025-07-24T09:11:36Z Using at most 125 automatic connections (10240 file descriptors available)
+2025-07-24T09:11:36Z scheduler thread start
+2025-07-24T09:11:36Z Binding RPC on address ::1 port 18443
+2025-07-24T09:11:36Z Binding RPC on address 127.0.0.1 port 18443
+2025-07-24T09:11:36Z Config options rpcuser and rpcpassword will soon be deprecated. Locally-run instances may remove rpcuser to use cookie-based auth, or may be replaced with rpcauth. Please see share/rpcauth for rpcauth auth generation.
+2025-07-24T09:11:36Z Using rpcauth authentication.
+2025-07-24T09:11:36Z Starting HTTP server with 4 worker threads
+2025-07-24T09:11:36Z Using wallet directory /home/pavki/bitpesa/bitcoin_data/regtest/wallets
+2025-07-24T09:11:36Z init message: Verifying wallet(s)…
+2025-07-24T09:11:36Z Using /16 prefix for IP bucketing
+2025-07-24T09:11:36Z init message: Loading P2P addresses…
+2025-07-24T09:11:36Z Loaded 0 addresses from peers.dat  1ms
+2025-07-24T09:11:36Z init message: Loading banlist…
+2025-07-24T09:11:36Z SetNetworkActive: true
+2025-07-24T09:11:36Z Script verification uses 7 additional threads
+2025-07-24T09:11:36Z Cache configuration:
+2025-07-24T09:11:36Z * Using 2.0 MiB for block index database
+2025-07-24T09:11:36Z * Using 56.0 MiB for transaction index database
+2025-07-24T09:11:36Z * Using 8.0 MiB for chain state database
+2025-07-24T09:11:36Z * Using 384.0 MiB for in-memory UTXO set (plus up to 286.1 MiB of unused mempool space)
+2025-07-24T09:11:36Z Using obfuscation key for blocksdir *.dat files (/home/pavki/bitpesa/bitcoin_data/regtest/blocks): 'c98ff7e6e1fba2a9'
+2025-07-24T09:11:37Z Using 16 MiB out of 16 MiB requested for signature cache, able to store 524288 elements
+2025-07-24T09:11:37Z Using 16 MiB out of 16 MiB requested for script execution cache, able to store 524288 elements
+2025-07-24T09:11:37Z init message: Loading block index…
+2025-07-24T09:11:37Z Validating signatures for all blocks.
+2025-07-24T09:11:37Z Setting nMinimumChainWork=0000000000000000000000000000000000000000000000000000000000000000
+2025-07-24T09:11:37Z Opening LevelDB in /home/pavki/bitpesa/bitcoin_data/regtest/blocks/index
+2025-07-24T09:11:37Z Opened LevelDB successfully
+2025-07-24T09:11:37Z Using obfuscation key for /home/pavki/bitpesa/bitcoin_data/regtest/blocks/index: 0000000000000000
+2025-07-24T09:11:37Z LoadBlockIndexDB: last block file = 0
+2025-07-24T09:11:37Z LoadBlockIndexDB: last block file info: CBlockFileInfo(blocks=12, size=3142, heights=0...11, time=2011-02-02...2025-07-23)
+2025-07-24T09:11:37Z Checking all blk files are present...
+2025-07-24T09:11:37Z Initializing chainstate Chainstate [ibd] @ height -1 (null)
+2025-07-24T09:11:37Z Opening LevelDB in /home/pavki/bitpesa/bitcoin_data/regtest/chainstate
+2025-07-24T09:11:37Z Opened LevelDB successfully
+2025-07-24T09:11:37Z Using obfuscation key for /home/pavki/bitpesa/bitcoin_data/regtest/chainstate: bd75432f146ac156
+2025-07-24T09:11:37Z Loaded best chain: hashBestChain=582a8485eaa7f24fe7e268b3812ec938953a441a9c0b92dc1d1a2b6c6c00f616 height=11 date=2025-07-23T11:52:21Z progress=1.000000
+2025-07-24T09:11:37Z Opening LevelDB in /home/pavki/bitpesa/bitcoin_data/regtest/chainstate
+2025-07-24T09:11:37Z Opened LevelDB successfully
+2025-07-24T09:11:37Z Using obfuscation key for /home/pavki/bitpesa/bitcoin_data/regtest/chainstate: bd75432f146ac156
+2025-07-24T09:11:37Z [Chainstate [ibd] @ height 11 (582a8485eaa7f24fe7e268b3812ec938953a441a9c0b92dc1d1a2b6c6c00f616)] resized coinsdb cache to 8.0 MiB
+2025-07-24T09:11:37Z [Chainstate [ibd] @ height 11 (582a8485eaa7f24fe7e268b3812ec938953a441a9c0b92dc1d1a2b6c6c00f616)] resized coinstip cache to 384.0 MiB
+2025-07-24T09:11:37Z init message: Verifying blocks…
+2025-07-24T09:11:37Z Verifying last 6 blocks at level 3
+2025-07-24T09:11:37Z Verification progress: 0%
+2025-07-24T09:11:37Z Verification progress: 16%
+2025-07-24T09:11:37Z Verification progress: 33%
+2025-07-24T09:11:37Z Verification progress: 50%
+2025-07-24T09:11:37Z Verification progress: 66%
+2025-07-24T09:11:37Z Verification progress: 83%
+2025-07-24T09:11:37Z Verification progress: 99%
+2025-07-24T09:11:37Z Verification: No coin database inconsistencies in last 6 blocks (6 transactions)
+2025-07-24T09:11:37Z  block index             176ms
+2025-07-24T09:11:37Z Opening LevelDB in /home/pavki/bitpesa/bitcoin_data/regtest/indexes/txindex
+2025-07-24T09:11:37Z Opened LevelDB successfully
+2025-07-24T09:11:37Z Using obfuscation key for /home/pavki/bitpesa/bitcoin_data/regtest/indexes/txindex: 0000000000000000
+2025-07-24T09:11:37Z Setting NODE_NETWORK on non-prune mode
+2025-07-24T09:11:37Z block tree size = 12
+2025-07-24T09:11:37Z nBestHeight = 11
+2025-07-24T09:11:37Z initload thread start
+2025-07-24T09:11:37Z torcontrol thread start
+2025-07-24T09:11:37Z Bound to 127.0.0.1:18445
+2025-07-24T09:11:37Z txindex thread start
+2025-07-24T09:11:37Z Loading 0 mempool transactions from file...
+2025-07-24T09:11:37Z txindex is enabled at height 11
+2025-07-24T09:11:37Z txindex thread exit
+2025-07-24T09:11:37Z Bound to [::]:18444
+2025-07-24T09:11:37Z Bound to 0.0.0.0:18444
+2025-07-24T09:11:37Z Imported mempool transactions from file: 0 succeeded, 0 failed, 0 expired, 0 already there, 0 waiting for initial broadcast
+2025-07-24T09:11:37Z Loaded 0 addresses from "anchors.dat"
+2025-07-24T09:11:37Z initload thread exit
+2025-07-24T09:11:37Z 0 block-relay-only anchors will be tried for connections.
+2025-07-24T09:11:37Z init message: Starting network threads…
+2025-07-24T09:11:37Z net thread start
+2025-07-24T09:11:37Z addcon thread start
+2025-07-24T09:11:37Z init message: Done loading
+2025-07-24T09:11:37Z dnsseed thread start
+2025-07-24T09:11:37Z Loading addresses from DNS seed dummySeed.invalid.
+2025-07-24T09:11:37Z opencon thread start
+2025-07-24T09:11:37Z msghand thread start
+2025-07-24T09:11:39Z 0 addresses found from DNS seeds
+2025-07-24T09:11:39Z dnsseed thread exit
+2025-07-24T09:11:57Z Leaving InitialBlockDownload (latching to false)
+2025-07-24T09:12:38Z Adding fixed seeds as 60 seconds have passed and addrman is empty for at least one reachable network
+2025-07-24T09:12:38Z Added 0 fixed seeds from reachable networks.
+2025-07-24T09:42:44Z Potential stale tip detected, will try using extra outbound peer (last tip update: 1823 seconds ago)
+2025-07-24T09:52:50Z Potential stale tip detected, will try using extra outbound peer (last tip update: 2429 seconds ago)
+2025-07-24T10:02:55Z Potential stale tip detected, will try using extra outbound peer (last tip update: 3034 seconds ago)
+2025-07-24T10:09:24Z Flushed fee estimates to fee_estimates.dat.
+2025-07-24T10:13:01Z Potential stale tip detected, will try using extra outbound peer (last tip update: 3640 seconds ago)
+2025-07-24T10:23:07Z Potential stale tip detected, will try using extra outbound peer (last tip update: 4246 seconds ago)
+2025-07-24T10:33:11Z Potential stale tip detected, will try using extra outbound peer (last tip update: 4850 seconds ago)
+2025-07-24T10:43:16Z Potential stale tip detected, will try using extra outbound peer (last tip update: 5455 seconds ago)
+2025-07-24T10:53:20Z Potential stale tip detected, will try using extra outbound peer (last tip update: 6059 seconds ago)
+2025-07-24T11:03:36Z Potential stale tip detected, will try using extra outbound peer (last tip update: 6675 seconds ago)
+2025-07-24T11:07:17Z Flushed fee estimates to fee_estimates.dat.
+2025-07-24T11:13:57Z Potential stale tip detected, will try using extra outbound peer (last tip update: 7296 seconds ago)
+2025-07-24T11:24:08Z Potential stale tip detected, will try using extra outbound peer (last tip update: 7907 seconds ago)
+2025-07-24T11:34:16Z Potential stale tip detected, will try using extra outbound peer (last tip update: 8515 seconds ago)
+2025-07-24T11:44:24Z Potential stale tip detected, will try using extra outbound peer (last tip update: 9123 seconds ago)
+2025-07-24T11:54:30Z Potential stale tip detected, will try using extra outbound peer (last tip update: 9729 seconds ago)
+2025-07-24T12:04:36Z Potential stale tip detected, will try using extra outbound peer (last tip update: 10335 seconds ago)
+2025-07-24T12:05:19Z Flushed fee estimates to fee_estimates.dat.
+2025-07-24T12:14:43Z Potential stale tip detected, will try using extra outbound peer (last tip update: 10942 seconds ago)
+2025-07-24T12:24:50Z Potential stale tip detected, will try using extra outbound peer (last tip update: 11549 seconds ago)
+2025-07-24T12:34:55Z Potential stale tip detected, will try using extra outbound peer (last tip update: 12154 seconds ago)
+2025-07-24T12:45:00Z Potential stale tip detected, will try using extra outbound peer (last tip update: 12759 seconds ago)
+2025-07-24T12:55:06Z Potential stale tip detected, will try using extra outbound peer (last tip update: 13365 seconds ago)
+2025-07-24T13:03:01Z Flushed fee estimates to fee_estimates.dat.
+2025-07-24T13:05:11Z Potential stale tip detected, will try using extra outbound peer (last tip update: 13970 seconds ago)
+2025-07-24T13:15:19Z Potential stale tip detected, will try using extra outbound peer (last tip update: 14578 seconds ago)
+2025-07-24T13:25:24Z Potential stale tip detected, will try using extra outbound peer (last tip update: 15183 seconds ago)
+2025-07-24T13:35:32Z Potential stale tip detected, will try using extra outbound peer (last tip update: 15791 seconds ago)
+2025-07-24T13:45:40Z Potential stale tip detected, will try using extra outbound peer (last tip update: 16399 seconds ago)
+2025-07-24T13:55:49Z Potential stale tip detected, will try using extra outbound peer (last tip update: 17008 seconds ago)
+2025-07-24T14:00:52Z Flushed fee estimates to fee_estimates.dat.
+2025-07-24T14:05:58Z Potential stale tip detected, will try using extra outbound peer (last tip update: 17617 seconds ago)
+2025-07-24T14:16:26Z Potential stale tip detected, will try using extra outbound peer (last tip update: 18245 seconds ago)
+2025-07-24T14:27:07Z Potential stale tip detected, will try using extra outbound peer (last tip update: 18886 seconds ago)
+2025-07-24T14:42:47Z Potential stale tip detected, will try using extra outbound peer (last tip update: 19826 seconds ago)
+2025-07-24T14:52:49Z Potential stale tip detected, will try using extra outbound peer (last tip update: 20428 seconds ago)
+2025-07-24T16:01:49Z Potential stale tip detected, will try using extra outbound peer (last tip update: 24568 seconds ago)
+2025-07-24T16:03:58Z Flushed fee estimates to fee_estimates.dat.
+2025-07-24T16:11:51Z Potential stale tip detected, will try using extra outbound peer (last tip update: 25170 seconds ago)
+2025-07-24T16:23:12Z Potential stale tip detected, will try using extra outbound peer (last tip update: 25851 seconds ago)
+2025-07-24T16:33:33Z Potential stale tip detected, will try using extra outbound peer (last tip update: 26472 seconds ago)
+2025-07-24T16:43:59Z Potential stale tip detected, will try using extra outbound peer (last tip update: 27098 seconds ago)
+2025-07-24T16:54:17Z Potential stale tip detected, will try using extra outbound peer (last tip update: 27716 seconds ago)
+2025-07-24T17:04:30Z Potential stale tip detected, will try using extra outbound peer (last tip update: 28329 seconds ago)
+2025-07-24T17:14:40Z Potential stale tip detected, will try using extra outbound peer (last tip update: 28939 seconds ago)
+2025-07-24T17:19:44Z Flushed fee estimates to fee_estimates.dat.
+2025-07-24T17:24:51Z Potential stale tip detected, will try using extra outbound peer (last tip update: 29550 seconds ago)
+2025-07-24T17:35:01Z Potential stale tip detected, will try using extra outbound peer (last tip update: 30160 seconds ago)
+2025-07-24T17:45:11Z Potential stale tip detected, will try using extra outbound peer (last tip update: 30770 seconds ago)
+2025-07-24T17:55:21Z Potential stale tip detected, will try using extra outbound peer (last tip update: 31380 seconds ago)
+2025-07-24T18:05:31Z Potential stale tip detected, will try using extra outbound peer (last tip update: 31990 seconds ago)
+2025-07-24T18:15:42Z Potential stale tip detected, will try using extra outbound peer (last tip update: 32601 seconds ago)
+2025-07-24T18:17:51Z Flushed fee estimates to fee_estimates.dat.
+2025-07-24T18:25:53Z Potential stale tip detected, will try using extra outbound peer (last tip update: 33212 seconds ago)
+2025-07-24T18:36:04Z Potential stale tip detected, will try using extra outbound peer (last tip update: 33823 seconds ago)
+2025-07-24T18:46:14Z Potential stale tip detected, will try using extra outbound peer (last tip update: 34433 seconds ago)
+2025-07-24T18:56:25Z Potential stale tip detected, will try using extra outbound peer (last tip update: 35044 seconds ago)
+2025-07-24T22:01:37Z Potential stale tip detected, will try using extra outbound peer (last tip update: 46156 seconds ago)
+2025-07-24T22:11:38Z Flushed fee estimates to fee_estimates.dat.
+2025-07-24T22:11:39Z Potential stale tip detected, will try using extra outbound peer (last tip update: 46758 seconds ago)
+2025-07-24T22:22:23Z Potential stale tip detected, will try using extra outbound peer (last tip update: 47402 seconds ago)
+2025-07-24T22:32:24Z Potential stale tip detected, will try using extra outbound peer (last tip update: 48003 seconds ago)
+2025-07-24T22:43:06Z Potential stale tip detected, will try using extra outbound peer (last tip update: 48645 seconds ago)
+2025-07-24T22:53:49Z Potential stale tip detected, will try using extra outbound peer (last tip update: 49288 seconds ago)
+2025-07-24T23:04:31Z Potential stale tip detected, will try using extra outbound peer (last tip update: 49930 seconds ago)
+2025-07-24T23:08:46Z Flushed fee estimates to fee_estimates.dat.
+2025-07-24T23:15:13Z Potential stale tip detected, will try using extra outbound peer (last tip update: 50572 seconds ago)
+2025-07-24T23:25:57Z Potential stale tip detected, will try using extra outbound peer (last tip update: 51216 seconds ago)
+2025-07-25T00:05:55Z Potential stale tip detected, will try using extra outbound peer (last tip update: 53614 seconds ago)
+2025-07-25T00:16:07Z Potential stale tip detected, will try using extra outbound peer (last tip update: 54226 seconds ago)
+2025-07-25T00:26:19Z Potential stale tip detected, will try using extra outbound peer (last tip update: 54838 seconds ago)
+2025-07-25T00:36:59Z Potential stale tip detected, will try using extra outbound peer (last tip update: 55478 seconds ago)
+2025-07-25T00:42:50Z Flushed fee estimates to fee_estimates.dat.
+2025-07-25T00:47:17Z Potential stale tip detected, will try using extra outbound peer (last tip update: 56096 seconds ago)
+2025-07-25T00:57:32Z Potential stale tip detected, will try using extra outbound peer (last tip update: 56711 seconds ago)
+2025-07-25T01:07:46Z Potential stale tip detected, will try using extra outbound peer (last tip update: 57325 seconds ago)
+2025-07-25T01:26:56Z Potential stale tip detected, will try using extra outbound peer (last tip update: 58475 seconds ago)
+2025-07-25T01:37:24Z Potential stale tip detected, will try using extra outbound peer (last tip update: 59103 seconds ago)
+2025-07-25T01:47:54Z Potential stale tip detected, will try using extra outbound peer (last tip update: 59733 seconds ago)
+2025-07-25T01:51:37Z Flushed fee estimates to fee_estimates.dat.
+2025-07-25T01:58:21Z Potential stale tip detected, will try using extra outbound peer (last tip update: 60360 seconds ago)
+2025-07-25T02:08:41Z Potential stale tip detected, will try using extra outbound peer (last tip update: 60980 seconds ago)
+2025-07-25T02:18:59Z Potential stale tip detected, will try using extra outbound peer (last tip update: 61598 seconds ago)
+2025-07-25T02:29:18Z Potential stale tip detected, will try using extra outbound peer (last tip update: 62217 seconds ago)
+2025-07-25T02:39:35Z Potential stale tip detected, will try using extra outbound peer (last tip update: 62834 seconds ago)
+2025-07-25T02:49:53Z Potential stale tip detected, will try using extra outbound peer (last tip update: 63452 seconds ago)
+2025-07-25T02:50:35Z Flushed fee estimates to fee_estimates.dat.
+2025-07-25T03:00:11Z Potential stale tip detected, will try using extra outbound peer (last tip update: 64070 seconds ago)
+2025-07-25T03:10:29Z Potential stale tip detected, will try using extra outbound peer (last tip update: 64688 seconds ago)
+2025-07-25T03:20:58Z Potential stale tip detected, will try using extra outbound peer (last tip update: 65317 seconds ago)
+2025-07-25T03:32:20Z Potential stale tip detected, will try using extra outbound peer (last tip update: 65999 seconds ago)
+2025-07-25T03:42:26Z Potential stale tip detected, will try using extra outbound peer (last tip update: 66605 seconds ago)
+2025-07-25T03:51:52Z Flushed fee estimates to fee_estimates.dat.
+2025-07-25T03:52:41Z Potential stale tip detected, will try using extra outbound peer (last tip update: 67220 seconds ago)
+2025-07-25T04:02:55Z Potential stale tip detected, will try using extra outbound peer (last tip update: 67834 seconds ago)
+2025-07-25T04:13:14Z Potential stale tip detected, will try using extra outbound peer (last tip update: 68453 seconds ago)
+2025-07-25T04:23:32Z Potential stale tip detected, will try using extra outbound peer (last tip update: 69071 seconds ago)
+2025-07-25T04:33:52Z Potential stale tip detected, will try using extra outbound peer (last tip update: 69691 seconds ago)
+2025-07-25T04:44:07Z Potential stale tip detected, will try using extra outbound peer (last tip update: 70306 seconds ago)
+2025-07-25T05:06:50Z Potential stale tip detected, will try using extra outbound peer (last tip update: 71669 seconds ago)
+2025-07-25T05:10:38Z Flushed fee estimates to fee_estimates.dat.
+2025-07-25T05:17:33Z Potential stale tip detected, will try using extra outbound peer (last tip update: 72312 seconds ago)
+2025-07-25T06:09:06Z Potential stale tip detected, will try using extra outbound peer (last tip update: 75405 seconds ago)
+2025-07-25T06:19:36Z Potential stale tip detected, will try using extra outbound peer (last tip update: 76035 seconds ago)
+2025-07-25T06:30:06Z Potential stale tip detected, will try using extra outbound peer (last tip update: 76665 seconds ago)
+2025-07-25T06:40:36Z Potential stale tip detected, will try using extra outbound peer (last tip update: 77295 seconds ago)
+2025-07-25T06:51:07Z Potential stale tip detected, will try using extra outbound peer (last tip update: 77926 seconds ago)
+2025-07-25T06:52:35Z Flushed fee estimates to fee_estimates.dat.
+2025-07-25T07:01:37Z Potential stale tip detected, will try using extra outbound peer (last tip update: 78556 seconds ago)
+2025-07-25T07:12:07Z Potential stale tip detected, will try using extra outbound peer (last tip update: 79186 seconds ago)
+2025-07-25T07:22:37Z Potential stale tip detected, will try using extra outbound peer (last tip update: 79816 seconds ago)
+2025-07-25T07:33:07Z Potential stale tip detected, will try using extra outbound peer (last tip update: 80446 seconds ago)
+2025-07-25T07:43:37Z Potential stale tip detected, will try using extra outbound peer (last tip update: 81076 seconds ago)
+2025-07-25T07:52:35Z Flushed fee estimates to fee_estimates.dat.
+2025-07-25T07:54:08Z Potential stale tip detected, will try using extra outbound peer (last tip update: 81707 seconds ago)
+2025-07-25T08:04:38Z Potential stale tip detected, will try using extra outbound peer (last tip update: 82337 seconds ago)
+2025-07-25T08:12:32Z CreateNewBlock(): block weight: 896 txs: 0 fees: 0 sigops 400
+2025-07-25T08:12:32Z Saw new header hash=3cfea1be3703720729b66b269851160ee234edb314f72674db42ca2d4edd1322 height=12
+2025-07-25T08:12:32Z UpdateTip: new best=3cfea1be3703720729b66b269851160ee234edb314f72674db42ca2d4edd1322 height=12 version=0x20000000 log2_work=4.700440 tx=13 date='2025-07-25T08:12:32Z' progress=1.000000 cache=0.3MiB(1txo)
+2025-07-25T08:12:32Z CreateNewBlock(): block weight: 896 txs: 0 fees: 0 sigops 400
+2025-07-25T08:12:32Z Saw new header hash=122e045b826b099e5edf98c2111f454ec1c456d3380e5633ce17db6427a8ccf7 height=13
+2025-07-25T08:12:32Z UpdateTip: new best=122e045b826b099e5edf98c2111f454ec1c456d3380e5633ce17db6427a8ccf7 height=13 version=0x20000000 log2_work=4.807355 tx=14 date='2025-07-25T08:12:32Z' progress=1.000000 cache=0.3MiB(2txo)
+2025-07-25T08:46:48Z Potential stale tip detected, will try using extra outbound peer (last tip update: 2056 seconds ago)
+2025-07-25T08:52:49Z Flushed fee estimates to fee_estimates.dat.
+2025-07-25T08:57:22Z Potential stale tip detected, will try using extra outbound peer (last tip update: 2690 seconds ago)
+2025-07-25T09:08:00Z Potential stale tip detected, will try using extra outbound peer (last tip update: 3328 seconds ago)
+2025-07-25T09:18:43Z Potential stale tip detected, will try using extra outbound peer (last tip update: 3971 seconds ago)
+2025-07-25T09:28:46Z Potential stale tip detected, will try using extra outbound peer (last tip update: 4574 seconds ago)
+2025-07-25T09:39:32Z Potential stale tip detected, will try using extra outbound peer (last tip update: 5220 seconds ago)
+2025-07-25T09:50:14Z Potential stale tip detected, will try using extra outbound peer (last tip update: 5862 seconds ago)
+2025-07-25T09:56:21Z Flushed fee estimates to fee_estimates.dat.
+2025-07-25T10:00:16Z Potential stale tip detected, will try using extra outbound peer (last tip update: 6464 seconds ago)
+2025-07-25T10:10:21Z Potential stale tip detected, will try using extra outbound peer (last tip update: 7069 seconds ago)
+2025-07-25T10:20:26Z Potential stale tip detected, will try using extra outbound peer (last tip update: 7674 seconds ago)
+2025-07-25T10:30:34Z Potential stale tip detected, will try using extra outbound peer (last tip update: 8282 seconds ago)
+2025-07-25T10:40:41Z Potential stale tip detected, will try using extra outbound peer (last tip update: 8889 seconds ago)
+2025-07-25T10:50:49Z Potential stale tip detected, will try using extra outbound peer (last tip update: 9497 seconds ago)
+2025-07-25T10:58:33Z Flushed fee estimates to fee_estimates.dat.
+2025-07-25T11:00:56Z Potential stale tip detected, will try using extra outbound peer (last tip update: 10104 seconds ago)
+2025-07-25T11:11:03Z Potential stale tip detected, will try using extra outbound peer (last tip update: 10711 seconds ago)
+2025-07-25T11:21:46Z Potential stale tip detected, will try using extra outbound peer (last tip update: 11354 seconds ago)
+2025-07-25T11:32:25Z Potential stale tip detected, will try using extra outbound peer (last tip update: 11993 seconds ago)
+2025-07-25T11:43:12Z Potential stale tip detected, will try using extra outbound peer (last tip update: 12640 seconds ago)
+2025-07-25T11:53:55Z Potential stale tip detected, will try using extra outbound peer (last tip update: 13283 seconds ago)
+2025-07-25T12:00:01Z Flushed fee estimates to fee_estimates.dat.
+2025-07-25T12:03:57Z Potential stale tip detected, will try using extra outbound peer (last tip update: 13885 seconds ago)
+2025-07-25T12:14:02Z Potential stale tip detected, will try using extra outbound peer (last tip update: 14490 seconds ago)
+2025-07-25T12:24:41Z Potential stale tip detected, will try using extra outbound peer (last tip update: 15129 seconds ago)
+2025-07-25T12:35:25Z Potential stale tip detected, will try using extra outbound peer (last tip update: 15773 seconds ago)
+2025-07-25T12:45:27Z Potential stale tip detected, will try using extra outbound peer (last tip update: 16375 seconds ago)
+2025-07-25T12:55:29Z Potential stale tip detected, will try using extra outbound peer (last tip update: 16977 seconds ago)
+2025-07-25T13:01:38Z Flushed fee estimates to fee_estimates.dat.
+2025-07-25T13:05:33Z Potential stale tip detected, will try using extra outbound peer (last tip update: 17581 seconds ago)
+2025-07-25T13:16:12Z Potential stale tip detected, will try using extra outbound peer (last tip update: 18220 seconds ago)
+2025-07-25T13:26:47Z Potential stale tip detected, will try using extra outbound peer (last tip update: 18855 seconds ago)
+2025-07-25T13:37:19Z Potential stale tip detected, will try using extra outbound peer (last tip update: 19487 seconds ago)
+2025-07-25T13:47:52Z Potential stale tip detected, will try using extra outbound peer (last tip update: 20120 seconds ago)
+2025-07-25T13:58:35Z Potential stale tip detected, will try using extra outbound peer (last tip update: 20763 seconds ago)
+2025-07-25T14:02:21Z Flushed fee estimates to fee_estimates.dat.
+2025-07-25T14:09:16Z Potential stale tip detected, will try using extra outbound peer (last tip update: 21404 seconds ago)
+2025-07-25T14:19:57Z Potential stale tip detected, will try using extra outbound peer (last tip update: 22045 seconds ago)
+2025-07-25T15:17:16Z Potential stale tip detected, will try using extra outbound peer (last tip update: 25484 seconds ago)
+2025-07-25T15:27:48Z Potential stale tip detected, will try using extra outbound peer (last tip update: 26116 seconds ago)
+2025-07-25T15:38:28Z Potential stale tip detected, will try using extra outbound peer (last tip update: 26756 seconds ago)
+2025-07-25T15:49:08Z Potential stale tip detected, will try using extra outbound peer (last tip update: 27396 seconds ago)
+2025-07-25T15:53:40Z Flushed fee estimates to fee_estimates.dat.
+2025-07-25T15:59:52Z Potential stale tip detected, will try using extra outbound peer (last tip update: 28040 seconds ago)
+2025-07-25T16:40:32Z Potential stale tip detected, will try using extra outbound peer (last tip update: 30480 seconds ago)
+2025-07-25T16:50:36Z Potential stale tip detected, will try using extra outbound peer (last tip update: 31084 seconds ago)
+2025-07-25T17:00:42Z Potential stale tip detected, will try using extra outbound peer (last tip update: 31690 seconds ago)
+2025-07-25T17:11:28Z Potential stale tip detected, will try using extra outbound peer (last tip update: 32336 seconds ago)
+2025-07-25T17:22:12Z Potential stale tip detected, will try using extra outbound peer (last tip update: 32980 seconds ago)
+2025-07-25T17:28:19Z Flushed fee estimates to fee_estimates.dat.
+2025-07-25T17:32:14Z Potential stale tip detected, will try using extra outbound peer (last tip update: 33582 seconds ago)
+2025-07-25T17:42:21Z Potential stale tip detected, will try using extra outbound peer (last tip update: 34189 seconds ago)
+2025-07-25T17:52:27Z Potential stale tip detected, will try using extra outbound peer (last tip update: 34795 seconds ago)
+2025-07-25T18:02:39Z Potential stale tip detected, will try using extra outbound peer (last tip update: 35407 seconds ago)
+2025-07-25T18:12:47Z Potential stale tip detected, will try using extra outbound peer (last tip update: 36015 seconds ago)
+2025-07-25T18:22:58Z Potential stale tip detected, will try using extra outbound peer (last tip update: 36626 seconds ago)
+2025-07-25T18:30:45Z Flushed fee estimates to fee_estimates.dat.
+2025-07-25T18:33:06Z Potential stale tip detected, will try using extra outbound peer (last tip update: 37234 seconds ago)
+2025-07-25T18:43:08Z Potential stale tip detected, will try using extra outbound peer (last tip update: 37836 seconds ago)
+2025-07-25T18:53:53Z Potential stale tip detected, will try using extra outbound peer (last tip update: 38481 seconds ago)
+2025-07-25T19:04:37Z Potential stale tip detected, will try using extra outbound peer (last tip update: 39125 seconds ago)
+2025-07-25T19:15:15Z Potential stale tip detected, will try using extra outbound peer (last tip update: 39763 seconds ago)
+2025-07-25T19:25:51Z Potential stale tip detected, will try using extra outbound peer (last tip update: 40399 seconds ago)
+2025-07-25T19:31:56Z Flushed fee estimates to fee_estimates.dat.
+2025-07-25T19:35:52Z Potential stale tip detected, will try using extra outbound peer (last tip update: 41000 seconds ago)
+2025-07-25T19:46:35Z Potential stale tip detected, will try using extra outbound peer (last tip update: 41643 seconds ago)
+2025-07-25T19:57:10Z Potential stale tip detected, will try using extra outbound peer (last tip update: 42278 seconds ago)
+2025-07-25T20:07:41Z Potential stale tip detected, will try using extra outbound peer (last tip update: 42909 seconds ago)
+2025-07-25T20:18:12Z Potential stale tip detected, will try using extra outbound peer (last tip update: 43540 seconds ago)
+2025-07-25T20:28:58Z Potential stale tip detected, will try using extra outbound peer (last tip update: 44186 seconds ago)
+2025-07-25T20:32:47Z Flushed fee estimates to fee_estimates.dat.
+2025-07-25T20:39:04Z Potential stale tip detected, will try using extra outbound peer (last tip update: 44792 seconds ago)
+2025-07-25T20:57:06Z Potential stale tip detected, will try using extra outbound peer (last tip update: 45874 seconds ago)
+2025-07-25T21:07:51Z Potential stale tip detected, will try using extra outbound peer (last tip update: 46519 seconds ago)
+2025-07-25T21:18:35Z Potential stale tip detected, will try using extra outbound peer (last tip update: 47163 seconds ago)
+2025-07-25T21:29:14Z Potential stale tip detected, will try using extra outbound peer (last tip update: 47802 seconds ago)
+2025-07-25T21:47:12Z Potential stale tip detected, will try using extra outbound peer (last tip update: 48880 seconds ago)
+2025-07-25T21:55:43Z Flushed fee estimates to fee_estimates.dat.
+2025-07-25T21:57:20Z Potential stale tip detected, will try using extra outbound peer (last tip update: 49488 seconds ago)
+2025-07-25T22:07:29Z Potential stale tip detected, will try using extra outbound peer (last tip update: 50097 seconds ago)
+2025-07-25T22:32:09Z Potential stale tip detected, will try using extra outbound peer (last tip update: 51577 seconds ago)
+2025-07-25T22:42:42Z Potential stale tip detected, will try using extra outbound peer (last tip update: 52210 seconds ago)
+2025-07-26T01:54:12Z Potential stale tip detected, will try using extra outbound peer (last tip update: 63700 seconds ago)
+2025-07-26T02:04:42Z Potential stale tip detected, will try using extra outbound peer (last tip update: 64330 seconds ago)
+2025-07-26T02:58:13Z Potential stale tip detected, will try using extra outbound peer (last tip update: 67541 seconds ago)
+2025-07-26T03:08:55Z Potential stale tip detected, will try using extra outbound peer (last tip update: 68183 seconds ago)
+2025-07-26T03:13:25Z Flushed fee estimates to fee_estimates.dat.
+2025-07-26T03:19:36Z Potential stale tip detected, will try using extra outbound peer (last tip update: 68824 seconds ago)
+2025-07-26T03:30:20Z Potential stale tip detected, will try using extra outbound peer (last tip update: 69468 seconds ago)
+2025-07-26T03:41:03Z Potential stale tip detected, will try using extra outbound peer (last tip update: 70111 seconds ago)
+2025-07-26T03:51:49Z Potential stale tip detected, will try using extra outbound peer (last tip update: 70757 seconds ago)
+2025-07-26T04:01:50Z Potential stale tip detected, will try using extra outbound peer (last tip update: 71358 seconds ago)
+2025-07-26T04:12:32Z Potential stale tip detected, will try using extra outbound peer (last tip update: 72000 seconds ago)
+2025-07-26T04:14:47Z Flushed fee estimates to fee_estimates.dat.
+2025-07-26T04:23:15Z Potential stale tip detected, will try using extra outbound peer (last tip update: 72643 seconds ago)
+2025-07-26T04:34:01Z Potential stale tip detected, will try using extra outbound peer (last tip update: 73289 seconds ago)
+2025-07-26T04:44:45Z Potential stale tip detected, will try using extra outbound peer (last tip update: 73933 seconds ago)
+2025-07-26T04:55:29Z Potential stale tip detected, will try using extra outbound peer (last tip update: 74577 seconds ago)
+2025-07-26T05:06:14Z Potential stale tip detected, will try using extra outbound peer (last tip update: 75222 seconds ago)
+2025-07-26T05:16:05Z Flushed fee estimates to fee_estimates.dat.
+2025-07-26T05:16:55Z Potential stale tip detected, will try using extra outbound peer (last tip update: 75863 seconds ago)
+2025-07-26T05:48:41Z Potential stale tip detected, will try using extra outbound peer (last tip update: 77769 seconds ago)
+2025-07-26T05:59:23Z Potential stale tip detected, will try using extra outbound peer (last tip update: 78411 seconds ago)
+2025-07-26T06:10:06Z Potential stale tip detected, will try using extra outbound peer (last tip update: 79054 seconds ago)
+2025-07-26T06:20:43Z Potential stale tip detected, will try using extra outbound peer (last tip update: 79691 seconds ago)
+2025-07-26T06:31:19Z Potential stale tip detected, will try using extra outbound peer (last tip update: 80327 seconds ago)
+2025-07-26T06:41:57Z Potential stale tip detected, will try using extra outbound peer (last tip update: 80965 seconds ago)
+2025-07-26T06:47:57Z Flushed fee estimates to fee_estimates.dat.
+2025-07-26T06:52:33Z Potential stale tip detected, will try using extra outbound peer (last tip update: 81601 seconds ago)
+2025-07-26T07:03:08Z Potential stale tip detected, will try using extra outbound peer (last tip update: 82236 seconds ago)
+2025-07-26T07:13:44Z Potential stale tip detected, will try using extra outbound peer (last tip update: 82872 seconds ago)
+2025-07-26T07:24:20Z Potential stale tip detected, will try using extra outbound peer (last tip update: 83508 seconds ago)
+2025-07-26T07:35:01Z Potential stale tip detected, will try using extra outbound peer (last tip update: 84149 seconds ago)
+2025-07-26T07:45:46Z Potential stale tip detected, will try using extra outbound peer (last tip update: 84794 seconds ago)
+2025-07-26T07:48:48Z Flushed fee estimates to fee_estimates.dat.
+2025-07-26T07:55:48Z Potential stale tip detected, will try using extra outbound peer (last tip update: 85396 seconds ago)
+2025-07-26T08:05:50Z Potential stale tip detected, will try using extra outbound peer (last tip update: 85998 seconds ago)
+2025-07-26T08:19:51Z Potential stale tip detected, will try using extra outbound peer (last tip update: 86839 seconds ago)
+2025-07-26T08:30:02Z Potential stale tip detected, will try using extra outbound peer (last tip update: 87450 seconds ago)
+2025-07-26T08:40:44Z Potential stale tip detected, will try using extra outbound peer (last tip update: 88092 seconds ago)
+2025-07-26T08:51:24Z Potential stale tip detected, will try using extra outbound peer (last tip update: 88732 seconds ago)
+2025-07-26T08:58:14Z Flushed fee estimates to fee_estimates.dat.
+2025-07-26T09:02:08Z Potential stale tip detected, will try using extra outbound peer (last tip update: 89376 seconds ago)
+
+
+
+
+
+2025-07-26T09:48:49Z Bitcoin Core version v28.1.0 (release build)
+2025-07-26T09:48:49Z Script verification uses 7 additional threads
+2025-07-26T09:48:49Z Using the 'sse4(1way),sse41(4way),avx2(8way)' SHA256 implementation
+2025-07-26T09:48:49Z Using RdSeed as an additional entropy source
+2025-07-26T09:48:49Z Using RdRand as an additional entropy source
+2025-07-26T09:48:49Z Default data directory /home/pavki/.bitcoin
+2025-07-26T09:48:49Z Using data directory /home/pavki/bitpesa/bitcoin_data/regtest
+2025-07-26T09:48:49Z Config file: /home/pavki/bitpesa/bitcoin.conf
+2025-07-26T09:48:49Z Config file arg: regtest="1"
+2025-07-26T09:48:49Z Config file arg: rpcauth=****
+2025-07-26T09:48:49Z Config file arg: rpcpassword=****
+2025-07-26T09:48:49Z Config file arg: rpcuser=****
+2025-07-26T09:48:49Z Config file arg: txindex="1"
+2025-07-26T09:48:49Z Command-line arg: conf="/home/pavki/bitpesa/bitcoin.conf"
+2025-07-26T09:48:49Z Command-line arg: datadir="/home/pavki/bitpesa/bitcoin_data"
+2025-07-26T09:48:49Z Command-line arg: port="18444"
+2025-07-26T09:48:49Z Using at most 125 automatic connections (10240 file descriptors available)
+2025-07-26T09:48:49Z scheduler thread start
+2025-07-26T09:48:49Z Binding RPC on address ::1 port 18443
+2025-07-26T09:48:49Z Binding RPC on address 127.0.0.1 port 18443
+2025-07-26T09:48:49Z Config options rpcuser and rpcpassword will soon be deprecated. Locally-run instances may remove rpcuser to use cookie-based auth, or may be replaced with rpcauth. Please see share/rpcauth for rpcauth auth generation.
+2025-07-26T09:48:49Z Using rpcauth authentication.
+2025-07-26T09:48:49Z Starting HTTP server with 4 worker threads
+2025-07-26T09:48:49Z Using wallet directory /home/pavki/bitpesa/bitcoin_data/regtest/wallets
+2025-07-26T09:48:49Z init message: Verifying wallet(s)…
+2025-07-26T09:48:49Z Using /16 prefix for IP bucketing
+2025-07-26T09:48:49Z init message: Loading P2P addresses…
+2025-07-26T09:48:49Z Loaded 0 addresses from peers.dat  3ms
+2025-07-26T09:48:49Z init message: Loading banlist…
+2025-07-26T09:48:49Z SetNetworkActive: true
+2025-07-26T09:48:49Z Script verification uses 7 additional threads
+2025-07-26T09:48:49Z Cache configuration:
+2025-07-26T09:48:49Z * Using 2.0 MiB for block index database
+2025-07-26T09:48:49Z * Using 56.0 MiB for transaction index database
+2025-07-26T09:48:49Z * Using 8.0 MiB for chain state database
+2025-07-26T09:48:49Z * Using 384.0 MiB for in-memory UTXO set (plus up to 286.1 MiB of unused mempool space)
+2025-07-26T09:48:49Z Using obfuscation key for blocksdir *.dat files (/home/pavki/bitpesa/bitcoin_data/regtest/blocks): 'c98ff7e6e1fba2a9'
+2025-07-26T09:48:49Z Using 16 MiB out of 16 MiB requested for signature cache, able to store 524288 elements
+2025-07-26T09:48:49Z Using 16 MiB out of 16 MiB requested for script execution cache, able to store 524288 elements
+2025-07-26T09:48:49Z init message: Loading block index…
+2025-07-26T09:48:49Z Validating signatures for all blocks.
+2025-07-26T09:48:49Z Setting nMinimumChainWork=0000000000000000000000000000000000000000000000000000000000000000
+2025-07-26T09:48:49Z Opening LevelDB in /home/pavki/bitpesa/bitcoin_data/regtest/blocks/index
+2025-07-26T09:48:49Z Opened LevelDB successfully
+2025-07-26T09:48:49Z Using obfuscation key for /home/pavki/bitpesa/bitcoin_data/regtest/blocks/index: 0000000000000000
+2025-07-26T09:48:49Z LoadBlockIndexDB: last block file = 0
+2025-07-26T09:48:49Z LoadBlockIndexDB: last block file info: CBlockFileInfo(blocks=13, size=3401, heights=0...12, time=2011-02-02...2025-07-25)
+2025-07-26T09:48:49Z Checking all blk files are present...
+2025-07-26T09:48:49Z Initializing chainstate Chainstate [ibd] @ height -1 (null)
+2025-07-26T09:48:49Z Opening LevelDB in /home/pavki/bitpesa/bitcoin_data/regtest/chainstate
+2025-07-26T09:48:49Z Opened LevelDB successfully
+2025-07-26T09:48:49Z Using obfuscation key for /home/pavki/bitpesa/bitcoin_data/regtest/chainstate: bd75432f146ac156
+2025-07-26T09:48:49Z Loaded best chain: hashBestChain=582a8485eaa7f24fe7e268b3812ec938953a441a9c0b92dc1d1a2b6c6c00f616 height=11 date=2025-07-23T11:52:21Z progress=1.000000
+2025-07-26T09:48:49Z Opening LevelDB in /home/pavki/bitpesa/bitcoin_data/regtest/chainstate
+2025-07-26T09:48:49Z Opened LevelDB successfully
+2025-07-26T09:48:49Z Using obfuscation key for /home/pavki/bitpesa/bitcoin_data/regtest/chainstate: bd75432f146ac156
+2025-07-26T09:48:49Z [Chainstate [ibd] @ height 11 (582a8485eaa7f24fe7e268b3812ec938953a441a9c0b92dc1d1a2b6c6c00f616)] resized coinsdb cache to 8.0 MiB
+2025-07-26T09:48:49Z [Chainstate [ibd] @ height 11 (582a8485eaa7f24fe7e268b3812ec938953a441a9c0b92dc1d1a2b6c6c00f616)] resized coinstip cache to 384.0 MiB
+2025-07-26T09:48:49Z init message: Verifying blocks…
+2025-07-26T09:48:49Z Verifying last 6 blocks at level 3
+2025-07-26T09:48:49Z Verification progress: 0%
+2025-07-26T09:48:49Z Verification progress: 16%
+2025-07-26T09:48:49Z Verification progress: 33%
+2025-07-26T09:48:49Z Verification progress: 50%
+2025-07-26T09:48:49Z Verification progress: 66%
+2025-07-26T09:48:49Z Verification progress: 83%
+2025-07-26T09:48:50Z Verification progress: 99%
+2025-07-26T09:48:50Z Verification: No coin database inconsistencies in last 6 blocks (6 transactions)
+2025-07-26T09:48:50Z  block index             148ms
+2025-07-26T09:48:50Z Opening LevelDB in /home/pavki/bitpesa/bitcoin_data/regtest/indexes/txindex
+2025-07-26T09:48:50Z Opened LevelDB successfully
+2025-07-26T09:48:50Z Using obfuscation key for /home/pavki/bitpesa/bitcoin_data/regtest/indexes/txindex: 0000000000000000
+2025-07-26T09:48:50Z Setting NODE_NETWORK on non-prune mode
+2025-07-26T09:48:50Z block tree size = 13
+2025-07-26T09:48:50Z nBestHeight = 11
+2025-07-26T09:48:50Z initload thread start
+2025-07-26T09:48:50Z torcontrol thread start
+2025-07-26T09:48:50Z Bound to 127.0.0.1:18445
+2025-07-26T09:48:50Z UpdateTip: new best=3cfea1be3703720729b66b269851160ee234edb314f72674db42ca2d4edd1322 height=12 version=0x20000000 log2_work=4.700440 tx=13 date='2025-07-25T08:12:32Z' progress=1.000000 cache=0.3MiB(1txo)
+2025-07-26T09:48:50Z Bound to [::]:18444
+2025-07-26T09:48:50Z Bound to 0.0.0.0:18444
+2025-07-26T09:48:50Z txindex thread start
+2025-07-26T09:48:50Z txindex is enabled at height 11
+2025-07-26T09:48:50Z txindex thread exit
+2025-07-26T09:48:50Z Loading 0 mempool transactions from file...
+2025-07-26T09:48:50Z Imported mempool transactions from file: 0 succeeded, 0 failed, 0 expired, 0 already there, 0 waiting for initial broadcast
+2025-07-26T09:48:50Z initload thread exit
+2025-07-26T09:48:50Z 0 block-relay-only anchors will be tried for connections.
+2025-07-26T09:48:50Z init message: Starting network threads…
+2025-07-26T09:48:50Z net thread start
+2025-07-26T09:48:50Z dnsseed thread start
+2025-07-26T09:48:50Z Loading addresses from DNS seed dummySeed.invalid.
+2025-07-26T09:48:50Z addcon thread start
+2025-07-26T09:48:50Z opencon thread start
+2025-07-26T09:48:50Z init message: Done loading
+2025-07-26T09:48:50Z msghand thread start
+2025-07-26T09:48:50Z 0 addresses found from DNS seeds
+2025-07-26T09:48:50Z dnsseed thread exit
+2025-07-26T09:49:51Z Adding fixed seeds as 60 seconds have passed and addrman is empty for at least one reachable network
+2025-07-26T09:49:51Z Added 0 fixed seeds from reachable networks.
+2025-07-26T10:20:11Z Potential stale tip detected, will try using extra outbound peer (last tip update: 1881 seconds ago)
+2025-07-26T10:30:22Z Potential stale tip detected, will try using extra outbound peer (last tip update: 2492 seconds ago)
+2025-07-26T10:40:35Z Potential stale tip detected, will try using extra outbound peer (last tip update: 3105 seconds ago)
