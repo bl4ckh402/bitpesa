@@ -1,0 +1,68 @@
+{
+  "canisters": {
+    "bitpesa_backend": {
+      "main": "bitpesa/src/bitpesa_backend/main.mo",
+      "type": "motoko"
+    },
+    "BitPesaProductionReady": {
+      "main": "bitpesasrc/bitpesa_backend/BitPesaProductionReady.mo", 
+      "type": "motoko"
+    },
+    "stablecoin": {
+      "type": "motoko",
+      "main": "bitpesa/src/bitpesa_backend/ICRC1.mo"
+    },
+    "bitpesa_enhanced": {
+      "main": "bitpesa/src/bitpesa_backend/BitPesaLendingEnhanced.mo",
+      "type": "motoko"
+    },
+    "ckusdc": {
+      "type": "custom",
+      "candid": "https://github.com/dfinity/ic/blob/master/rs/rosetta-api/icrc1/ckusdc/ckUSDC.did",
+      "wasm": "",
+      "remote": {
+        "id": {
+          "ic": "mxzaz-hqaaa-aaaar-qaada-cai"
+        }
+      }
+    },
+    "internet_identity": {
+      "candid": "https://github.com/dfinity/internet-identity/releases/latest/download/internet_identity.did",
+      "frontend": {},
+      "remote": {
+        "id": {
+          "ic": "rdmx6-jaaaa-aaaaa-aaadq-cai"
+        }
+      },
+      "type": "custom",
+      "wasm": "https://github.com/dfinity/internet-identity/releases/latest/download/internet_identity_dev.wasm.gz"
+    }
+  },
+  "defaults": {
+    "bitcoin": {
+      "enabled": true,
+      "log_level": "info",
+      "nodes": [
+        "127.0.0.1:18444"
+      ]
+    },
+    "build": {
+      "args": "",
+      "packtool": ""
+    }
+  },
+  "networks": {
+    "local": {
+      "bind": "127.0.0.1:4943",
+      "type": "ephemeral"
+    },
+    "ic": {
+      "providers": [
+        "https://icp-api.io"
+      ],
+      "type": "persistent"
+    }
+  },
+  "output_env_file": ".env",
+  "version": 1
+}
