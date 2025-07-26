@@ -21,7 +21,6 @@ if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger, ScrollToPlugin, SplitText);
 }
 
-// Helper hook for scroll progress - moved outside the component
 function useScroll() {
   const [scrollYProgress, setScrollYProgress] = useState(0);
 
